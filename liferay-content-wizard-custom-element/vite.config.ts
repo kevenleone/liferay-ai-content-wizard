@@ -1,0 +1,31 @@
+import path from 'path';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  build: {
+    outDir: 'build/vite',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name][extname]',
+        chunkFileNames: '[name]-[hash].js',
+        entryFileNames: 'main.js',
+      },
+    },
+  },
+  experimental: {
+    renderBuiltUrl(filename: string) {
+      return `/o/liferay-content-wizard-custom-element/${filename}`;
+    },
+  },
+  plugins: [react(), splitVendorChunkPlugin()],
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, './src/'),
+    },
+  },
+  server: {
+    origin: 'http://192.168.226.252:5173',
+  },
+});

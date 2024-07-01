@@ -1,0 +1,16 @@
+{
+  "name": "liferay-content-wizard-bun",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@langchain/google-vertexai": "^0.0.19",
+    "langchain": "^0.2.8",
+    "zod": "^3.23.8"
+  }
+}
