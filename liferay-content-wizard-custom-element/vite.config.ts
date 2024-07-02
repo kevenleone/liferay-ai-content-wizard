@@ -26,6 +26,6 @@ export default defineConfig({
     },
   },
   server: {
-    origin: 'http://192.168.226.252:5173',
+    origin: 'http://localhost:5173',
   },
 });

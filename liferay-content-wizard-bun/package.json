@@ -9,8 +9,17 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.0.2",
+    "@langchain/google-genai": "^0.0.21",
     "@langchain/google-vertexai": "^0.0.19",
+    "elysia": "^1.0.26",
     "langchain": "^0.2.8",
     "zod": "^3.23.8"
+  },
+  "scripts": {
+    "dev": "bun --watch src/index.ts",
+    "build": "bun build src/index.ts",
+    "start": "NODE_ENV=production bun src/index.ts",
+    "test": "bun test"
   }
 }
