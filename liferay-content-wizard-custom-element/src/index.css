@@ -1,3 +1,8 @@
 .ai-options-panel{
     background-color: #f7f8f9;
 }
+.icon-square{
+    border-radius: 2px;
+    padding: 1px 3px;
+    margin-right: 3px;
+}

@@ -9,6 +9,9 @@ export default class AIWizardContentOAuth2 {
   async generate(data: unknown) {
     return Liferay.Util.fetch('http://localhost:3333/generate', {
       body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
     });
   }
