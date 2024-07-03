@@ -21,8 +21,9 @@ new Elysia()
     async ({ body }) => {
       const { question } = body;
 
-      const langChain = new LangChain('vertexai', {
-        modelName: 'gemini-1.5-flash-001',
+      const langChain = new LangChain('openai', {
+        apiKey: env.OPENAI_KEY,
+        modelName: 'gpt-3.5-turbo',
       });
 
       let structuredResponse;

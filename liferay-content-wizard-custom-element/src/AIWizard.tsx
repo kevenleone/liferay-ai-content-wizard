@@ -1,77 +1,61 @@
-import Modal, { useModal } from '@clayui/modal';
-import ClayButton from '@clayui/button';
-import ClayForm, { ClayInput } from '@clayui/form';
-import useSWR from 'swr';
-
-import ModalContent from './ModalContent';
-
-import { useState } from 'react';
-import WizardEmptyState from './components/WizardEmptyState';
-import useAIWizardContentOAuth2 from './hooks/useAIWizardOAuth2';
-import ClayIcon from '@clayui/icon';
 import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import ClayButton from '@clayui/button';
+import ClayIcon from '@clayui/icon';
+import Modal, { useModal } from '@clayui/modal';
+
 import { Liferay } from './services/liferay';
+import ChatBody from './components/Chat/ChatBody';
+import ChatInput from './components/Chat/ChatInput';
+import useAIWizardContentOAuth2 from './hooks/useAIWizardOAuth2';
+import { Message } from './types';
+import ClayAlert from '@clayui/alert';
 
 type AIWizardProps = {
   modal: ReturnType<typeof useModal>;
 };
 
-type ContentWizardProps = {
-  aiWizardContentOAuth2: ReturnType<typeof useAIWizardContentOAuth2>;
-  messages: any[];
-  setMessages: React.Dispatch<any>;
-};
-
-function ContentWizard({
-  aiWizardContentOAuth2,
-  messages,
-  setMessages,
-}: ContentWizardProps) {
-  const { isLoading, data: settings = {} } = useSWR(
-    '/ai/settings',
-    aiWizardContentOAuth2.settings
-  );
-
-  if (isLoading) {
-    return <b>Loading...</b>;
-  }
-
-  if (!settings.configured) {
-    return <ModalContent messages={messages} setMessages={setMessages} />;
-  }
-
-  return (
-    <WizardEmptyState
-      description='You must setting up the AI Wizard Settings.'
-      title='Oops... Unable to continue'
-    />
-  );
-}
-
 const schema = z.object({ input: z.string() });
 
-type Schema = z.infer<typeof schema>;
+export type Schema = z.infer<typeof schema>;
 
 export default function AIWizard({ modal }: AIWizardProps) {
+  const [placeholder, setPlaceholder] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
   const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
+  const ref = useRef<HTMLDivElement>(null);
 
-  const { register, handleSubmit, formState } = useForm<Schema>({
+  const form = useForm<Schema>({
     resolver: zodResolver(schema),
   });
 
-  const [messages, setMessages] = useState([]);
+  const appendMessage = (message: Message) =>
+    setMessages((prevMessages) => [...prevMessages, message]);
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   async function onSubmit({ input }: Schema) {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: input, role: 'user' },
-    ]);
+    appendMessage({ text: input, role: 'user' });
 
     const response = await aiWizardContentOAuth2.generate({
       question: input,
     });
+
+    if (!response.ok) {
+      return appendMessage({
+        role: 'system',
+        text: (
+          <ClayAlert displayType='danger'>
+            <b>Error:</b> it seems like you might have typed a symbol by
+            mistake. Please try again.
+          </ClayAlert>
+        ),
+      });
+    }
 
     const data = await response.json();
 
@@ -81,40 +65,33 @@ export default function AIWizard({ modal }: AIWizardProps) {
       title: 'Success',
     });
 
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: JSON.stringify(data, null, 2), role: 'assistant' },
-    ]);
+    appendMessage({
+      text: JSON.stringify(data, null, 2),
+      role: 'assistant',
+    });
+
+    form.setValue('input', '');
   }
 
   return (
     <Modal size='lg' observer={modal.observer}>
       <Modal.Header>AI Assistant</Modal.Header>
-      <Modal.Body>
-        <ContentWizard
+      <Modal.Body className='ai-assistant-body'>
+        <ChatBody
           aiWizardContentOAuth2={aiWizardContentOAuth2}
           messages={messages}
           setMessages={setMessages}
+          onSelectAsset={(asset) => setPlaceholder(asset.hint)}
         />
+
+        {/* Bottom Reference, to scroll messages */}
+        <div ref={ref} />
       </Modal.Body>
       <div className='modal-footer'>
-        <ClayForm className='d-flex w-100' onSubmit={handleSubmit(onSubmit)}>
-          <ClayInput
-            {...register('input')}
-            disabled={formState.isSubmitting || formState.isLoading}
-            placeholder='Write your answer'
-          />
-
-          <ClayIcon
-            color='gray'
-            style={{ marginLeft: -30, marginTop: 14 }}
-            aria-label='Submit Prompt'
-            symbol='order-arrow-right'
-          />
-        </ClayForm>
+        <ChatInput form={form} onSubmit={onSubmit} placeholder={placeholder} />
 
         <div className='d-flex mt-4 w-100 justify-content-end'>
-          <ClayButton displayType='secondary'>
+          <ClayButton displayType='secondary' onClick={() => setMessages([])}>
             <ClayIcon symbol='reset' /> Restart Chat
           </ClayButton>
         </div>

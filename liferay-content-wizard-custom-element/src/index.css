@@ -1,7 +1,12 @@
-.ai-options-panel{
+.ai-options-panel {
     background-color: #f7f8f9;
 }
-.icon-square{
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.icon-square {
     border-radius: 2px;
     padding: 1px 3px;
     margin-right: 3px;
