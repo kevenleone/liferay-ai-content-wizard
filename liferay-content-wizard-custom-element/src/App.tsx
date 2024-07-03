@@ -3,11 +3,14 @@ import { useEffect, useState } from 'react';
 import { useModal } from '@clayui/modal';
 
 import AIWizard from './AIWizard';
+import DisplayIcon from './DisplayIcon';
 import DisplayButton from './DisplayButton';
 
 const controlMenu = document.querySelector(
   '.control-menu-nav-item.layout-reports-icon'
 )!;
+
+const adminNav = document.querySelector('#productMenuSidebar')!;
 
 function App() {
   const [container, setContainer] = useState<HTMLElement>();
@@ -28,9 +31,14 @@ function App() {
 
       {container &&
         createPortal(
-          <DisplayButton onClick={() => modal.onOpenChange(true)} />,
+          <DisplayIcon onClick={() => modal.onOpenChange(true)} />,
           controlMenu
         )}
+
+      {createPortal(
+        <DisplayButton onClick={() => modal.onOpenChange(true)} />,
+        adminNav
+      )}
     </>
   );
 }

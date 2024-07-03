@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { PromptInput } from '../types';
+import type { PromptPayload } from '../types';
 
 type Props = {
   count: number;
@@ -12,7 +12,7 @@ export default function getBlogPrompt({
   count,
   language,
   subject,
-}: Props): PromptInput {
+}: Props): PromptPayload {
   return {
     instruction:
       'You are a blog author. Do not include Quotes or Double Quotes',

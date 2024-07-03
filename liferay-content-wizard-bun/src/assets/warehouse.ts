@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { PromptInput } from '../types';
+import type { PromptPayload } from '../types';
 
 type WarehousePromptType = {
   count: number;
@@ -10,7 +10,7 @@ type WarehousePromptType = {
 export default function getWarehousePrompt({
   count,
   subject,
-}: WarehousePromptType): PromptInput {
+}: WarehousePromptType): PromptPayload {
   return {
     instruction:
       'You are a helpful assistant tasked with listing cities, regions, or counties within an area.',

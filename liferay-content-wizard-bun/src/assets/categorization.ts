@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import type { PromptInput } from '../types';
+import type { PromptPayload } from '../types';
 
 export const schema = z
   .object({
@@ -30,7 +30,7 @@ export const schema = z
 
 export default function getPromptCategorization(
   prompt: string
-): PromptInput<typeof schema> {
+): PromptPayload<typeof schema> {
   return {
     instruction:
       'You will be responsible to categorize the user input and parse the question based on the given schema',

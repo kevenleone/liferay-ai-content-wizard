@@ -4,9 +4,9 @@ import { ChatVertexAI } from '@langchain/google-vertexai';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 
 import env from './env';
-import getBlogPrompt from './prompts/blogPrompt';
-import getAccountPrompt from './prompts/accountPrompt';
-import type { PromptInput } from './types';
+import getBlogPrompt from './assets/blog';
+import getAccountPrompt from './assets/account';
+import type { PromptPayload } from './types';
 import type { z } from 'zod';
 
 type LangChainOptions = {
@@ -34,7 +34,7 @@ export class LangChain {
     this.provider = provider;
   }
 
-  async getStructuredContent(input: PromptInput) {
+  async getStructuredContent(input: PromptPayload) {
     // const prompt = ChatPromptTemplate.fromTemplate(`
     //     {instructions}
     //     Formatting Instructions: {format_instructions}

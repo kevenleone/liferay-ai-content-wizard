@@ -1,17 +1,18 @@
-import { useForm } from 'react-hook-form';
 import { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import ClayAlert from '@clayui/alert';
 import ClayButton from '@clayui/button';
 import ClayIcon from '@clayui/icon';
 import Modal, { useModal } from '@clayui/modal';
+import useSWR from 'swr';
 
 import { Liferay } from './services/liferay';
+import { Message } from './types';
 import ChatBody from './components/Chat/ChatBody';
 import ChatInput from './components/Chat/ChatInput';
 import useAIWizardContentOAuth2 from './hooks/useAIWizardOAuth2';
-import { Message } from './types';
-import ClayAlert from '@clayui/alert';
 
 type AIWizardProps = {
   modal: ReturnType<typeof useModal>;
@@ -26,6 +27,11 @@ export default function AIWizard({ modal }: AIWizardProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
   const ref = useRef<HTMLDivElement>(null);
+
+  const { isLoading, data: settings = {} } = useSWR(
+    '/ai/settings',
+    aiWizardContentOAuth2.settings
+  );
 
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
@@ -76,26 +82,34 @@ export default function AIWizard({ modal }: AIWizardProps) {
   return (
     <Modal size='lg' observer={modal.observer}>
       <Modal.Header>AI Assistant</Modal.Header>
-      <Modal.Body className='ai-assistant-body'>
+      <Modal.Body>
         <ChatBody
-          aiWizardContentOAuth2={aiWizardContentOAuth2}
+          configured={settings.configured}
+          isLoading={isLoading}
           messages={messages}
-          setMessages={setMessages}
           onSelectAsset={(asset) => setPlaceholder(asset.hint)}
+          setMessages={setMessages}
         />
 
         {/* Bottom Reference, to scroll messages */}
         <div ref={ref} />
       </Modal.Body>
-      <div className='modal-footer'>
-        <ChatInput form={form} onSubmit={onSubmit} placeholder={placeholder} />
 
-        <div className='d-flex mt-4 w-100 justify-content-end'>
-          <ClayButton displayType='secondary' onClick={() => setMessages([])}>
-            <ClayIcon symbol='reset' /> Restart Chat
-          </ClayButton>
+      {settings.configured && (
+        <div className='modal-footer'>
+          <ChatInput
+            form={form}
+            onSubmit={onSubmit}
+            placeholder={placeholder}
+          />
+
+          <div className='d-flex mt-4 w-100 justify-content-end'>
+            <ClayButton displayType='secondary' onClick={() => setMessages([])}>
+              <ClayIcon symbol='reset' /> Restart Chat
+            </ClayButton>
+          </div>
         </div>
-      </div>
+      )}
     </Modal>
   );
 }
