@@ -1,0 +1,23 @@
+assemble:
+    - from: batch
+      into: batch
+liferay-tryitnow-batch:
+    name: AI Wizard Config
+    oAuthApplicationHeadlessServer: ai-wizard-config-oauth-application-headless-server
+    type: batch
+liferay-tryitnow-batch-oauth-application-headless-server:
+    .serviceAddress: localhost:8080
+    .serviceScheme: http
+    name: AI Wizard Config
+    scopes:
+        - C_AIWizardConfig.everything
+        - Liferay.Headless.Batch.Engine.everything
+        - Liferay.Object.Admin.REST.everything
+        - Liferay.Bulk.REST.everything
+        - Liferay.Headless.Commerce.Admin.Account.everything
+        - Liferay.Headless.Commerce.Admin.Catalog.everything
+        - Liferay.Headless.Commerce.Admin.Inventory.everything
+        - Liferay.Headless.Admin.User.everything
+        - Liferay.Headless.Admin.Content.everything
+        - Liferay.Headless.Admin.Taxonomy.everything
+    type: oAuthApplicationHeadlessServer
