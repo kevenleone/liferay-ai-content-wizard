@@ -20,7 +20,7 @@ export default function ChatBody({
     return <b>Loading...</b>;
   }
 
-  if (configured) {
+  if (1==1) {
     return (
       <ModalContent
         messages={messages}

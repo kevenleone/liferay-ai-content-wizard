@@ -17,11 +17,11 @@ type ModalContentProps = {
 };
 
 const Asset = ({ asset, onSelectAsset }: any) => (
-  <Card className='mr-2 mt-0 mb-3 cursor-pointer'>
+  <Card className='mr-2 mt-0 mb-3 cursor-pointer ai-prompt-option'>
     <Card.Body onClick={() => onSelectAsset(asset)}>
       <span
         className='icon-square'
-        style={{ border: '1px solid ' + asset.bgColor }}
+        style={{ border: '1px solid ' + asset.bgColor, backgroundColor:asset.bgColor + '22' }}
       >
         <ClayIcon color={asset.iconColor} symbol={asset.icon} />
       </span>
