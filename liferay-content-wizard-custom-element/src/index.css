@@ -46,11 +46,11 @@
     left: 0!important;
     width: calc(100% + 4px)!important;
     height: calc(100% + 4px)!important;
-    background: linear-gradient(90deg, #FF8038 0%, #FF0099 30.43%, #00EBEB 68.23%, #DB00FF 100%)!important;
+    background-image: linear-gradient(90deg, #FF8038 0%, #FF0099 30.43%, #00EBEB 68.23%, #DB00FF 100%)!important;
     background-size: 600% 600%!important;
     border-radius: 50px!important;
-    animation: AnimateBorder 4s ease infinite;
-    -webkit-animation: AnimateBorder 4s ease infinite!important;
+    animation: AnimateBorder 4s ease infinite!important;
+    -webkit-animation: AnimateBorder 4s ease infinite;
     -moz-animation: AnimateBorder 4s ease infinite!important;
     z-index: 10!important;
     transform: translate(-2px, -2px)!important;
