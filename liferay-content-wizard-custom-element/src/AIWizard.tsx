@@ -52,12 +52,17 @@ export default function AIWizard({ modal }: AIWizardProps) {
     });
 
     if (!response.ok) {
+      const data = await response.json();
+
       return appendMessage({
         role: 'system',
         text: (
           <ClayAlert displayType='danger'>
             <b>Error:</b> it seems like you might have typed a symbol by
             mistake. Please try again.
+            <details className='mt-2'>
+              <pre>{JSON.stringify(data, null, 2)}</pre>
+            </details>
           </ClayAlert>
         ),
       });
