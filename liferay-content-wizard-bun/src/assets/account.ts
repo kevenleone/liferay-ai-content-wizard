@@ -21,7 +21,7 @@ async function createAccounts(
         .toUpperCase()
         .replaceAll(' ', '-')}-${new Date().getTime()}`,
       name: account.name,
-      type: 'business',
+      type: account.type,
     });
   }
 }

@@ -1,7 +1,10 @@
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatVertexAI } from '@langchain/google-vertexai';
-import { StructuredOutputParser } from 'langchain/output_parsers';
+import {
+  OutputFixingParser,
+  StructuredOutputParser,
+} from 'langchain/output_parsers';
 
 import type { PromptPayload } from './types';
 
@@ -12,7 +15,6 @@ type LangChainOptions = {
 
 export class LangChain {
   private llm: ChatOpenAI | ChatVertexAI;
-  private provider: string;
 
   constructor(provider: 'openai' | 'vertexai', options: LangChainOptions) {
     const baseOptions = {
@@ -26,8 +28,6 @@ export class LangChain {
       provider === 'openai'
         ? new ChatOpenAI(baseOptions)
         : new ChatVertexAI(baseOptions);
-
-    this.provider = provider;
   }
 
   async getStructuredContent(input: PromptPayload) {
@@ -35,11 +35,17 @@ export class LangChain {
       ['system', '{instructions}'],
       ['user', '{prompt}'],
       ['ai', 'Formatting Instructions: {format_instructions}'],
+      [
+        'user',
+        'The content created needs to be in the HTML format whenever possible, avoid using markdown.',
+      ],
     ]);
 
     const outputParser = StructuredOutputParser.fromZodSchema(input.schema);
 
-    const chain = prompt.pipe(this.llm).pipe(outputParser);
+    const parserWithFix = OutputFixingParser.fromLLM(this.llm, outputParser);
+
+    const chain = prompt.pipe(this.llm).pipe(parserWithFix);
 
     return chain.invoke({
       instructions: input.instruction,

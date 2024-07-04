@@ -4,17 +4,17 @@ import WizardEmptyState from '../WizardEmptyState';
 type ContentWizardProps = {
   configured: boolean;
   isLoading: boolean;
+  isLoadingContent: boolean;
   messages: any[];
   onSelectAsset: (asset: any) => void;
-  setMessages: React.Dispatch<any>;
 };
 
 export default function ChatBody({
-  isLoading,
   configured,
+  isLoading,
+  isLoadingContent,
   messages,
   onSelectAsset,
-  setMessages,
 }: ContentWizardProps) {
   if (isLoading) {
     return <b>Loading...</b>;
@@ -23,8 +23,8 @@ export default function ChatBody({
   if (configured) {
     return (
       <ModalContent
+        isLoadingContent={isLoadingContent}
         messages={messages}
-        setMessages={setMessages}
         onSelectAsset={onSelectAsset}
       />
     );

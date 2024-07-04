@@ -1,9 +1,10 @@
 import type { z } from 'zod';
 
-import * as assets from '../assets';
-import { LangChain } from '../LangChain';
-import getPromptCategorization, { schema } from '../assets/categorization';
 import { execHooks } from '../hooks/execWorkflow';
+import { LangChain } from '../LangChain';
+import * as assets from '../assets';
+import getPromptCategorization from '../assets/categorization';
+import type { categorizationSchema } from '../schemas';
 
 export default async function generate(body: any) {
   const langChain = new LangChain('vertexai', {
@@ -15,7 +16,7 @@ export default async function generate(body: any) {
   const categorizationPrompt = getPromptCategorization(body.question);
   const data = await langChain.getStructuredContent(categorizationPrompt);
 
-  const categorization = data as z.infer<typeof schema>;
+  const categorization = data as z.infer<typeof categorizationSchema>;
 
   console.info({ categorization });
 

@@ -1,6 +1,6 @@
 import type { ZodSchema, z } from 'zod';
-import type { schema } from './assets/categorization';
 import type liferayHeadless from './services/apis';
+import type { categorizationSchema } from './schemas';
 
 export type HookStructure = {
   prompt: any;
@@ -24,7 +24,7 @@ export type HookData<T> = {
   promptResponse: T;
 };
 
-export type PromptInput = z.infer<typeof schema>;
+export type PromptInput = z.infer<typeof categorizationSchema>;
 
 export type PromptPayload<ZSchema = ZodSchema> = {
   instruction: string;

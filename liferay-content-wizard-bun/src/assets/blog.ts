@@ -16,6 +16,8 @@ async function createBlog(
     console.log('Creating blog', blog);
 
     try {
+      delete (blog as any).pictureDescription;
+
       await liferay.postBlog(themeDisplay.scopeGroupId, blog);
     } catch (error) {
       console.error(error);

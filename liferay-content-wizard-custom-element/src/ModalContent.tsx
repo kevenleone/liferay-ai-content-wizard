@@ -1,27 +1,33 @@
+import { useState } from 'react';
 import Card from '@clayui/card';
+import { Text } from '@clayui/core';
+import classNames from 'classnames';
+import ClayIcon from '@clayui/icon';
 import Icon from '@clayui/icon';
+import LoadingIndicator from '@clayui/loading-indicator';
 
 import { Liferay } from './services/liferay';
-import ClayIcon from '@clayui/icon';
-import classNames from 'classnames';
 import { assets } from './utils/assets';
 import { Message as MessageType } from './types';
-import { useState } from 'react';
 
 const ASSETS_BASE_LIMIT = 4;
+const ASSETS_ADD_LIMIT = 3;
 
 type ModalContentProps = {
+  isLoadingContent: boolean;
   messages: any[];
-  setMessages: React.Dispatch<any>;
   onSelectAsset: (asset: any) => void;
 };
 
 const Asset = ({ asset, onSelectAsset }: any) => (
-  <Card className='mr-2 mt-0 mb-3 cursor-pointer'>
+  <Card className='mr-2 mt-0 mb-3 col-xl-3 col-lg-4 cursor-pointer ai-prompt-option'>
     <Card.Body onClick={() => onSelectAsset(asset)}>
       <span
         className='icon-square'
-        style={{ border: '1px solid ' + asset.bgColor }}
+        style={{
+          border: '1px solid ' + asset.bgColor,
+          backgroundColor: asset.bgColor + '22',
+        }}
       >
         <ClayIcon color={asset.iconColor} symbol={asset.icon} />
       </span>
@@ -67,13 +73,24 @@ const Message = ({
   );
 };
 
+const More = ({ setAssetCount }: { setAssetCount: React.Dispatch<number> }) => (
+  <Asset
+    asset={{ title: 'More', icon: 'plus' }}
+    onSelectAsset={() =>
+      setAssetCount((assetCount) => assetCount + ASSETS_BASE_LIMIT)
+    }
+  />
+);
+
 export default function ModalContent({
+  isLoadingContent,
   messages,
   onSelectAsset,
 }: ModalContentProps) {
   const [assetCount, setAssetCount] = useState(ASSETS_BASE_LIMIT);
+
   return (
-    <div>
+    <div className='w-100'>
       <Message role='assistant'>
         <b>
           Hi {Liferay.ThemeDisplay.getUserName()}! What would you like to
@@ -81,19 +98,14 @@ export default function ModalContent({
         </b>
         <br />
         Suggested content (choose one):
-        <div className='d-flex flex-wrap mt-2'>
+        <div className='d-flex flex-wrap mt-2 row w-100'>
           {assets
             .filter((_, index) => index < assetCount)
             .map((asset, index) => (
               <Asset asset={asset} key={index} onSelectAsset={onSelectAsset} />
             ))}
 
-          <Asset
-            asset={{ title: 'More', icon: 'plus' }}
-            onSelectAsset={() =>
-              setAssetCount((assetCount) => assetCount + ASSETS_BASE_LIMIT)
-            }
-          />
+          {assetCount < assets.length && <More setAssetCount={setAssetCount} />}
         </div>
       </Message>
 
@@ -102,6 +114,24 @@ export default function ModalContent({
           {message.text}
         </Message>
       ))}
+
+      {isLoadingContent && (
+        <Message role='assistant'>
+          <div className='d-flex justify-content-center align-items-center w-100'>
+            <Text color='secondary' italic>
+              Content is being generated... be patient.
+            </Text>
+
+            <LoadingIndicator
+              shape='squares'
+              className='ml-2'
+              size='sm'
+              displayType='secondary'
+              title='Content is being generated... be patient.'
+            />
+          </div>
+        </Message>
+      )}
     </div>
   );
 }

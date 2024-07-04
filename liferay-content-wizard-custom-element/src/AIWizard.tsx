@@ -72,30 +72,32 @@ export default function AIWizard({ modal }: AIWizardProps) {
     });
 
     appendMessage({
-      text: JSON.stringify(data, null, 2),
+      text: data.output || JSON.stringify(data, null, 2),
       role: 'assistant',
     });
 
     form.setValue('input', '');
   }
 
+  const configured = settings.configured || true;
+
   return (
-    <Modal size='lg' observer={modal.observer}>
+    <Modal size='full-screen' observer={modal.observer}>
       <Modal.Header>AI Assistant</Modal.Header>
       <Modal.Body>
         <ChatBody
-          configured={settings.configured}
+          isLoadingContent={form.formState.isSubmitting}
+          configured={configured}
           isLoading={isLoading}
           messages={messages}
           onSelectAsset={(asset) => setPlaceholder(asset.hint)}
-          setMessages={setMessages}
         />
 
         {/* Bottom Reference, to scroll messages */}
         <div ref={ref} />
       </Modal.Body>
 
-      {settings.configured && (
+      {configured && (
         <div className='modal-footer'>
           <ChatInput
             form={form}

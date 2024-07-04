@@ -1,14 +1,14 @@
 import type { z } from 'zod';
 
-import type { schema } from '../assets/categorization';
 import type { HookStructure } from '../types';
 import type { LangChain } from '../LangChain';
 
 import liferayHeadless from '../services/apis';
 import getLiferayInstance from '../services/liferay';
+import type { categorizationSchema } from '../schemas';
 
 type Props = {
-  categorization: z.infer<typeof schema>;
+  categorization: z.infer<typeof categorizationSchema>;
   langChain: LangChain;
   hooks: HookStructure;
   themeDisplay: any;
@@ -25,6 +25,7 @@ export async function execHooks({
     beforePrompt: [] as any[],
     categorization,
     promptResponse: {},
+    output: '',
   };
 
   for (const beforePromptCall of hooks.beforePromptCalls ?? []) {
@@ -53,6 +54,16 @@ export async function execHooks({
       themeDisplay,
     });
   }
+
+  let capitalizedAssetType =
+    categorization.assetType.charAt(0).toUpperCase() +
+    categorization.assetType.substring(1, categorization.assetType.length);
+
+  if (categorization.amount !== 1) {
+    capitalizedAssetType += 's';
+  }
+
+  response.output = `${capitalizedAssetType} generated with the following subject "${categorization.subject}"`;
 
   return response;
 }

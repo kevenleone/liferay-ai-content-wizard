@@ -6,6 +6,16 @@ export default function getLiferayInstance() {
     headers: {
       Authorization: 'Basic dGVzdEBsaWZlcmF5LmNvbTox',
     },
+    hooks: {
+      beforeError: [
+        (error) => {
+          console.log(error.message);
+          console.log({ error });
+
+          return error;
+        },
+      ],
+    },
     retry: {
       limit: 5,
       methods: ['get', 'post'],
