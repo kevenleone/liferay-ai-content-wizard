@@ -2,11 +2,24 @@ import type { z } from 'zod';
 
 import type { schema } from '../assets/categorization';
 import type { HookStructure } from '../types';
+import type { LangChain } from '../LangChain';
 
-export async function execHooks(
-  categorization: z.infer<typeof schema>,
-  hooks: HookStructure
-) {
+import liferayHeadless from '../services/apis';
+import getLiferayInstance from '../services/liferay';
+
+type Props = {
+  categorization: z.infer<typeof schema>;
+  langChain: LangChain;
+  hooks: HookStructure;
+  themeDisplay: any;
+};
+
+export async function execHooks({
+  categorization,
+  langChain,
+  hooks,
+  themeDisplay,
+}: Props) {
   const response = {
     afterPromptCalls: [] as any[],
     beforePrompt: [] as any[],
@@ -14,39 +27,31 @@ export async function execHooks(
     promptResponse: {},
   };
 
-  console.log('Executing hooks', new Date());
-
   for (const beforePromptCall of hooks.beforePromptCalls ?? []) {
+    console.log('Executing Before Prompt Call', new Date());
+
     const result = await beforePromptCall();
 
     response.beforePrompt.push(result);
   }
 
-  response.promptResponse = await hooks.prompt(categorization);
+  response.promptResponse = await langChain.getStructuredContent(
+    hooks.prompt(categorization)
+  );
 
   for (const afterPromptCall of hooks.afterPromptCalls ?? []) {
+    console.log('Executing Before Prompt Call', new Date());
+
     const result = await afterPromptCall();
 
     response.afterPromptCalls = result;
   }
 
-  console.log('Here...');
-
   for (const action of hooks.actions) {
-    await action(response);
-  }
-
-  return response;
-}
-
-export default async function execWorkflow(
-  categorization: z.infer<typeof schema>,
-  ...actions: any[]
-) {
-  let response = categorization as any;
-
-  for (const action of actions) {
-    response = await action(response);
+    await action(response.promptResponse, {
+      liferay: liferayHeadless(getLiferayInstance()),
+      themeDisplay,
+    });
   }
 
   return response;

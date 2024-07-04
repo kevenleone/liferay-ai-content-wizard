@@ -1,37 +1,37 @@
 import { z } from 'zod';
 
-import type { PromptPayload } from '../types';
+import type {
+  HookContext,
+  HookStructure,
+  PromptInput,
+  PromptPayload,
+} from '../types';
+import { blogSchema } from '../schemas';
 
-type Props = {
-  count: number;
-  language: string;
-  subject: string;
-};
+async function createBlog(
+  blogs: z.infer<typeof blogSchema>,
+  { liferay, themeDisplay }: HookContext
+) {
+  for (const blog of blogs) {
+    console.log('Creating blog', blog);
 
-export default function getBlogPrompt({
-  count,
-  language,
-  subject,
-}: Props): PromptPayload {
-  return {
-    instruction:
-      'You are a blog author. Do not include Quotes or Double Quotes',
-    prompt: `Write ${count} blogs on the subject of: ${subject}. It is important that each blog article's content is translated into: ${language}`,
-    schema: z
-      .array(
-        z.object({
-          alternativeHeadline: z
-            .string()
-            .describe('A headline that is a summary of the blog'),
-          body: z.string().describe('The content of the blog article'),
-          headline: z.string().describe('The title of the blog article'),
-          pictureDescription: z
-            .string()
-            .describe(
-              'A description of an appropriate image for this blog in three sentences.'
-            ),
-        })
-      )
-      .describe('An array of blog articles'),
-  };
+    try {
+      await liferay.postBlog(themeDisplay.scopeGroupId, blog);
+    } catch (error) {
+      console.error(error);
+
+      throw error;
+    }
+  }
 }
+
+const getBlogPrompt = ({ amount, subject }: PromptInput): PromptPayload => ({
+  instruction: 'You are a blog author. Do not include Quotes or Double Quotes',
+  prompt: `Write ${amount} blogs on the subject of: ${subject}. It is important that each blog article's content is translated into: English`,
+  schema: blogSchema,
+});
+
+export default {
+  actions: [createBlog],
+  prompt: getBlogPrompt,
+} as HookStructure;
