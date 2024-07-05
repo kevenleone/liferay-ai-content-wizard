@@ -13,7 +13,35 @@
     margin-right: 3px;
 }
 
+.modal-options{
+    float: right;
+    font-size: .7em;
+    margin-right: 13px;
+    margin-top: 5px;
+    cursor: pointer;
+}
 
+.ai-options-panel .card{
+    margin-bottom: 0;
+}
+
+.option-col {
+    padding-left: 12px;
+    padding-right: 12px;
+    position: relative;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.modal-full-screen .option-col {
+    flex: 0 0 calc(3 / 12* 100%);
+    max-width: calc(3 / 12* 100%);
+}
+
+.modal-lg .option-col {
+    flex: 0 0 calc(4 / 12* 100%);
+    max-width: calc(4 / 12* 100%);
+}
 
 #AIButton {
     display: block;

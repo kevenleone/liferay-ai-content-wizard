@@ -23,7 +23,8 @@ const schema = z.object({ input: z.string() });
 export type Schema = z.infer<typeof schema>;
 
 export default function AIWizard({ modal }: AIWizardProps) {
-  const [placeholder, setPlaceholder] = useState('');
+  const [userSelectedAssetType, setUserSelectedAssetType] = useState('');
+  const [fullscreen, setFullscreen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
   const ref = useRef<HTMLDivElement>(null);
@@ -87,15 +88,22 @@ export default function AIWizard({ modal }: AIWizardProps) {
   const configured = settings.configured || true;
 
   return (
-    <Modal size='full-screen' observer={modal.observer}>
-      <Modal.Header>AI Assistant</Modal.Header>
+    <Modal size={fullscreen ? 'full-screen':'lg'}  observer={modal.observer}>
+    <Modal.Header>
+      AI Assistant
+
+      <span className='modal-options'
+        onClick={() => setFullscreen(!fullscreen)}>
+        <ClayIcon symbol={fullscreen ? 'compress':'expand'} />
+      </span>
+    </Modal.Header>
       <Modal.Body>
         <ChatBody
           isLoadingContent={form.formState.isSubmitting}
           configured={configured}
           isLoading={isLoading}
           messages={messages}
-          onSelectAsset={(asset) => setPlaceholder(asset.hint)}
+          onSelectAsset={(asset) => setUserSelectedAssetType(asset.hint)}
         />
 
         {/* Bottom Reference, to scroll messages */}
@@ -107,10 +115,10 @@ export default function AIWizard({ modal }: AIWizardProps) {
           <ChatInput
             form={form}
             onSubmit={onSubmit}
-            placeholder={placeholder}
+            placeholder=''
           />
 
-          <div className='d-flex mt-4 w-100 justify-content-end'>
+          <div className='d-flex mt-4 justify-content-end'>
             <ClayButton displayType='secondary' onClick={() => setMessages([])}>
               <ClayIcon symbol='reset' /> Restart Chat
             </ClayButton>
