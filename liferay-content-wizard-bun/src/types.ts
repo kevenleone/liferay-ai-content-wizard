@@ -31,3 +31,11 @@ export type PromptPayload<ZSchema = ZodSchema> = {
   prompt: string;
   schema: ZSchema;
 };
+
+export type APIResponse<Query = any> = {
+  items: Query[];
+  lastPage: number;
+  page: number;
+  pageSize: number;
+  totalCount: number;
+};

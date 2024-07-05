@@ -29,7 +29,10 @@ export default function liferayHeadless(
       );
     },
 
-    createTaxonomyVocabulary(siteId: string, json: { name: string }) {
+    createTaxonomyVocabulary(
+      siteId: string,
+      json: { name: string; name_i18n: unknown }
+    ) {
       return liferay.post(
         `o/headless-admin-taxonomy/v1.0/sites/${siteId}/taxonomy-vocabularies`,
         { json }
@@ -88,11 +91,31 @@ export default function liferayHeadless(
       );
     },
 
+    getKeywords(siteId: string, searchParams = new URLSearchParams()) {
+      return liferay.get(
+        `o/headless-admin-taxonomy/v1.0/sites/${siteId}/keywords?${searchParams.toString()}`
+      );
+    },
+
+    createKeyword(siteId: string, name: string) {
+      return liferay.post(
+        `o/headless-admin-taxonomy/v1.0/sites/${siteId}/keywords`,
+        { json: { name } }
+      );
+    },
+
+    createKeywordBatch(siteId: string, json: unknown) {
+      return liferay.post(
+        `o/headless-admin-taxonomy/v1.0/sites/${siteId}/keywords/batch`,
+        { json }
+      );
+    },
+
     createChildWikiPage(
       parentWikiPageId: number,
       json: {
         content: string;
-        encondingFormat: string;
+        encodingFormat: string;
         headline: string;
         parentWikiPageId: number;
         wikiNodeId: number;

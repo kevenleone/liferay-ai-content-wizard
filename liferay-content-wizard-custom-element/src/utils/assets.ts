@@ -24,20 +24,20 @@ export const assets = [
     title: 'Knowledge Base',
   },
   {
-    description: 'Choose a topic to create message board sections and threads.',
-    icon: 'message-boards',
-    iconColor: '#D19403',
-    bgColor: '#F7DC6F',
-    hint: 'Organize a message board for a company that provides wellness and health information and services.',
-    title: 'Message Boards',
-  },
-  {
     description: 'Create a set of wiki nodes and pages based on a prompt.',
     icon: 'wiki-page',
     iconColor: '#FF5733',
     bgColor: '#FF8973',
     hint: 'Build a wiki for a specific travel destination or region. Include information on attractions, transportation, local customs, and must-try experiences.',
     title: 'Wikis',
+  },
+  {
+    description: 'Choose a topic to create message board sections and threads.',
+    icon: 'message-boards',
+    iconColor: '#D19403',
+    bgColor: '#F7DC6F',
+    hint: 'Organize a message board for a company that provides wellness and health information and services.',
+    title: 'Message Boards',
   },
   {
     description: 'Create a set of multilingual FAQs based on a topic.',

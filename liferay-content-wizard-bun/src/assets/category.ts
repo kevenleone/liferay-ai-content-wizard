@@ -16,7 +16,8 @@ async function action(
   const taxonomyVocabularyResponse = await liferay.createTaxonomyVocabulary(
     themeDisplay.scopeGroupId,
     {
-      name: vocabulary.vocabularyName,
+      name: vocabulary.name,
+      name_i18n: vocabulary.name_i18n,
     }
   );
 
@@ -30,6 +31,7 @@ async function action(
     const vocabularyCategoryResponse =
       await liferay.createTaxonomyVocabularyCategory(taxonomyVocabulary.id, {
         name: category.name,
+        name_i18n: category.name_i18n,
       });
 
     const vocabularyCategory = await vocabularyCategoryResponse.json<{
@@ -41,17 +43,24 @@ async function action(
     for (const childCategory of category.childCategories) {
       await liferay.createTaxonomyCategory(vocabularyCategory.id, {
         name: childCategory.name,
+        name_i18n: childCategory.name_i18n,
         parentTaxonomyCategory: { id: vocabularyCategory.id },
       });
     }
   }
 }
 
-const getPrompt = ({ amount, subject }: PromptInput): PromptPayload => {
+const getPrompt = ({
+  amount,
+  subject,
+  metadata: { availableLanguages },
+}: PromptInput): PromptPayload => {
   return {
     instruction:
       'You are a category manager responsible for listing the categories for your company.',
-    prompt: `Create a list of ${amount} categories about ${subject}`,
+    prompt: `Create a list of ${amount} categories about ${subject}, available languages: ${availableLanguages.join(
+      ', '
+    )}`,
     schema: categorySchema,
   };
 };

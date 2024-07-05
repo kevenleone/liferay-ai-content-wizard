@@ -20,6 +20,15 @@ export const blogSchema = z
         .describe('A headline that is a summary of the blog'),
       articleBody: z.string().describe('The content of the blog article'),
       headline: z.string().describe('The title of the blog article'),
+      keywords: z
+        .array(
+          z
+            .string()
+            .describe(
+              'Identify the content of the blog and add meaningful keywords using the following format: hyphen-case'
+            )
+        )
+        .describe('You cannot add more than 5 keywords.'),
       pictureDescription: z
         .string()
         .describe(
@@ -38,19 +47,22 @@ export const categorySchema = z
             .array(
               z.object({
                 name: z.string().describe('The name of the child category'),
+                name_i18n: z.any(),
               })
             )
             .describe('child categories'),
           name: z.string().describe('The name of the category'),
+          name_i18n: z.any(),
         })
       )
       .describe('An array of categories'),
-    vocabularyName: z
+    name: z
       .string()
       .describe('The vocabulary name based on the title with few words.'),
+    name_i18n: z.any(),
   })
   .describe(
-    'Vocabulary structure with the name and a list of categories and their child categories'
+    'Vocabulary structure with the name and a list of categories and their child categories. For all name_i18n: they are related to the closest "name" property, use the language as key and the translated value'
   );
 
 export const categorizationSchema = z
@@ -73,13 +85,17 @@ export const categorizationSchema = z
         'tag',
         'user',
         'warehouse',
-        'web content',
         'wiki',
       ])
       .describe(
         `The user prompt is related to one of these options, if you dont know for sure the best qualified option, you can say "none", category can be known as "categories" and "asset categories"`
       ),
     metadata: z.object({
+      availableLanguages: z
+        .array(z.string())
+        .describe(
+          'Add all the languages mentioned by the user, following the BCP47 format, like en-US, pt-BR'
+        ),
       additionalContext: z
         .string()
         .describe(

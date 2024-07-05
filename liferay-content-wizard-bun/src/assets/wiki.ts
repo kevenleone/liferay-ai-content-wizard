@@ -39,9 +39,18 @@ async function action(
     const _wikiPage = await wikiPageResponse.json<{ id: number }>();
 
     for (const childArticle of wikiPage.childArticles) {
-      await liferay.createChildWikiPage(_wikiPage.id, {
+      console.log({
         content: `<p>${childArticle.articleBody}</p>`,
         encondingFormat: 'text/html',
+        headline: childArticle.title,
+        parentWikiPageId: _wikiPage.id,
+        viewableBy: wiki.viewableBy,
+        wikiNodeId: wikiNode.id,
+      });
+
+      await liferay.createChildWikiPage(_wikiPage.id, {
+        content: `<p>${childArticle.articleBody}</p>`,
+        encodingFormat: 'text/html',
         headline: childArticle.title,
         parentWikiPageId: _wikiPage.id,
         viewableBy: wiki.viewableBy,

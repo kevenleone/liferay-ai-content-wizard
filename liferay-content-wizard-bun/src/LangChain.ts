@@ -52,7 +52,6 @@ export class LangChain {
     ]);
 
     const outputParser = StructuredOutputParser.fromZodSchema(input.schema);
-
     const parserWithFix = OutputFixingParser.fromLLM(this.llm, outputParser);
 
     const chain = prompt.pipe(this.llm).pipe(parserWithFix);
