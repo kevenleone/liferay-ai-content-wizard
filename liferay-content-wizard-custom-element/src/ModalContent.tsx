@@ -11,7 +11,6 @@ import { assets } from './utils/assets';
 import { Message as MessageType } from './types';
 
 const ASSETS_BASE_LIMIT = 4;
-const ASSETS_ADD_LIMIT = 3;
 
 type ModalContentProps = {
   isLoadingContent: boolean;
@@ -19,21 +18,23 @@ type ModalContentProps = {
   onSelectAsset: (asset: any) => void;
 };
 
-const Asset = ({ asset, onSelectAsset }: any) => (
-  <Card className='mr-2 mt-0 mb-3 col-xl-3 col-lg-4 cursor-pointer ai-prompt-option'>
-    <Card.Body onClick={() => onSelectAsset(asset)}>
-      <span
-        className='icon-square'
-        style={{
-          border: '1px solid ' + asset.bgColor,
-          backgroundColor: asset.bgColor + '22',
-        }}
-      >
-        <ClayIcon color={asset.iconColor} symbol={asset.icon} />
-      </span>
-      <small className='font-weight-bold ml-2'>{asset.title}</small>
-    </Card.Body>
-  </Card>
+const Asset = ({ asset, onSelectionClick }: any) => (
+  <div className='option-col mt-0 mb-3'>
+    <Card className='cursor-pointer ai-prompt-option'>
+      <Card.Body onClick={() => onSelectionClick(asset)}>
+        <span
+          className='icon-square'
+          style={{
+            border: '1px solid ' + asset.bgColor,
+            backgroundColor: asset.bgColor + '22',
+          }}
+        >
+          <ClayIcon color={asset.iconColor} symbol={asset.icon} />
+        </span>
+        <small className='font-weight-bold ml-2'>{asset.title}</small>
+      </Card.Body>
+    </Card>
+  </div>
 );
 
 const Message = ({
@@ -61,6 +62,7 @@ const Message = ({
 
       <div>{children}</div>
 
+
       {role === 'user' && (
         <img
           className='rounded-circle ml-3'
@@ -76,7 +78,7 @@ const Message = ({
 const More = ({ setAssetCount }: { setAssetCount: React.Dispatch<number> }) => (
   <Asset
     asset={{ title: 'More', icon: 'plus' }}
-    onSelectAsset={() =>
+    onSelectionClick={() =>
       setAssetCount((assetCount) => assetCount + ASSETS_BASE_LIMIT)
     }
   />
@@ -86,11 +88,25 @@ export default function ModalContent({
   isLoadingContent,
   messages,
   onSelectAsset,
+  
 }: ModalContentProps) {
   const [assetCount, setAssetCount] = useState(ASSETS_BASE_LIMIT);
 
+  async function onSelectionClick(asset:any) {
+
+    messages.push({ text: 'I would like to create '+ asset.title + '.', role: 'user' });
+
+    messages.push({
+      text: "Tell me more about what you would like to create. Here is an example: "+
+      "<i>Eg. " + asset.hint + "</i>",
+      role: 'assistant',
+    })
+
+    onSelectAsset(asset);
+  }
+
   return (
-    <div className='w-100'>
+    <>
       <Message role='assistant'>
         <b>
           Hi {Liferay.ThemeDisplay.getUserName()}! What would you like to
@@ -98,11 +114,11 @@ export default function ModalContent({
         </b>
         <br />
         Suggested content (choose one):
-        <div className='d-flex flex-wrap mt-2 row w-100'>
+        <div className='d-flex flex-wrap mt-2 row'>
           {assets
             .filter((_, index) => index < assetCount)
             .map((asset, index) => (
-              <Asset asset={asset} key={index} onSelectAsset={onSelectAsset} />
+              <Asset asset={asset} key={index} onSelectionClick={onSelectionClick} />
             ))}
 
           {assetCount < assets.length && <More setAssetCount={setAssetCount} />}
@@ -132,6 +148,6 @@ export default function ModalContent({
           </div>
         </Message>
       )}
-    </div>
+    </>
   );
 }

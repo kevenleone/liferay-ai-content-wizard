@@ -12,7 +12,7 @@ export const assets = [
     icon: 'categories',
     iconColor: '#3357FF',
     bgColor: '#7389FF',
-    hint: 'Create categories that represent popular vehicle brands in Italy',
+    hint: 'Create categories that represent luxury vehicle brands in Italy.',
     title: 'Categories',
   },
   {
