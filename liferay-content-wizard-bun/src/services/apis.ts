@@ -62,6 +62,51 @@ export default function liferayHeadless(
       );
     },
 
+    createWikiNode(siteId: string, json: { name: string; viewableBy: string }) {
+      return liferay.post(
+        `o/headless-delivery/v1.0/sites/${siteId}/wiki-nodes`,
+        {
+          json,
+        }
+      );
+    },
+
+    createWikiPage(
+      nodeId: number,
+      json: {
+        content: string;
+        encodingFormat: string;
+        headline: string;
+        viewableBy: string;
+      }
+    ) {
+      return liferay.post(
+        `o/headless-delivery/v1.0/wiki-nodes/${nodeId}/wiki-pages`,
+        {
+          json,
+        }
+      );
+    },
+
+    createChildWikiPage(
+      parentWikiPageId: number,
+      json: {
+        content: string;
+        encondingFormat: string;
+        headline: string;
+        parentWikiPageId: number;
+        wikiNodeId: number;
+        viewableBy: string;
+      }
+    ) {
+      return liferay.post(
+        `o/headless-delivery/v1.0/wiki-pages/${parentWikiPageId}/wiki-pages`,
+        {
+          json,
+        }
+      );
+    },
+
     async postBlog(siteId: string, json: unknown) {
       return liferay.post(
         `o/headless-delivery/v1.0/sites/${siteId}/blog-postings`,

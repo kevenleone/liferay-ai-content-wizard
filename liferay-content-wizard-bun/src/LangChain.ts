@@ -22,6 +22,7 @@ export class LangChain {
       modelName: options.modelName,
       temperature: 0.7,
       verbose: false,
+      maxOutputTokens: 2048,
     };
 
     this.llm =
