@@ -23,7 +23,6 @@ const schema = z.object({ input: z.string() });
 export type Schema = z.infer<typeof schema>;
 
 export default function AIWizard({ modal }: AIWizardProps) {
-  const [userSelectedAssetType, setUserSelectedAssetType] = useState('');
   const [fullscreen, setFullscreen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
@@ -88,22 +87,40 @@ export default function AIWizard({ modal }: AIWizardProps) {
   const configured = settings.configured || true;
 
   return (
-    <Modal size={fullscreen ? 'full-screen':'lg'}  observer={modal.observer}>
-    <Modal.Header>
-      AI Assistant
-
-      <span className='modal-options'
-        onClick={() => setFullscreen(!fullscreen)}>
-        <ClayIcon symbol={fullscreen ? 'compress':'expand'} />
-      </span>
-    </Modal.Header>
+    <Modal size={fullscreen ? 'full-screen' : 'lg'} observer={modal.observer}>
+      <Modal.Header>
+        AI Assistant
+        <span
+          className='modal-options'
+          onClick={() => setFullscreen(!fullscreen)}
+        >
+          <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
+        </span>
+      </Modal.Header>
       <Modal.Body>
         <ChatBody
           isLoadingContent={form.formState.isSubmitting}
           configured={configured}
           isLoading={isLoading}
           messages={messages}
-          onSelectAsset={(asset) => setUserSelectedAssetType(asset.hint)}
+          onSelectAsset={(asset) => {
+            appendMessage({
+              role: 'user',
+              text: `I would like to create ${asset.title}.`,
+            });
+
+            setTimeout(() => {
+              appendMessage({
+                role: 'assistant',
+                text: (
+                  <>
+                    Tell me more about what you would like to create. Here is an
+                    example: <i>Eg. {asset.hint}</i>
+                  </>
+                ),
+              });
+            }, 750);
+          }}
         />
 
         {/* Bottom Reference, to scroll messages */}
@@ -112,11 +129,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
 
       {configured && (
         <div className='modal-footer'>
-          <ChatInput
-            form={form}
-            onSubmit={onSubmit}
-            placeholder=''
-          />
+          <ChatInput form={form} onSubmit={onSubmit} placeholder='' />
 
           <div className='d-flex mt-4 justify-content-end'>
             <ClayButton displayType='secondary' onClick={() => setMessages([])}>

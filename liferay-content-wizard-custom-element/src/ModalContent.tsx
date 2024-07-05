@@ -9,6 +9,7 @@ import LoadingIndicator from '@clayui/loading-indicator';
 import { Liferay } from './services/liferay';
 import { assets } from './utils/assets';
 import { Message as MessageType } from './types';
+import { useAppContext } from './AppContext';
 
 const ASSETS_BASE_LIMIT = 4;
 
@@ -43,6 +44,8 @@ const Message = ({
 }: {
   children: any;
 } & Omit<MessageType, 'text'>) => {
+  const { myUserAccount } = useAppContext();
+
   if (role === 'system') {
     return children;
   }
@@ -62,13 +65,12 @@ const Message = ({
 
       <div>{children}</div>
 
-
       {role === 'user' && (
         <img
           className='rounded-circle ml-3'
           width={32}
           height={32}
-          src='https://github.com/kevenleone.png'
+          src={myUserAccount?.image || '/image/user_portrait'}
         />
       )}
     </div>
@@ -88,22 +90,8 @@ export default function ModalContent({
   isLoadingContent,
   messages,
   onSelectAsset,
-  
 }: ModalContentProps) {
   const [assetCount, setAssetCount] = useState(ASSETS_BASE_LIMIT);
-
-  async function onSelectionClick(asset:any) {
-
-    messages.push({ text: 'I would like to create '+ asset.title + '.', role: 'user' });
-
-    messages.push({
-      text: "Tell me more about what you would like to create. Here is an example: "+
-      "<i>Eg. " + asset.hint + "</i>",
-      role: 'assistant',
-    })
-
-    onSelectAsset(asset);
-  }
 
   return (
     <>
@@ -118,7 +106,11 @@ export default function ModalContent({
           {assets
             .filter((_, index) => index < assetCount)
             .map((asset, index) => (
-              <Asset asset={asset} key={index} onSelectionClick={onSelectionClick} />
+              <Asset
+                asset={asset}
+                key={index}
+                onSelectionClick={onSelectAsset}
+              />
             ))}
 
           {assetCount < assets.length && <More setAssetCount={setAssetCount} />}
