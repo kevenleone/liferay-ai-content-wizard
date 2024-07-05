@@ -1,3 +1,4 @@
+import { HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatVertexAI } from '@langchain/google-vertexai';
@@ -28,7 +29,15 @@ export class LangChain {
     this.llm =
       provider === 'openai'
         ? new ChatOpenAI(baseOptions)
-        : new ChatVertexAI(baseOptions);
+        : new ChatVertexAI({
+            ...baseOptions,
+            safetySettings: [
+              {
+                category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+                threshold: HarmBlockThreshold.BLOCK_LOW_AND_ABOVE,
+              },
+            ],
+          });
   }
 
   async getStructuredContent(input: PromptPayload) {
