@@ -21,6 +21,10 @@
     cursor: pointer;
 }
 
+.optionContainer{
+    width:100%;
+}
+
 .ai-options-panel .card{
     margin-bottom: 0;
 }

@@ -3,6 +3,7 @@ import WizardEmptyState from '../WizardEmptyState';
 
 type ContentWizardProps = {
   configured: boolean;
+  fullscreen: boolean;
   isLoading: boolean;
   isLoadingContent: boolean;
   messages: any[];
@@ -11,6 +12,7 @@ type ContentWizardProps = {
 
 export default function ChatBody({
   configured,
+  fullscreen,
   isLoading,
   isLoadingContent,
   messages,
@@ -24,6 +26,7 @@ export default function ChatBody({
     return (
       <ModalContent
         isLoadingContent={isLoadingContent}
+        fullscreen={fullscreen}
         messages={messages}
         onSelectAsset={onSelectAsset}
       />

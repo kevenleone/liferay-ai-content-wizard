@@ -100,6 +100,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
       <Modal.Body>
         <ChatBody
           isLoadingContent={form.formState.isSubmitting}
+          fullscreen={fullscreen}
           configured={configured}
           isLoading={isLoading}
           messages={messages}
