@@ -11,10 +11,12 @@ import { assets } from './utils/assets';
 import { Message as MessageType } from './types';
 import { useAppContext } from './AppContext';
 
-const ASSETS_BASE_LIMIT = 4;
+const ASSETS_BASE_LIMIT = 3;
+const ASSETS_BASE_LIMIT_FULLSCREEN = 4;
 
 type ModalContentProps = {
   isLoadingContent: boolean;
+  fullscreen: boolean;
   messages: any[];
   onSelectAsset: (asset: any) => void;
 };
@@ -63,7 +65,7 @@ const Message = ({
         </div>
       )}
 
-      <div>{children}</div>
+      <div className='optionContainer'>{children}</div>
 
       {role === 'user' && (
         <img
@@ -77,17 +79,24 @@ const Message = ({
   );
 };
 
-const More = ({ setAssetCount }: { setAssetCount: React.Dispatch<number> }) => (
+const More = ({ 
+    setAssetCount,
+    fullscreen 
+  }: { 
+    setAssetCount: React.Dispatch<number>,
+    fullscreen:boolean 
+  }) => (
   <Asset
     asset={{ title: 'More', icon: 'plus' }}
     onSelectionClick={() =>
-      setAssetCount((assetCount) => assetCount + ASSETS_BASE_LIMIT)
+      setAssetCount((assetCount) => assetCount + (fullscreen ?ASSETS_BASE_LIMIT_FULLSCREEN : ASSETS_BASE_LIMIT))
     }
   />
 );
 
 export default function ModalContent({
   isLoadingContent,
+  fullscreen,
   messages,
   onSelectAsset,
 }: ModalContentProps) {
@@ -113,7 +122,7 @@ export default function ModalContent({
               />
             ))}
 
-          {assetCount < assets.length && <More setAssetCount={setAssetCount} />}
+          {assetCount < assets.length && <More setAssetCount={setAssetCount} fullscreen={fullscreen}/>}
         </div>
       </Message>
 
