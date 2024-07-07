@@ -120,6 +120,15 @@ export const knowledgeBaseSchema = z
       articles: z.array(
         z.object({
           articleBody: z.string().describe('The knowledge base article body'),
+          keywords: z
+            .array(
+              z
+                .string()
+                .describe(
+                  'Identify the content of the blog and add meaningful keywords'
+                )
+            )
+            .describe('You cannot add more than 3 keywords.'),
           title: z.string().describe('Title of knowledge base article'),
         })
       ),
