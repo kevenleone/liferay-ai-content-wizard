@@ -18,7 +18,7 @@ We recommend you to update `liferay.workspace.product` to use as most as possibl
 
 ## Client Extensions
 
-To deploy the Client Extensions you must open each individual folder inside /client-extensions and run `gradle gw deploy`
+To deploy the Client Extensions you must open each individual folder inside /client-extensions and run `blade gw deploy`
 
 Is important to deploy the Custom Element CX before deploying the Site Initializer, because of an existing reference.
 
