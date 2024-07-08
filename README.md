@@ -25,3 +25,8 @@ Is important to deploy the Custom Element CX before deploying the Site Initializ
 ## Bun
 
 This project was created with [Bun](https://bun.sh/), I reccomend you to set up a Bun Envirnoment to execute the `liferay-content-wizard-bun`
+
+# Running
+
+Backend: go to `liferay-content-wizard-bun` and run `bun|yarn|npm run dev`
+Frontend: go to `liferay-content-custom-element` and run `bun|yarn|npm run dev`
