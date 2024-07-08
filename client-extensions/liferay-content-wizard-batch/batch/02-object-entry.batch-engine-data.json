@@ -1,0 +1,20 @@
+{
+  "configuration": {
+    "className": "com.liferay.object.rest.dto.v1_0.ObjectEntry",
+    "parameters": {
+      "containsHeaders": "true",
+      "createStrategy": "UPSERT",
+      "onErrorFail": "false",
+      "updateStrategy": "UPDATE"
+    },
+    "taskItemDelegateName": "C_AIWizardConfig"
+  },
+  "items": [
+    {
+      "apiKey": "##########",
+      "externalReferenceCode": "AIWIZARD_CONFIG",
+      "model": "gemini-1.5-flash",
+      "provider": "google"
+    }
+  ]
+}

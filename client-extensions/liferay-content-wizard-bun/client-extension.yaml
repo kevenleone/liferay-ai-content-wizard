@@ -3,11 +3,14 @@ liferay-content-wizard-oauth-application-user-agent:
   .serviceScheme: http
   name: Liferay Content Wizard OAuth Application User Agent
   scopes:
+    - C_ContentWizardSettings.everything
+    - Liferay.Bulk.REST.everything
+    - Liferay.Headless.Admin.Content.everything
     - Liferay.Headless.Admin.Taxonomy.everything
     - Liferay.Headless.Admin.User.everything
-    - Liferay.Headless.Admin.Workflow.everything
+    - Liferay.Headless.Batch.Engine.everything
     - Liferay.Headless.Commerce.Admin.Account.everything
     - Liferay.Headless.Commerce.Admin.Catalog.everything
-    - Liferay.Headless.Delivery.everything
-    - Liferay.Headless.Site.everything
+    - Liferay.Headless.Commerce.Admin.Inventory.everything
+    - Liferay.Object.Admin.REST.everything
   type: oAuthApplicationUserAgent

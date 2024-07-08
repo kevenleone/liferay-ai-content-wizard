@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "client-extensions/liferay-content-wizard-bun",
+            "client-extensions/liferay-content-wizard-custom-element"
+        ]
+    }
+}

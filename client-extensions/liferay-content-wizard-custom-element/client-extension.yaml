@@ -6,6 +6,7 @@ liferay-content-wizard-custom-element:
     - '**/index*.css'
   friendlyURLMapping: liferay-content-wizard-custom-element
   htmlElementName: liferay-content-wizard-custom-element
+  panelCategoryKey: applications_menu.applications.custom.apps
   instanceable: false
   name: Liferay Content Wizard
   portletCategoryName: category.client-extensions

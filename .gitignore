@@ -1,0 +1,12 @@
+.gradle
+build
+bundles
+**/**/node_modules
+**/**/build
+**/**/dist
+**/**/package-lock.json
+**/**/bun.lockb
+**/**/yarn.lockb
+**/**/.DS_Store
+.DS_Store
+yarn.lock
