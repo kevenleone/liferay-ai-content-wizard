@@ -8,11 +8,11 @@ import ClayIcon from '@clayui/icon';
 import Modal, { useModal } from '@clayui/modal';
 import useSWR from 'swr';
 
-import { Liferay } from './services/liferay';
-import { Message } from './types';
-import ChatBody from './components/Chat/ChatBody';
-import ChatInput from './components/Chat/ChatInput';
-import useAIWizardContentOAuth2 from './hooks/useAIWizardOAuth2';
+import { Liferay } from '../services/liferay';
+import { Message } from '../types';
+import ChatBody from './Chat/ChatBody';
+import ChatInput from './Chat/ChatInput';
+import useAIWizardContentOAuth2 from '../hooks/useAIWizardOAuth2';
 
 type AIWizardProps = {
   modal: ReturnType<typeof useModal>;

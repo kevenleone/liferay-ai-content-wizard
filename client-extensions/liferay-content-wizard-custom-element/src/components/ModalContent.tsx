@@ -6,10 +6,10 @@ import ClayIcon from '@clayui/icon';
 import Icon from '@clayui/icon';
 import LoadingIndicator from '@clayui/loading-indicator';
 
-import { Liferay } from './services/liferay';
-import { assets } from './utils/assets';
-import { Message as MessageType } from './types';
-import { useAppContext } from './AppContext';
+import { Liferay } from '../services/liferay';
+import { assets } from '../utils/assets';
+import { Message as MessageType } from '../types';
+import { useAppContext } from '../context/AppContext';
 
 const ASSETS_BASE_LIMIT = 3;
 const ASSETS_BASE_LIMIT_FULLSCREEN = 4;
@@ -79,17 +79,21 @@ const Message = ({
   );
 };
 
-const More = ({ 
-    setAssetCount,
-    fullscreen 
-  }: { 
-    setAssetCount: React.Dispatch<number>,
-    fullscreen:boolean 
-  }) => (
+const More = ({
+  setAssetCount,
+  fullscreen,
+}: {
+  setAssetCount: React.Dispatch<number>;
+  fullscreen: boolean;
+}) => (
   <Asset
     asset={{ title: 'More', icon: 'plus' }}
     onSelectionClick={() =>
-      setAssetCount((assetCount) => assetCount + (fullscreen ?ASSETS_BASE_LIMIT_FULLSCREEN : ASSETS_BASE_LIMIT))
+      setAssetCount(
+        (assetCount) =>
+          assetCount +
+          (fullscreen ? ASSETS_BASE_LIMIT_FULLSCREEN : ASSETS_BASE_LIMIT)
+      )
     }
   />
 );
@@ -122,7 +126,9 @@ export default function ModalContent({
               />
             ))}
 
-          {assetCount < assets.length && <More setAssetCount={setAssetCount} fullscreen={fullscreen}/>}
+          {assetCount < assets.length && (
+            <More setAssetCount={setAssetCount} fullscreen={fullscreen} />
+          )}
         </div>
       </Message>
 

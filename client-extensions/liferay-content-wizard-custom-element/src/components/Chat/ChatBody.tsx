@@ -1,4 +1,4 @@
-import ModalContent from '../../ModalContent';
+import ModalContent from '../ModalContent';
 import WizardEmptyState from '../WizardEmptyState';
 
 type ContentWizardProps = {

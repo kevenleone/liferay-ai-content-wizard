@@ -2,7 +2,7 @@ import ClayForm, { ClayInput } from '@clayui/form';
 import ClayIcon from '@clayui/icon';
 import { UseFormReturn } from 'react-hook-form';
 
-import { Schema } from '../../AIWizard';
+import { Schema } from '../AIWizard';
 
 type Props = {
   form: UseFormReturn<Schema>;

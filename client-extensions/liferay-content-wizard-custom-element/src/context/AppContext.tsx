@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useContext } from 'react';
 
-import { useMyUserAccount } from './hooks/useMyUserAccount';
+import { useMyUserAccount } from '../hooks/useMyUserAccount';
 
 const AppContext = createContext<{ myUserAccount: any }>({
   myUserAccount: null,
