@@ -7,6 +7,7 @@ import { getIconSpriteMap } from './utils/iconSpritemap.ts';
 import { SWRConfig } from 'swr';
 import SWRCacheProvider from './SWRCacheProvider.ts';
 import AppContextProvider from './AppContext.tsx';
+import Settings from './Settings.tsx';
 
 const customElementId = 'liferay-content-wizard-custom-element';
 
@@ -28,6 +29,8 @@ class ContentWizard extends HTMLElement {
           <AppContextProvider>
             <ClayIconSpriteContext.Provider value={getIconSpriteMap()}>
               <App />
+
+              <Settings />
             </ClayIconSpriteContext.Provider>
           </AppContextProvider>
         </SWRConfig>
