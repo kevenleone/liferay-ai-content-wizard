@@ -133,7 +133,12 @@ export default function AIWizard({ modal }: AIWizardProps) {
           <ChatInput form={form} onSubmit={onSubmit} placeholder='' />
 
           <div className='d-flex mt-4 justify-content-end'>
-            <ClayButton displayType='secondary' onClick={() => setMessages([])}>
+            <ClayButton
+              borderless
+              size='xs'
+              displayType='secondary'
+              onClick={() => setMessages([])}
+            >
               <ClayIcon symbol='reset' /> Restart Chat
             </ClayButton>
           </div>

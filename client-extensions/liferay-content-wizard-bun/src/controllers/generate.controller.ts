@@ -9,7 +9,7 @@ import liferayHeadless from '../services/apis';
 import getLiferayInstance from '../services/liferay';
 
 export default async function generate(body: any) {
-  const langChain = new LangChain('vertexai', {
+  const langChain = new LangChain('google', {
     modelName: 'gemini-1.5-flash-001',
   });
 
