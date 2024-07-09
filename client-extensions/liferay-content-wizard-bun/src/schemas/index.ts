@@ -198,3 +198,13 @@ export const wikiSchema = z
   .describe(
     'Wiki structure with the name and a list of wikis and their child wiki articles'
   );
+
+export const warehouseSchema = z
+  .array(
+    z.object({
+      longitute: z.number().describe('Region Longitude'),
+      latitude: z.number().describe('Region Latitude'),
+      name: z.string().describe('Name of the Region'),
+    })
+  )
+  .describe('an array of cities, regions, or counties within a region.');

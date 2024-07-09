@@ -1,10 +1,12 @@
 import type { z } from 'zod';
 
-import { execHooks } from '../hooks/execWorkflow';
 import { LangChain } from '../LangChain';
 import * as assets from '../assets';
 import getPromptCategorization from '../assets/categorization';
 import type { categorizationSchema } from '../schemas';
+import type Asset from '../assets/Asset';
+import liferayHeadless from '../services/apis';
+import getLiferayInstance from '../services/liferay';
 
 export default async function generate(body: any) {
   const langChain = new LangChain('vertexai', {
@@ -24,18 +26,16 @@ export default async function generate(body: any) {
     return { message: 'Asset Type invalid' };
   }
 
-  const hooks = (assets as any)[categorization.assetType];
+  const _Asset = (assets as any)[categorization.assetType];
 
-  if (!hooks) {
+  if (!_Asset) {
     throw new Error('Invalid asset type.');
   }
 
-  const response = await execHooks({
-    categorization,
-    hooks,
-    langChain,
-    themeDisplay,
-  });
+  const asset: Asset = new _Asset(
+    { langChain, liferay: liferayHeadless(getLiferayInstance()), themeDisplay },
+    categorization
+  );
 
-  return response;
+  return asset.run();
 }

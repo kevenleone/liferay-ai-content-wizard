@@ -1,51 +1,51 @@
 import { z } from 'zod';
 
-import type {
-  HookContext,
-  HookStructure,
-  PromptInput,
-  PromptPayload,
-} from '../types';
+import type { HookContext, PromptInput, PromptPayload } from '../types';
 import { organizationSchema } from '../schemas';
+import Asset from './Asset';
 
-async function action(
-  organizations: z.infer<typeof organizationSchema>,
-  { liferay, themeDisplay }: HookContext
-) {
-  for (const organization of organizations) {
-    const organizationResponse = await liferay.createOrganization({
-      name: organization.name,
-    });
+export default class OrganizationAsset extends Asset<
+  z.infer<typeof organizationSchema>
+> {
+  constructor(hookContext: HookContext, promptInput: PromptInput) {
+    super(hookContext, promptInput, organizationSchema);
+  }
 
-    const organizationName = await organizationResponse.json<{
-      id: number;
-    }>();
+  async action(organizations: z.infer<typeof organizationSchema>) {
+    for (const organization of organizations) {
+      const organizationResponse =
+        await this.hookContext.liferay.createOrganization({
+          name: organization.name,
+        });
 
-    console.log('Organization name created', organizationName);
+      const organizationName = await organizationResponse.json<{
+        id: number;
+      }>();
 
-    for (const child of organization.childOrganizations) {
-      const organizationResponse = await liferay.createOrganization({
-        name: child.name,
-        parentOrganization: {
-          id: organizationName.id,
-        },
-      });
+      console.log('Organization name created', organizationName);
 
-      const _organization = await organizationResponse.json();
+      for (const child of organization.childOrganizations) {
+        const organizationResponse =
+          await this.hookContext.liferay.createOrganization({
+            name: child.name,
+            parentOrganization: {
+              id: organizationName.id,
+            },
+          });
 
-      console.log('Organization created', _organization);
+        const _organization = await organizationResponse.json();
+
+        console.log('Organization created', _organization);
+      }
     }
   }
+
+  getPrompt({ amount, subject }: PromptInput): PromptPayload {
+    return {
+      instruction:
+        'ou are an organization manager responsible for listing the business organizations for your company.',
+      prompt: `Create a list of ${amount} expected organizations, child businesses, and departments for a company that provides ${subject}`,
+      schema: organizationSchema,
+    };
+  }
 }
-
-const getPrompt = ({ amount, subject }: PromptInput): PromptPayload => ({
-  instruction:
-    'ou are an organization manager responsible for listing the business organizations for your company.',
-  prompt: `Create a list of ${amount} expected organizations, child businesses, and departments for a company that provides ${subject}`,
-  schema: organizationSchema,
-});
-
-export default {
-  actions: [action],
-  prompt: getPrompt,
-} as HookStructure;

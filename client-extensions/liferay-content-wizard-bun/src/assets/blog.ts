@@ -2,44 +2,56 @@ import { z } from 'zod';
 
 import type {
   HookContext,
-  HookStructure,
   PromptInput,
   PromptPayload,
   RetrieveFirstItem,
 } from '../types';
-import { blogSchema } from '../schemas';
+import { blogSchema, categorizationSchema } from '../schemas';
+import Asset from './Asset';
 
-async function createBlog(
-  blog: RetrieveFirstItem<z.infer<typeof blogSchema>>,
-  { langChain, liferay, themeDisplay }: HookContext
-) {
-  const formData = await langChain.getGeneratedImage(blog.pictureDescription);
+type BlogsSchema = z.infer<typeof blogSchema>;
 
-  delete (blog as any).pictureDescription;
+export default class BlogAsset extends Asset<BlogsSchema> {
+  constructor(
+    hookContext: HookContext,
+    categorization: z.infer<typeof categorizationSchema>
+  ) {
+    super(hookContext, categorization, blogSchema);
+  }
 
-  const blogImage = await liferay.postBlogImage(
-    themeDisplay.scopeGroupId,
-    formData
-  );
-  const blogImageJson = await (blogImage.json() as any);
+  async createBlog(blog: RetrieveFirstItem<z.infer<typeof blogSchema>>) {
+    const formData = await this.hookContext.langChain.getGeneratedImage(
+      blog.pictureDescription
+    );
 
-  await liferay.postBlog(themeDisplay.scopeGroupId, {
-    ...blog,
-    image: { imageId: blogImageJson.id },
-  });
+    delete (blog as any).pictureDescription;
+
+    const blogImage = await this.hookContext.liferay.postBlogImage(
+      this.hookContext.themeDisplay.scopeGroupId,
+      formData
+    );
+
+    const blogImageJson = await (blogImage.json() as any);
+
+    await this.hookContext.liferay.postBlog(
+      this.hookContext.themeDisplay.scopeGroupId,
+      {
+        ...blog,
+        image: { imageId: blogImageJson.id },
+      }
+    );
+  }
+
+  public async action(blogs: BlogsSchema) {
+    await Promise.all(blogs.map((blog) => this.createBlog(blog)));
+  }
+
+  getPrompt({ amount, subject }: PromptInput): PromptPayload {
+    return {
+      instruction:
+        'You are a blog author. Do not include Quotes or Double Quotes',
+      prompt: `Write ${amount} blogs on the subject of: ${subject}. It is important that each blog article's content is translated into: English`,
+      schema: blogSchema,
+    };
+  }
 }
-
-async function action(blogs: z.infer<typeof blogSchema>, options: HookContext) {
-  await Promise.all(blogs.map((blog) => createBlog(blog, options)));
-}
-
-const getBlogPrompt = ({ amount, subject }: PromptInput): PromptPayload => ({
-  instruction: 'You are a blog author. Do not include Quotes or Double Quotes',
-  prompt: `Write ${amount} blogs on the subject of: ${subject}. It is important that each blog article's content is translated into: English`,
-  schema: blogSchema,
-});
-
-export default {
-  actions: [action],
-  prompt: getBlogPrompt,
-} as HookStructure;
