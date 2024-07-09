@@ -115,7 +115,7 @@ export default function ModalContent({
         </b>
         <br />
         Suggested content (choose one):
-        <div className='d-flex flex-wrap mt-2 row'>
+        <div className='d-flex flex-wrap mt-3 row'>
           {assets
             .filter((_, index) => index < assetCount)
             .map((asset, index) => (

@@ -25,6 +25,10 @@
     width:100%;
 }
 
+.optionContainer i {
+    color:#555;
+}
+
 .ai-options-panel .card{
     margin-bottom: 0;
 }
@@ -45,6 +49,18 @@
 .modal-lg .option-col {
     flex: 0 0 calc(4 / 12* 100%);
     max-width: calc(4 / 12* 100%);
+}
+
+.modal-footer .autofit-row{
+    column-gap: 5px;
+}
+.modal-footer .btn-group-spaced .btn{
+    margin-right: 3px;
+}
+
+.modal-footer .autofit-padded>.autofit-col{
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #AIButton {

@@ -6,6 +6,8 @@ export default function liferayHeadless(
   liferay: ReturnType<typeof getLiferayInstance>
 ) {
   return {
+    instance: liferay,
+
     async postAccount(account: {
       description: string;
       externalReferenceCode: string;
@@ -63,6 +65,12 @@ export default function liferayHeadless(
           json,
         }
       );
+    },
+
+    createOrganization(json: any) {
+      return liferay.post(`o/headless-admin-user/v1.0/organizations`, {
+        json,
+      });
     },
 
     createWikiNode(siteId: string, json: { name: string; viewableBy: string }) {
@@ -126,6 +134,15 @@ export default function liferayHeadless(
         `o/headless-delivery/v1.0/wiki-pages/${parentWikiPageId}/wiki-pages`,
         {
           json,
+        }
+      );
+    },
+
+    async postBlogImage(siteId: string, body: FormData) {
+      return liferay.post(
+        `o/headless-delivery/v1.0/sites/${siteId}/blog-posting-images`,
+        {
+          body,
         }
       );
     },
@@ -231,10 +248,10 @@ export default function liferayHeadless(
         .json<any>();
     },
 
-    getSiteDocuments() {
+    getSiteDocuments(siteId: number) {
       return liferay
         .get(
-          `o/headless-delivery/v1.0/sites/${SITE_ID}/documents?fields=contentUrl,documentFolderId,documentType,id,title&flatten=true&page=-1`
+          `o/headless-delivery/v1.0/sites/${SITE_ID}/documents?flatten=true&page=-1`
         )
         .json<any>();
     },
@@ -245,6 +262,12 @@ export default function liferayHeadless(
           `o/headless-delivery/v1.0/sites/${SITE_ID}/document-folders?fields=id,parentDocumentFolderId,name&flatten=true&page=-1`
         )
         .json<any>();
+    },
+
+    getDocumentFolderDocuments(folderId: number) {
+      return liferay.get(
+        `o/headless-delivery/v1.0/document-folders/${folderId}/documents`
+      );
     },
   };
 }
