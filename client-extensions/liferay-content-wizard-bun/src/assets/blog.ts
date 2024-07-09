@@ -5,26 +5,32 @@ import type {
   HookStructure,
   PromptInput,
   PromptPayload,
+  RetrieveFirstItem,
 } from '../types';
 import { blogSchema } from '../schemas';
 
 async function createBlog(
-  blogs: z.infer<typeof blogSchema>,
-  { liferay, themeDisplay }: HookContext
+  blog: RetrieveFirstItem<z.infer<typeof blogSchema>>,
+  { langChain, liferay, themeDisplay }: HookContext
 ) {
-  for (const blog of blogs) {
-    console.log('Creating blog', blog);
+  const formData = await langChain.getGeneratedImage(blog.pictureDescription);
 
-    try {
-      delete (blog as any).pictureDescription;
+  delete (blog as any).pictureDescription;
 
-      await liferay.postBlog(themeDisplay.scopeGroupId, blog);
-    } catch (error) {
-      console.error(error);
+  const blogImage = await liferay.postBlogImage(
+    themeDisplay.scopeGroupId,
+    formData
+  );
+  const blogImageJson = await (blogImage.json() as any);
 
-      throw error;
-    }
-  }
+  await liferay.postBlog(themeDisplay.scopeGroupId, {
+    ...blog,
+    image: { imageId: blogImageJson.id },
+  });
+}
+
+async function action(blogs: z.infer<typeof blogSchema>, options: HookContext) {
+  await Promise.all(blogs.map((blog) => createBlog(blog, options)));
 }
 
 const getBlogPrompt = ({ amount, subject }: PromptInput): PromptPayload => ({
@@ -34,6 +40,6 @@ const getBlogPrompt = ({ amount, subject }: PromptInput): PromptPayload => ({
 });
 
 export default {
-  actions: [createBlog],
+  actions: [action],
   prompt: getBlogPrompt,
 } as HookStructure;

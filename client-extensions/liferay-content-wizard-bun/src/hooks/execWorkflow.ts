@@ -50,6 +50,7 @@ export async function execHooks({
 
   for (const action of hooks.actions) {
     await action(response.promptResponse, {
+      langChain,
       liferay: liferayHeadless(getLiferayInstance()),
       themeDisplay,
     });

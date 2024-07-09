@@ -81,6 +81,7 @@ export const categorizationSchema = z
         'knowledgeBase',
         'news',
         'none',
+        'organization',
         'product',
         'tag',
         'user',
@@ -125,7 +126,7 @@ export const knowledgeBaseSchema = z
               z
                 .string()
                 .describe(
-                  'Identify the content of the blog and add meaningful keywords'
+                  'Identify the content of the knowledge base article and add meaningful keywords'
                 )
             )
             .describe('You cannot add more than 3 keywords.'),
@@ -141,6 +142,19 @@ export const knowledgeBaseSchema = z
     })
   )
   .describe('An array of knowledge base categories related to a given topic');
+
+export const organizationSchema = z
+  .array(
+    z.object({
+      name: z.string().describe('The name of the business organization.'),
+      childOrganizations: z.array(
+        z.object({
+          name: z.string().describe('The name of the organization'),
+        })
+      ),
+    })
+  )
+  .describe('An array of organizations related to a given topic');
 
 export const tagSchema = z
   .array(
