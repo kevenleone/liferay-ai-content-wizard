@@ -8,6 +8,7 @@ import type {
 } from '../types';
 import { blogSchema, categorizationSchema } from '../schemas';
 import Asset from './Asset';
+import responseToBase64 from '../utils/ResponseToBase64';
 
 type BlogsSchema = z.infer<typeof blogSchema>;
 
@@ -44,6 +45,29 @@ export default class BlogAsset extends Asset<BlogsSchema> {
 
   public async action(blogs: BlogsSchema) {
     await Promise.all(blogs.map((blog) => this.createBlog(blog)));
+  }
+
+  async getStructuredContentCustomCall() {
+    const files = this.hookContext.files;
+
+    if (files.length) {
+      const file = files.at(0);
+      const imageResponse = await this.hookContext.liferay.instance.get(
+        file.value.replace('/', '')
+      );
+
+      const base64 = await responseToBase64(imageResponse);
+
+      const prompt = await this.getPrompt(this.categorization);
+
+      return this.hookContext.langChain.getImageContext(
+        `${prompt.instruction} ${prompt.prompt}`,
+        files.map((file) => ({ type: 'base64', content: base64 })),
+        this.schema
+      );
+    }
+
+    return super.getStructuredContentCustomCall(this.categorization);
   }
 
   getPrompt({ amount, subject }: PromptInput): PromptPayload {

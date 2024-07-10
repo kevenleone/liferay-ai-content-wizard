@@ -18,7 +18,12 @@ type AIWizardProps = {
   modal: ReturnType<typeof useModal>;
 };
 
-const schema = z.object({ input: z.string() });
+const schema = z.object({
+  input: z.string(),
+  files: z.array(
+    z.object({ value: z.string(), type: z.enum(['fileEntryId', 'folder']) })
+  ),
+});
 
 export type Schema = z.infer<typeof schema>;
 
@@ -35,6 +40,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
 
   const form = useForm<Schema>({
     resolver: zodResolver(schema),
+    defaultValues: { files: [], input: '' },
   });
 
   const appendMessage = (message: Message) =>
@@ -44,10 +50,11 @@ export default function AIWizard({ modal }: AIWizardProps) {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  async function onSubmit({ input }: Schema) {
+  async function onSubmit({ files, input }: Schema) {
     appendMessage({ text: input, role: 'user' });
 
     const response = await aiWizardContentOAuth2.generate({
+      files,
       question: input,
     });
 
@@ -87,7 +94,12 @@ export default function AIWizard({ modal }: AIWizardProps) {
   const configured = settings.configured || true;
 
   return (
-    <Modal size={fullscreen ? 'full-screen' : 'lg'} observer={modal.observer}>
+    <Modal
+      className='ai-parent-modal'
+      disableAutoClose
+      size={fullscreen ? 'full-screen' : 'lg'}
+      observer={modal.observer}
+    >
       <Modal.Header>
         AI Assistant
         <span
@@ -99,10 +111,10 @@ export default function AIWizard({ modal }: AIWizardProps) {
       </Modal.Header>
       <Modal.Body>
         <ChatBody
-          isLoadingContent={form.formState.isSubmitting}
-          fullscreen={fullscreen}
           configured={configured}
+          fullscreen={fullscreen}
           isLoading={isLoading}
+          isLoadingContent={form.formState.isSubmitting}
           messages={messages}
           onSelectAsset={(asset) => {
             appendMessage({

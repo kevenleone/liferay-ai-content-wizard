@@ -14,10 +14,6 @@ import {
 
 import type { PromptPayload } from './types';
 import env from './env';
-import { blogSchema } from './schemas';
-import liferayHeadless from './services/apis';
-import getLiferayInstance from './services/liferay';
-import responseToBase64 from './utils/ResponseToBase64';
 
 type LangChainOptions = {
   apiKey?: string;
@@ -36,7 +32,7 @@ export class LangChain {
       modelName: options.modelName,
       temperature: 0.7,
       verbose: false,
-      maxOutputTokens: 2048,
+      maxOutputTokens: 4000,
     };
 
     this.llm =
@@ -56,14 +52,12 @@ export class LangChain {
   }
 
   async getImageContext(
+    instructions: string,
     images: { content: string; type: 'base64' | 'url' }[],
     zodSchema: ZodSchema
   ) {
     const prompt = ChatPromptTemplate.fromMessages([
-      [
-        'system',
-        'You are a blog author and your job is analyze the images and create a blog based on that',
-      ],
+      ['system', instructions],
       [
         'human',
         images.map((image) => ({
@@ -87,48 +81,6 @@ export class LangChain {
     return chain.invoke({
       format_instructions: outputParser.getFormatInstructions(),
     });
-  }
-
-  async test() {
-    const multiModalPrompt = ChatPromptTemplate.fromMessages([
-      ['system', "You have 20:20 vision! Describe the user's image."],
-      [
-        'human',
-        [
-          {
-            type: 'image_url',
-            image_url: {
-              url: '{imageURL}',
-              detail: 'high',
-            },
-          },
-          {
-            type: 'image_url',
-            image_url: 'data:image/jpeg;base64,{base64Image}',
-          },
-        ],
-      ],
-    ]);
-    const outputParser = StructuredOutputParser.fromZodSchema(
-      z.object({
-        content: z
-          .string()
-          .describe(
-            'Describe the content present on the image and the link shared'
-          ),
-      })
-    );
-    const parserWithFix = OutputFixingParser.fromLLM(this.llm, outputParser);
-
-    const chain = multiModalPrompt.pipe(this.llm).pipe(parserWithFix);
-
-    const resopnspe = await chain.invoke({
-      imageURL: 'https://avatars.githubusercontent.com/u/9919?v=4',
-      // base64Image: base64,
-      format_instructions: outputParser.getFormatInstructions(),
-    });
-
-    console.log(resopnspe);
   }
 
   async getStructuredContent(input: PromptPayload) {

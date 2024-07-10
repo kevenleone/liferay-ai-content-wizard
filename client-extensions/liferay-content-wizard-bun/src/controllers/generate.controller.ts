@@ -13,18 +13,17 @@ export default async function generate(body: any) {
     modelName: 'gemini-1.5-flash-001',
   });
 
-  const themeDisplay = body.themeDisplay;
-
+  const { themeDisplay, files } = body;
   const categorizationPrompt = getPromptCategorization(body.question);
   const data = await langChain.getStructuredContent(categorizationPrompt);
 
   const categorization = data as z.infer<typeof categorizationSchema>;
 
-  console.info({ categorization });
-
   if (categorization.assetType === 'none') {
     return { message: 'Asset Type invalid' };
   }
+
+  console.log({ body, categorization });
 
   const _Asset = (assets as any)[categorization.assetType];
 
@@ -33,7 +32,12 @@ export default async function generate(body: any) {
   }
 
   const asset: Asset = new _Asset(
-    { langChain, liferay: liferayHeadless(getLiferayInstance()), themeDisplay },
+    {
+      files,
+      langChain,
+      liferay: liferayHeadless(getLiferayInstance()),
+      themeDisplay,
+    },
     categorization
   );
 

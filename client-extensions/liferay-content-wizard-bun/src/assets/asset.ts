@@ -41,14 +41,21 @@ export default class Asset<T = any> {
     );
   }
 
+  public async getStructuredContentCustomCall(input: PromptInput) {
+    console.log('Calling getStructuredContentCustomCall...');
+
+    return this.hookContext.langChain.getStructuredContent(
+      this.getPrompt(input)
+    );
+  }
+
   public async run() {
     console.log(`Start processing: ${this.constructor.name} - ${new Date()}`);
     await this.beforePromptCall();
 
-    this.data.promptResponse =
-      await this.hookContext.langChain.getStructuredContent(
-        this.getPrompt(this.categorization)
-      );
+    this.data.promptResponse = await this.getStructuredContentCustomCall(
+      this.categorization
+    );
 
     await this.afterPromptCall();
 

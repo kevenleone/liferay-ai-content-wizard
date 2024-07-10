@@ -2,15 +2,14 @@ import ClayForm, { ClayInput } from '@clayui/form';
 import ClayLayout from '@clayui/layout';
 import ClayIcon from '@clayui/icon';
 import ClayButton from '@clayui/button';
-import { TreeView } from '@clayui/core';
 import { UseFormReturn } from 'react-hook-form';
 import DropDown, { Align } from '@clayui/drop-down';
-import ClayModal, { useModal } from '@clayui/modal';
+import { useModal } from '@clayui/modal';
 
 import { Schema } from '../AIWizard';
-import useSWR from 'swr';
-import { Liferay } from '../../services/liferay';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import ChatFileModal from './ChatFileModal';
+import useSiteDocuments from '../../hooks/useSiteDocuments';
 
 type Props = {
   form: UseFormReturn<Schema>;
@@ -18,114 +17,22 @@ type Props = {
   placeholder: string;
 };
 
-const FileExplorer = ({ selectedTree, setSelectedTree }: any) => {
-  const { data: response } = useSWR('/documents/graphql/fwefwef', async () => {
-    const response = await Liferay.Util.fetch('/o/graphql', {
-      body: JSON.stringify({
-        query: `query Documents {
-            documents(siteKey: "${Liferay.ThemeDisplay.getScopeGroupId()}", flatten: true) {
-              items {
-                contentUrl
-                fileName
-                folder {
-                    id
-                    name
-                  }
-                id
-              }
-              totalCount
-            }
-          }`,
-      }),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    return response.json();
-  });
-
-  const documentAndFolders = useMemo(() => {
-    const items = response?.data?.documents?.items ?? [];
-    const folderStructure = {} as any;
-
-    for (const item of items) {
-      const folderId = item.folder.name;
-      const folder = folderStructure[folderId];
-
-      if (folder) {
-        folderStructure[folderId].push(item);
-      } else {
-        folderStructure[folderId] = [item];
-      }
-    }
-
-    const newItems = [];
-
-    for (const folder in folderStructure) {
-      const documents = folderStructure[folder] as any[];
-
-      newItems.push({
-        children: documents.map((document) => ({
-          image: document.contentUrl,
-          name: document.fileName,
-          id: document.id,
-        })),
-        name: folder,
-        type: 'folder',
-      });
-    }
-
-    return newItems;
-  }, [response]);
-
-  return (
-    <TreeView
-      defaultItems={documentAndFolders}
-      nestedKey='children'
-      selectionMode='single'
-    >
-      {(item) => (
-        <TreeView.Item onClick={() => setSelectedTree(item)}>
-          <TreeView.ItemStack>
-            <ClayIcon
-              aria-label='Stack icon'
-              symbol={item.type ? item.type : 'folder'}
-            />
-            {item.name}
-          </TreeView.ItemStack>
-          <TreeView.Group items={item.children}>
-            {({ image, name }) => (
-              <TreeView.Item>
-                {image && (
-                  <img
-                    width={18}
-                    height={18}
-                    className='rounded-circle'
-                    src={image}
-                  />
-                )}
-
-                {name}
-              </TreeView.Item>
-            )}
-          </TreeView.Group>
-        </TreeView.Item>
-      )}
-    </TreeView>
-  );
-};
-
 export default function ChatInput(props: Props) {
-  const [files, setFiles] = useState([]);
-  const [selectedTree, setSelectedTree] = useState();
-  const { handleSubmit, formState, register, watch } = props.form;
+  const [selectedTree, setSelectedTree] = useState<any>();
+  const { handleSubmit, formState, setValue, register, watch } = props.form;
   const formRef = useRef<HTMLFormElement>(null);
   const modal = useModal();
+  const files = watch('files');
   const text = watch('input');
+  const { data: response } = useSiteDocuments();
 
-  console.log({ selectedTree });
+  useEffect(() => {
+    const modalContainer = document.querySelector('.ai-parent-modal div');
+
+    if (!modal.open && modalContainer) {
+      modalContainer.removeAttribute('inert');
+    }
+  }, [modal.open]);
 
   const handleKeyDown = (event: any) => {
     if (event.key === 'Enter') {
@@ -136,39 +43,27 @@ export default function ChatInput(props: Props) {
     }
   };
 
-  const onChoose = () => {};
+  const onChoose = () => {
+    setValue('files', [
+      ...files,
+      { type: 'fileEntryId', value: selectedTree.image },
+    ]);
+
+    modal.onClose();
+  };
+
+  console.log({ modal });
 
   return (
     <>
       {modal.open && (
-        <ClayModal observer={modal.observer}>
-          <ClayModal.Header>
-            <ClayModal.Title>
-              Choose the Documents and Media Files
-            </ClayModal.Title>
-          </ClayModal.Header>
-          <ClayModal.Body>
-            <FileExplorer
-              selectedTree={selectedTree}
-              setSelectedTree={setSelectedTree}
-            />
-          </ClayModal.Body>
-          <ClayModal.Footer
-            last={
-              <>
-                <ClayButton
-                  className='mr-2'
-                  onClick={modal.onClose}
-                  displayType='secondary'
-                >
-                  Cancel
-                </ClayButton>
-
-                <ClayButton onClick={onChoose}>Choose</ClayButton>
-              </>
-            }
-          />
-        </ClayModal>
+        <ChatFileModal
+          items={response?.data?.documents?.items ?? []}
+          modal={modal}
+          setSelectedTree={setSelectedTree}
+          onChoose={onChoose}
+          selectedTree={selectedTree}
+        />
       )}
 
       <ClayLayout.ContentRow className='w-100'>
@@ -190,6 +85,21 @@ export default function ChatInput(props: Props) {
               }
             />
           </ClayForm>
+
+          {files.length > 0 && (
+            <div className='d-flex my-2'>
+              {files.map((file, index) => (
+                <img
+                  key={index}
+                  draggable={false}
+                  className='rounded border p-1 mr-1'
+                  height={60}
+                  width={60}
+                  src={(file as any).value}
+                />
+              ))}
+            </div>
+          )}
         </ClayLayout.ContentCol>
         <ClayLayout.ContentCol>
           <ClayLayout.ContentSection>
@@ -198,6 +108,7 @@ export default function ChatInput(props: Props) {
                 alignmentPosition={Align.BottomLeft}
                 trigger={
                   <ClayButton
+                    aria-label='Submit Prompt button'
                     borderless
                     disabled={formState.isSubmitting || formState.isLoading}
                   >
@@ -212,7 +123,6 @@ export default function ChatInput(props: Props) {
                 <DropDown.ItemList>
                   <DropDown.Item
                     onClick={() => {
-                      console.log('Click');
                       modal.onOpenChange(true);
                     }}
                   >
@@ -233,6 +143,7 @@ export default function ChatInput(props: Props) {
               <ClayButton
                 disabled={formState.isSubmitting || formState.isLoading}
                 displayType='primary'
+                aria-label='Submit button'
                 onClick={handleSubmit(props.onSubmit)}
               >
                 <ClayIcon

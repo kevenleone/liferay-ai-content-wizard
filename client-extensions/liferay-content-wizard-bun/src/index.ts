@@ -13,6 +13,7 @@ new Elysia()
   }))
   .post('/generate', async ({ body }) => generate(body), {
     body: t.Object({
+      files: t.Any(),
       themeDisplay: t.Any(),
       question: t.String(),
     }),

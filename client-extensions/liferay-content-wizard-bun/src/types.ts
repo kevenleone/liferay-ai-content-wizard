@@ -27,6 +27,7 @@ export type HookStructure = {
 };
 
 export type HookContext = {
+  files: any[];
   langChain: LangChain;
   liferay: ReturnType<typeof liferayHeadless>;
   themeDisplay: {
@@ -39,6 +40,7 @@ export type PromptInput = z.infer<typeof categorizationSchema>;
 
 export type PromptPayload<ZSchema = ZodSchema> = {
   instruction: string;
+  messages?: any[];
   prompt: string;
   schema: ZSchema;
 };
