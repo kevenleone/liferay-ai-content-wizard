@@ -7,6 +7,7 @@ import type { categorizationSchema } from '../schemas';
 import type Asset from '../assets/Asset';
 import liferayHeadless from '../services/apis';
 import getLiferayInstance from '../services/liferay';
+import logger from '../utils/logger';
 
 export default async function generate(body: any) {
   const langChain = new LangChain('google', {
@@ -20,14 +21,18 @@ export default async function generate(body: any) {
   const categorization = data as z.infer<typeof categorizationSchema>;
 
   if (categorization.assetType === 'none') {
+    logger.error('Invalid asset type.');
+
     return { message: 'Asset Type invalid' };
   }
 
-  console.log({ body, categorization });
+  logger.info({ body, categorization });
 
   const _Asset = (assets as any)[categorization.assetType];
 
   if (!_Asset) {
+    logger.error('Invalid asset type.');
+
     throw new Error('Invalid asset type.');
   }
 

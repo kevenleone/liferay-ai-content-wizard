@@ -3,11 +3,12 @@ import { Elysia, t } from 'elysia';
 
 import env from './env';
 import generate from './controllers/generate.controller';
+import logger from './utils/logger';
 
 const PORT = env.PORT;
 
 new Elysia()
-  .use(cors({allowedHeaders: "*"}))
+  .use(cors({ allowedHeaders: '*' }))
   .get('/settings', () => ({
     configured: true,
   }))
@@ -18,4 +19,4 @@ new Elysia()
       question: t.String(),
     }),
   })
-  .listen(PORT, () => console.log(`Elysia is running on PORT ${PORT}`));
+  .listen(PORT, () => logger.info(`Elysia is running on PORT ${PORT}`));

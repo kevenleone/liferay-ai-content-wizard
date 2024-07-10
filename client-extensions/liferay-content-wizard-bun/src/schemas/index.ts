@@ -159,17 +159,35 @@ export const organizationSchema = z
 
 export const objectDefinitionSchema = z
   .object({
-    name: z.string().describe('Name of the database schema'),
-    fields:
-      z.array( 
-          z.object({
-            name: z.string().describe('Name of the database field'),
-            type: z.string().describe('The value is String'),
-          })
-        )
-      }
-  )
-  .describe('A simple database schema related to the given topic');
+    label: z.any(),
+    scope: z
+      .enum(['company', 'site'])
+      .describe(
+        'The Object Definition Scope definition, the default value is company'
+      ),
+    name: z
+      .string()
+      .describe('Name of the database schema, use the PascalCase format'),
+    fields: z.array(
+      z.object({
+        label: z.any(),
+        name: z
+          .string()
+          .describe(
+            'Name of the database field, the first character of a name must be a lower case letter'
+          ),
+        type: z
+          .enum(['String', 'Integer', 'Boolean', 'BigDecimal', 'DateTime'])
+          .describe(
+            'Based on the field name, find the appropriate data type, use String as default'
+          ),
+        required: z.boolean().describe('default value is false'),
+      })
+    ),
+  })
+  .describe(
+    'A simple database schema related to the given topic. All the "label" fields are related to the closest "name" property, use the language as key with BCP47 format and the translated value'
+  );
 
 export const tagSchema = z
   .array(

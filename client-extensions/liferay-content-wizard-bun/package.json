@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "pino-pretty": "^11.2.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
@@ -15,6 +16,7 @@
     "elysia": "^1.0.26",
     "ky": "^1.4.0",
     "langchain": "^0.2.8",
+    "pino": "^9.2.0",
     "zod": "^3.23.8"
   },
   "scripts": {

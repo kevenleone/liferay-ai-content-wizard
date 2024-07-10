@@ -1,6 +1,7 @@
 import type { ZodSchema, z } from 'zod';
 import type { HookContext, PromptInput, PromptPayload } from '../types';
 import { categorizationSchema } from '../schemas';
+import logger from '../utils/logger';
 
 export default class Asset<T = any> {
   protected data = {
@@ -28,11 +29,11 @@ export default class Asset<T = any> {
   }
 
   public afterPromptCall() {
-    console.log('Calling afterPromptCall...');
+    logger.info('Calling afterPromptCall...');
   }
 
   public beforePromptCall() {
-    console.log('Calling beforePromptCall...');
+    logger.info('Calling beforePromptCall...');
   }
 
   public getPrompt(_input: PromptInput): PromptPayload {
@@ -42,7 +43,7 @@ export default class Asset<T = any> {
   }
 
   public async getStructuredContentCustomCall(input: PromptInput) {
-    console.log('Calling getStructuredContentCustomCall...');
+    logger.info('Calling getStructuredContentCustomCall...');
 
     return this.hookContext.langChain.getStructuredContent(
       this.getPrompt(input)
@@ -50,7 +51,8 @@ export default class Asset<T = any> {
   }
 
   public async run() {
-    console.log(`Start processing: ${this.constructor.name} - ${new Date()}`);
+    logger.info('Start processing');
+
     await this.beforePromptCall();
 
     this.data.promptResponse = await this.getStructuredContentCustomCall(
@@ -58,7 +60,6 @@ export default class Asset<T = any> {
     );
 
     await this.afterPromptCall();
-
     await this.action(this.data.promptResponse as T);
 
     const { assetType, amount, subject } = this.categorization;
@@ -72,6 +73,8 @@ export default class Asset<T = any> {
     }
 
     this.data.output = `${capitalizedAssetType} generated with the following subject "${subject}"`;
+
+    logger.info('Finish processing');
 
     return this.data;
   }

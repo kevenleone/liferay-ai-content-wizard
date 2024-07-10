@@ -67,15 +67,13 @@ export default function liferayHeadless(
       );
     },
 
-    createOrganization(json: any) {
+    createOrganization(json: unknown) {
       return liferay.post(`o/headless-admin-user/v1.0/organizations`, {
         json,
       });
     },
 
-    createObjectDefinition(json: any){
-      console.log("createObjectDefinition");
-      console.log(JSON.stringify(json,null,2));
+    createObjectDefinition(json: unknown) {
       return liferay.post(`o/object-admin/v1.0/object-definitions`, {
         json,
       });
