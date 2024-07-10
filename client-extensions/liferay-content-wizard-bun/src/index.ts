@@ -7,7 +7,7 @@ import generate from './controllers/generate.controller';
 const PORT = env.PORT;
 
 new Elysia()
-  .use(cors())
+  .use(cors({allowedHeaders: "*"}))
   .get('/settings', () => ({
     configured: true,
   }))

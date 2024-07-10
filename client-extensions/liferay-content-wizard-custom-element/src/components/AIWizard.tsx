@@ -128,7 +128,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
                 text: (
                   <>
                     Tell me more about what you would like to create. Here is an
-                    example: <i>Eg. {asset.hint}</i>
+                    example: <br/><br/><i>"{asset.hint}"</i>
                   </>
                 ),
               });
