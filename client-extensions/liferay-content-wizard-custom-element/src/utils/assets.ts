@@ -4,7 +4,7 @@ export const assets = [
     icon: 'document',
     iconColor: '#33CF27',
     bgColor: '#89FF97',
-    hint: "I'd like to generate web content about vegan recipes. 2 articles, each with 800 words, friendly tone.", //in English and Spanish.
+    hint: "I'd like to generate 2 blogs about vegan recipes. each with 800 words, friendly tone.",
     title: 'Blogs',
   },
   {
@@ -98,7 +98,8 @@ export const assets = [
     title: 'Sites',
   },
   {
-    description: 'Create display fragments that could be used within the portal.',
+    description:
+      'Create display fragments that could be used within the portal.',
     icon: 'community',
     iconColor: '#16A085',
     bgColor: '#48C9B0',

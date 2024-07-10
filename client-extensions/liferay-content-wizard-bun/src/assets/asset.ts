@@ -72,7 +72,9 @@ export default class Asset<T = any> {
       capitalizedAssetType += assetType.charAt(-1) === 'y' ? 'ies' : 's';
     }
 
-    this.data.output = `${capitalizedAssetType} generated with the following subject "${subject}"`;
+    if (!this.data.output) {
+      this.data.output = `${capitalizedAssetType} generated with the following subject "${subject}"`;
+    }
 
     logger.info('Finish processing');
 

@@ -32,8 +32,8 @@ export default class objectDefinition extends Asset {
   async action(objectDefinition: z.infer<typeof schema>) {
     await this.hookContext.liferay.createObjectDefinition({
       objectFields: objectDefinition.fields.map((field) => ({
-        DBType: field.type,
         businessType: this.getBusinessType(field.type),
+        DBType: field.type,
         indexed: false,
         indexedAsKeyword: false,
         indexedLanguageId: '',
@@ -44,7 +44,7 @@ export default class objectDefinition extends Asset {
         readOnlyConditionExpression: '',
         required: field.required,
         state: false,
-        system: true,
+        system: false,
         type: field.type,
         ...(field.type === 'DateTime' && {
           objectFieldSettings: [
@@ -72,14 +72,28 @@ export default class objectDefinition extends Asset {
       },
       portlet: true,
       scope: objectDefinition.scope,
-      status: {
-        code: 0,
-        label: 'approved',
-        label_i18n: 'Approved',
-      },
+      status: { label_i18n: 'Draft', code: 2, label: 'draft' },
       system: false,
       titleObjectFieldName: 'provider',
     });
+
+    const sortedFields = objectDefinition.fields.sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+
+    const fields = sortedFields.map(
+      (field) =>
+        `<li><b>${field.label['en-US'] || field.name}</b> (${field.type})</li>`
+    );
+
+    this.data.output = `Object Definition <b>${
+      objectDefinition.name
+    }</b> created as <b>Draft</b> with the following fields: 
+    <ul class="mt-2">
+      ${fields.join('')}
+    </ul>`;
+
+    console.log(this.data.output);
   }
 
   getPrompt({
@@ -89,7 +103,7 @@ export default class objectDefinition extends Asset {
     return {
       instruction:
         'You are a database administrator responsible for managing schemas for your company.',
-      prompt: `Create a database structure on the subject of ${subject}. Do not include fields for 'Status', 'Create Date', 'Modified Date', 'Author', or 'ID' available languages: ${availableLanguages.join(
+      prompt: `Create a database structure on the subject of ${subject}. Do not include fields for 'Status', 'Create Date', 'Modified Date', 'Author', or 'ID'. Available languages are ${availableLanguages.join(
         ', '
       )}`,
       schema,

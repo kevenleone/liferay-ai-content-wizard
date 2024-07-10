@@ -10,6 +10,7 @@ import { Liferay } from '../services/liferay';
 import { assets } from '../utils/assets';
 import { Message as MessageType } from '../types';
 import { useAppContext } from '../context/AppContext';
+import React from 'react';
 
 const ASSETS_BASE_LIMIT = 3;
 const ASSETS_BASE_LIMIT_FULLSCREEN = 4;
@@ -134,7 +135,11 @@ export default function ModalContent({
 
       {messages.map((message, index) => (
         <Message key={index} role={message.role}>
-          {message.text}
+          {React.isValidElement(message.text) ? (
+            message.text
+          ) : (
+            <span dangerouslySetInnerHTML={{ __html: message.text }} />
+          )}
         </Message>
       ))}
 

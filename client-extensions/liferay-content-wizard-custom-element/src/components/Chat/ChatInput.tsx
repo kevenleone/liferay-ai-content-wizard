@@ -141,7 +141,11 @@ export default function ChatInput(props: Props) {
               </DropDown>
 
               <ClayButton
-                disabled={formState.isSubmitting || formState.isLoading}
+                disabled={
+                  formState.isSubmitting ||
+                  formState.isLoading ||
+                  !text?.trim()?.length
+                }
                 displayType='primary'
                 aria-label='Submit button'
                 onClick={handleSubmit(props.onSubmit)}
