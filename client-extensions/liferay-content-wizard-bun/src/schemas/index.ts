@@ -80,6 +80,7 @@ export const categorizationSchema = z
         'image',
         'knowledgeBase',
         'news',
+        'objectDefinition',
         'none',
         'organization',
         'product',
@@ -155,6 +156,20 @@ export const organizationSchema = z
     })
   )
   .describe('An array of organizations related to a given topic');
+
+export const objectDefinitionSchema = z
+  .object({
+    name: z.string().describe('Name of the database schema'),
+    fields:
+      z.array( 
+          z.object({
+            name: z.string().describe('Name of the database field'),
+            type: z.string().describe('The value is String'),
+          })
+        )
+      }
+  )
+  .describe('A simple database schema related to the given topic');
 
 export const tagSchema = z
   .array(

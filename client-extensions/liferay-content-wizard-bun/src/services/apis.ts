@@ -73,6 +73,14 @@ export default function liferayHeadless(
       });
     },
 
+    createObjectDefinition(json: any){
+      console.log("createObjectDefinition");
+      console.log(JSON.stringify(json,null,2));
+      return liferay.post(`o/object-admin/v1.0/object-definitions`, {
+        json,
+      });
+    },
+
     createWikiNode(siteId: string, json: { name: string; viewableBy: string }) {
       return liferay.post(
         `o/headless-delivery/v1.0/sites/${siteId}/wiki-nodes`,
