@@ -105,6 +105,26 @@ export default function liferayHeadless(
       );
     },
 
+    getTaxonomyCategoriesRanked(siteId: string) {
+      return liferay.post(`o/graphql?ts=${new Date().getTime()}`, {
+        json: {
+          query: `query taxonomyCategoriesRanked {
+            taxonomyCategoriesRanked(siteKey: "${siteId}",pageSize: 500) {
+              actions
+              lastPage
+              items {
+                id
+                name
+              }
+              page
+              pageSize
+              totalCount
+            }
+          }`,
+        },
+      });
+    },
+
     getKeywords(siteId: string, searchParams = new URLSearchParams()) {
       return liferay.get(
         `o/headless-admin-taxonomy/v1.0/sites/${siteId}/keywords?${searchParams.toString()}`

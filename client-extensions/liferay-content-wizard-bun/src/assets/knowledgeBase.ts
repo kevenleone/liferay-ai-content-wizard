@@ -41,6 +41,19 @@ export default class KnowledgeBase extends Asset {
         console.log('Knowledge Base created', _knowledgeBase);
       }
     }
+
+    this.data.output = `The following Knowledge Bases were created:`;
+
+    this.data.output += knowledgeBases
+      .map(
+        (knowledgeBase) =>
+          `<ul class="mt-2"><li class="font-weight-bold">${
+            knowledgeBase.name
+          }</li> <ol>${knowledgeBase.articles
+            .map(({ title }) => `<li>${title}</li>`)
+            .join('')}</ol></ul>`
+      )
+      .join('');
   }
 
   getPrompt({ amount, subject }: PromptInput): PromptPayload {

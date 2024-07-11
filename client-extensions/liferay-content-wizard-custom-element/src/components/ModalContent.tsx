@@ -12,8 +12,8 @@ import { Message as MessageType } from '../types';
 import { useAppContext } from '../context/AppContext';
 import React from 'react';
 
-const ASSETS_BASE_LIMIT = 3;
-const ASSETS_BASE_LIMIT_FULLSCREEN = 4;
+const ASSETS_BASE_LIMIT = 4;
+const ASSETS_BASE_LIMIT_FULLSCREEN = 5;
 
 type ModalContentProps = {
   isLoadingContent: boolean;
@@ -22,10 +22,12 @@ type ModalContentProps = {
   onSelectAsset: (asset: any) => void;
 };
 
-const Asset = ({ asset, onSelectionClick }: any) => (
+const Asset = ({ asset, onSelectionClick, isLoadingContent }: any) => (
   <div className='option-col mt-0 mb-3'>
     <Card className='cursor-pointer ai-prompt-option'>
-      <Card.Body onClick={() => onSelectionClick(asset)}>
+      <Card.Body
+        onClick={() => (isLoadingContent ? null : onSelectionClick(asset))}
+      >
         <span
           className='icon-square'
           style={{
@@ -83,11 +85,14 @@ const Message = ({
 const More = ({
   setAssetCount,
   fullscreen,
+  isLoadingContent,
 }: {
-  setAssetCount: React.Dispatch<number>;
   fullscreen: boolean;
+  isLoadingContent: boolean;
+  setAssetCount: React.Dispatch<number>;
 }) => (
   <Asset
+    isLoadingContent={isLoadingContent}
     asset={{ title: 'More', icon: 'plus' }}
     onSelectionClick={() =>
       setAssetCount(
@@ -109,29 +114,40 @@ export default function ModalContent({
 
   return (
     <>
-      <Message role='assistant'>
-        <b>
-          Hi {Liferay.ThemeDisplay.getUserName()}! What would you like to
-          generate?
-        </b>
-        <br />
-        Suggested content (choose one):
-        <div className='d-flex flex-wrap mt-3 row'>
-          {assets
-            .filter((_, index) => index < assetCount)
-            .map((asset, index) => (
-              <Asset
-                asset={asset}
-                key={index}
-                onSelectionClick={onSelectAsset}
-              />
-            ))}
+      <div
+        className={classNames({
+          disabled: isLoadingContent,
+        })}
+      >
+        <Message role='assistant'>
+          <b>
+            Hi {Liferay.ThemeDisplay.getUserName()}! What would you like to
+            generate?
+          </b>
+          <br />
+          Suggested content (choose one):
+          <div className='d-flex flex-wrap mt-3 row'>
+            {assets
+              .filter((_, index) => index < assetCount)
+              .map((asset, index) => (
+                <Asset
+                  asset={asset}
+                  isLoadingContent={isLoadingContent}
+                  key={index}
+                  onSelectionClick={onSelectAsset}
+                />
+              ))}
 
-          {assetCount < assets.length && (
-            <More setAssetCount={setAssetCount} fullscreen={fullscreen} />
-          )}
-        </div>
-      </Message>
+            {assetCount < assets.length && (
+              <More
+                fullscreen={fullscreen}
+                isLoadingContent={isLoadingContent}
+                setAssetCount={setAssetCount}
+              />
+            )}
+          </div>
+        </Message>
+      </div>
 
       {messages.map((message, index) => (
         <Message key={index} role={message.role}>

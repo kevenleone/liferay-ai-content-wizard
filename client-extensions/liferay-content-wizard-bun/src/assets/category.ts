@@ -68,6 +68,19 @@ export default class CategoryAsset extends Asset<VocabulariesSchema> {
         this.createVocabulary(category, taxonomyVocabulary)
       )
     );
+
+    this.data.output = `Created the <b>${vocabulary.name}</b> Vocabulary with the following categories`;
+
+    this.data.output += vocabulary.categories
+      .map(
+        (category) =>
+          `<ul class="mt-2"><li class="font-weight-bold">${
+            category.name
+          }</li> <ol>${category.childCategories
+            .map(({ name }) => `<li>${name}</li>`)
+            .join('')}</ol></ul>`
+      )
+      .join('');
   }
 
   getPrompt({

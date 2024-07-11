@@ -45,6 +45,18 @@ export default class BlogAsset extends Asset<BlogsSchema> {
 
   public async action(blogs: BlogsSchema) {
     await Promise.all(blogs.map((blog) => this.createBlog(blog)));
+
+    const sorted = blogs.sort((a, b) => a.headline.localeCompare(b.headline));
+    const fields = sorted.map(({ headline }) => `<li>${headline}</li>`);
+
+    this.data.output =
+      blogs.length === 1
+        ? `The Blog <b>${blogs.at(0)?.headline}</b> was created.`
+        : `The following blogs were created: <ul class="mt-2">${fields.join(
+            ''
+          )}</ul>`;
+
+    console.log(fields, this.data.output);
   }
 
   async getStructuredContentCustomCall() {
@@ -67,12 +79,34 @@ export default class BlogAsset extends Asset<BlogsSchema> {
       );
     }
 
-    return super.getStructuredContentCustomCall(this.categorization);
+    const response = await this.hookContext.liferay.getTaxonomyCategoriesRanked(
+      this.hookContext.themeDisplay.scopeGroupId
+    );
+
+    const {
+      data: {
+        taxonomyCategoriesRanked: { items: taxonomyCategories = [] },
+      },
+    } = await response.json<any>();
+
+    const instruction = `You are a blog author and you have a list of TaxonomyCategories: ${JSON.stringify(
+      taxonomyCategories
+    )} that can be used as reference for taxonomyCategoryIds`;
+
+    return super.getStructuredContentCustomCall({
+      ...this.categorization,
+      instruction,
+    } as PromptInput & { instruction?: string });
   }
 
-  getPrompt({ amount, subject }: PromptInput): PromptPayload {
+  getPrompt({
+    amount,
+    instruction,
+    subject,
+  }: PromptInput & { instruction?: string }): PromptPayload {
     return {
       instruction:
+        instruction ||
         'You are a blog author. Do not include Quotes or Double Quotes',
       prompt: `Write ${amount} blogs on the subject of: ${subject}. It is important that each blog article's content is translated into: English`,
       schema: blogSchema,

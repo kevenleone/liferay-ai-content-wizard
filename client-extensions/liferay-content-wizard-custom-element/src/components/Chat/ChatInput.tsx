@@ -52,8 +52,6 @@ export default function ChatInput(props: Props) {
     modal.onClose();
   };
 
-  console.log({ modal });
-
   return (
     <>
       {modal.open && (

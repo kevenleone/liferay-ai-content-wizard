@@ -34,9 +34,17 @@ export const blogSchema = z
         .describe(
           'A description of an appropriate image for this blog in three sentences.'
         ),
+      taxonomyCategoryIds: z
+        .array(z.number())
+        .default([])
+        .describe(
+          'This field is a relationship with TaxonomyCategory, you must filter taxonomyCategoryIds that are most related to the articleBody/keywords/headline and store the id, max: 3 taxonomyCategoryIds.'
+        ),
     })
   )
-  .describe('An array of blog articles with the articleBody formatted as HTML');
+  .describe(
+    'An array of blog articles with the articleBody formatted as HTML, keywords should be 5'
+  );
 
 export const categorySchema = z
   .object({

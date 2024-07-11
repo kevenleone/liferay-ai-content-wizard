@@ -12,7 +12,7 @@ export const assets = [
     icon: 'categories',
     iconColor: '#3357FF',
     bgColor: '#7389FF',
-    hint: 'Create categories that represent luxury vehicle brands in Italy.',
+    hint: 'Create Categories for Vehicle Parts, Services, Warranties',
     title: 'Categories',
   },
   {
@@ -22,6 +22,14 @@ export const assets = [
     bgColor: '#48C9B0',
     hint: 'Build a knowledge base that focuses on worker safety information for agricultural equipment manufacturing facilities.',
     title: 'Knowledge Base',
+  },
+  {
+    description: 'Populate a custom object with records based on a prompt.',
+    icon: 'plus-squares',
+    iconColor: '#D16403',
+    bgColor: '#F7AC6F',
+    hint: 'Build an Object Definition named Recipe. This object should should include a Recipe Name, Ingredients, Cook Time, Preparation Instructions, and Expected Calorie Count',
+    title: 'Objects',
   },
   {
     description: 'Create a set of wiki nodes and pages based on a prompt.',
@@ -55,14 +63,7 @@ export const assets = [
     hint: "I'd like to generate web content about vegan recipes. 2 articles, each with 800 words, friendly tone, in English and Spanish.",
     title: 'News',
   },
-  {
-    description: 'Populate a custom object with records based on a prompt.',
-    icon: 'plus-squares',
-    iconColor: '#D16403',
-    bgColor: '#F7AC6F',
-    hint: 'Build a custom object and records for an object named Recipe. This object should should include a Recipe Name, Ingredients, Cook Time, Preparation Instructions, and Expected Calorie Count',
-    title: 'Objects',
-  },
+
   {
     description: 'Create an organizational structure for a company.',
     icon: 'organizations',
