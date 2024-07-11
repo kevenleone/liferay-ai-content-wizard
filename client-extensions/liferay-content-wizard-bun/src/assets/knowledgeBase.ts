@@ -27,6 +27,7 @@ export default class KnowledgeBase extends Asset {
       console.log('Knowledge Base folder created', knowledgeBaseFolder);
 
       for (const article of knowledgeBase.articles) {
+        console.log('Creating', article);
         const knowledgeBaseResponse =
           await this.hookContext.liferay.createKnowledgeBase(
             knowledgeBaseFolder.id,

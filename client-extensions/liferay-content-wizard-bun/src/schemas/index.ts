@@ -135,7 +135,7 @@ export const knowledgeBaseSchema = z
               z
                 .string()
                 .describe(
-                  'Identify the content of the knowledge base article and add meaningful keywords'
+                  'Identify the content of the knowledge base article and add meaningful keywords, use the kebab-case and no longer than 16 characters'
                 )
             )
             .describe('You cannot add more than 3 keywords.'),

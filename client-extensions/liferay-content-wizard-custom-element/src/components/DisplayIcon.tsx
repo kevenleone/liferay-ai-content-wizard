@@ -1,7 +1,7 @@
 export default function DisplayIcon({ onClick }: { onClick: any }) {
   return (
     <li className='control-menu-nav-item'>
-      <span className=' lfr-portal-tooltip' title='AI Assistant'>
+      <span className=' lfr-portal-tooltip' title='Liferay Assistant'>
         <a
           href='#'
           data-target='#clayDefaultModal'
@@ -18,7 +18,7 @@ export default function DisplayIcon({ onClick }: { onClick: any }) {
             </svg>
           </span>
           <span className='taglib-text hide-accessible sr-only'>
-            AI Assistant
+            Liferay Assistant
           </span>
         </a>
       </span>

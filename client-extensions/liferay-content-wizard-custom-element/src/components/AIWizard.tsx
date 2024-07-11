@@ -8,7 +8,6 @@ import ClayIcon from '@clayui/icon';
 import Modal, { useModal } from '@clayui/modal';
 import useSWR from 'swr';
 
-import { Liferay } from '../services/liferay';
 import { Message } from '../types';
 import ChatBody from './Chat/ChatBody';
 import ChatInput from './Chat/ChatInput';
@@ -77,12 +76,6 @@ export default function AIWizard({ modal }: AIWizardProps) {
 
     const data = await response.json();
 
-    Liferay.Util.openToast({
-      message:
-        'Your content has been succesfully generated. You can view it in...',
-      title: 'Success',
-    });
-
     appendMessage({
       text: data.output || JSON.stringify(data, null, 2),
       role: 'assistant',
@@ -101,7 +94,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
       observer={modal.observer}
     >
       <Modal.Header>
-        AI Assistant
+        Liferay Assistant
         <span
           className='modal-options'
           onClick={() => setFullscreen(!fullscreen)}
@@ -128,7 +121,9 @@ export default function AIWizard({ modal }: AIWizardProps) {
                 text: (
                   <>
                     Tell me more about what you would like to create. Here is an
-                    example: <br/><br/><i>"{asset.hint}"</i>
+                    example: <br />
+                    <br />
+                    <i>"{asset.hint}"</i>
                   </>
                 ),
               });

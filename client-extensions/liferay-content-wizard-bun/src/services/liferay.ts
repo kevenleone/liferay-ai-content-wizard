@@ -8,18 +8,29 @@ export default function getLiferayInstance() {
     },
     hooks: {
       beforeError: [
-        (error) => {
+        async (error) => {
+          const response = error.response;
+
           console.log(error.message);
           console.log({ error });
+
+          if (response) {
+            const data = await response.json();
+            console.log(
+              `Error Formatted: ${JSON.stringify(data, null, 2)} (${
+                response.status
+              })`
+            );
+          }
 
           return error;
         },
       ],
     },
     retry: {
-      limit: 5,
+      limit: 2,
       methods: ['get', 'post'],
-      statusCodes: [403, 401],
+      statusCodes: [400, 403, 401],
       backoffLimit: 3000,
     },
   });

@@ -23,7 +23,7 @@ export default async function generate(body: any) {
   if (categorization.assetType === 'none') {
     logger.error('Invalid asset type.');
 
-    return { message: 'Asset Type invalid' };
+    return { output: 'Sorry, I did not understand that request.' };
   }
 
   logger.info({ body, categorization });
@@ -33,7 +33,7 @@ export default async function generate(body: any) {
   if (!_Asset) {
     logger.error('Invalid asset type.');
 
-    throw new Error('Invalid asset type.');
+    return { output: 'Asset Type is invalid.' };
   }
 
   const asset: Asset = new _Asset(

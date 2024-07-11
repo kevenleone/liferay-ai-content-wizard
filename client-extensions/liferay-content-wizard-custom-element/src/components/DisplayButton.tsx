@@ -12,7 +12,7 @@ export default function DisplayButton({ onClick }: { onClick: any }) {
               <use href='/o/classic-theme/images/clay/icons.svg#stars'></use>
             </svg>
           </span>
-          &nbsp; Ai Assistant
+          &nbsp; Liferay Assistant
         </button>
         <div className='button-bg'></div>
       </div>
