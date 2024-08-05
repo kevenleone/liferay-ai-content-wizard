@@ -13,4 +13,5 @@ liferay-content-wizard-oauth-application-user-agent:
     - Liferay.Headless.Commerce.Admin.Catalog.everything
     - Liferay.Headless.Commerce.Admin.Inventory.everything
     - Liferay.Object.Admin.REST.everything
+    - c_contentwizardsettings.everything
   type: oAuthApplicationUserAgent
