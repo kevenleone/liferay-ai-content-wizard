@@ -1,8 +1,32 @@
 import type { ZodSchema, z } from 'zod';
 
-import type liferayHeadless from './services/apis';
-import type { categorizationSchema } from './schemas';
-import type { LangChain } from './LangChain';
+import type liferayHeadless from '../services/apis';
+import type { categorizationSchema } from '../schemas';
+import type { LangChain } from '../core/LangChain';
+
+export type PickListEntry = {
+  key: string;
+  name: string;
+};
+
+export type WizardSettingsPayload = {
+  active: boolean;
+  apiKey: string;
+  id?: number;
+  imageModel: string;
+  model: string;
+  provider: string;
+  settings: string;
+};
+
+export type WizardSetting = {
+  active: boolean;
+  apiKey: string;
+  imageModel: PickListEntry;
+  model: PickListEntry;
+  provider: PickListEntry;
+  settings: string;
+};
 
 export type APIResponse<Query = any> = {
   items: Query[];

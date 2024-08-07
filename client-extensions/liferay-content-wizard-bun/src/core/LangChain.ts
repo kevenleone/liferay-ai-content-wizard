@@ -3,28 +3,31 @@ import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatVertexAI } from '@langchain/google-vertexai';
 import { DallEAPIWrapper } from '@langchain/openai';
-import { ZodSchema, z } from 'zod';
+import { ZodSchema } from 'zod';
 import ky from 'ky';
-import path from 'path';
 
 import {
   OutputFixingParser,
   StructuredOutputParser,
 } from 'langchain/output_parsers';
-
-import type { PromptPayload } from './types';
-import env from './env';
+import type { PromptPayload } from '../utils/types';
+import env from '../utils/env';
 
 type LangChainOptions = {
   apiKey?: string;
   modelName: string;
 };
 
-type Provider = 'google' | 'openai';
+const providers = ['google', 'openai'] as const;
+
+export type Provider = (typeof providers)[number];
 
 export class LangChain {
   private llm: ChatOpenAI | ChatVertexAI;
-  private provider: Provider;
+
+  static isProviderAllowed(provider: Provider) {
+    return providers.includes(provider);
+  }
 
   constructor(provider: Provider, options: LangChainOptions) {
     const baseOptions = {
@@ -47,8 +50,6 @@ export class LangChain {
               },
             ],
           });
-
-    this.provider = provider;
   }
 
   async getImageContext(
