@@ -51,8 +51,6 @@ const Message = ({
 } & Omit<MessageType, 'text'>) => {
   const { myUserAccount } = useAppContext();
 
-  console.log({ myUserAccount });
-
   if (role === 'system') {
     return children;
   }

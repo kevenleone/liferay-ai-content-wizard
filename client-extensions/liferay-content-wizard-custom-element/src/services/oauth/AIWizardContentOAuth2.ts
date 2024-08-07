@@ -1,30 +1,41 @@
 import { Liferay } from '../liferay';
-// import OAuth2Client from './OAuth2Client';
+import OAuth2Client from './OAuth2Client';
 
-export default class AIWizardContentOAuth2 {
+export default class AIWizardContentOAuth2 extends OAuth2Client {
   constructor() {
-    // super('liferay-ai-wizard-content-oauth-application-user-agent');
+    super('liferay-content-wizard-oauth-application-user-agent');
   }
 
-  async generate(data: any) {
-    return Liferay.Util.fetch('http://localhost:3333/generate', {
-      body: JSON.stringify({
-        ...data,
-        themeDisplay: {
-          languageId: Liferay.ThemeDisplay.getLanguageId(),
-          scopeGroupId: Liferay.ThemeDisplay.getScopeGroupId(),
-        },
-      }),
+  async deleteSetting(id: number) {
+    return this.fetch(`/settings/${id}`, { method: 'DELETE' });
+  }
+
+  async fetch(url: string, options?: FetchRequestInit) {
+    return this.oAuth2Client.fetch(url, {
+      ...options,
       headers: {
         'Content-Type': 'application/json',
+        'Language-Id': Liferay.ThemeDisplay.getLanguageId(),
+        'Scope-Group-Id': Liferay.ThemeDisplay.getScopeGroupId().toString(),
       },
-      method: 'POST',
     });
   }
 
-  async settings() {
-    const response = await Liferay.Util.fetch('http://localhost:3333/settings');
+  async generate(data: unknown) {
+    return this.fetch('/ai/generate', {
+      body: JSON.stringify(data),
+      method: 'POST',
+    }) as unknown as Promise<{ output: string }>;
+  }
 
-    return response.json();
+  async getSettings(): Promise<any> {
+    return this.fetch('/settings');
+  }
+
+  async saveSettings(data: unknown) {
+    return this.fetch('/settings', {
+      body: JSON.stringify(data),
+      method: 'POST',
+    });
   }
 }

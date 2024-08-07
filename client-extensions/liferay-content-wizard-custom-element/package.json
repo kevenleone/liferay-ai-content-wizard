@@ -14,6 +14,7 @@
     "@clayui/button": "^3.116.0",
     "@clayui/card": "^3.116.1",
     "@clayui/core": "^3.116.1",
+    "@clayui/drop-down": "^3.117.0",
     "@clayui/empty-state": "^3.116.0",
     "@clayui/form": "^3.116.0",
     "@clayui/icon": "^3.111.0",
@@ -27,7 +28,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.52.1",
-    "swr": "^2.2.5",
+    "react-router-dom": "^6.26.0",
+    "swr": "^2.2.4",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -35,11 +37,11 @@
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
-    "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitejs/plugin-react": "^3.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "typescript": "^5.2.2",
-    "vite": "^5.3.1"
+    "vite": "4.0.0"
   }
 }

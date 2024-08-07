@@ -1,13 +1,13 @@
 import ReactDOM, { Root } from 'react-dom/client';
 import { ClayIconSpriteContext } from '@clayui/icon';
+import { SWRConfig } from 'swr';
 
 import App from './routes/App.tsx';
 import './index.css';
 import { getIconSpriteMap } from './utils/iconSpritemap.ts';
-import { SWRConfig } from 'swr';
 import SWRCacheProvider from './SWRCacheProvider.ts';
 import AppContextProvider from './context/AppContext.tsx';
-import Settings from './routes/Settings.tsx';
+import SettingRouter from './routes/settings/SettingRouter.tsx';
 
 const customElementId = 'liferay-content-wizard-custom-element';
 
@@ -26,14 +26,14 @@ class ContentWizard extends HTMLElement {
         <SWRConfig
           value={{
             provider: SWRCacheProvider,
-            revalidateIfStale: false,
+            revalidateIfStale: true,
             revalidateOnFocus: false,
           }}
         >
           <AppContextProvider>
             <ClayIconSpriteContext.Provider value={getIconSpriteMap()}>
               {route === 'app' && <App />}
-              {route === 'settings' && <Settings />}
+              {route === 'settings' && <SettingRouter />}
             </ClayIconSpriteContext.Provider>
           </AppContextProvider>
         </SWRConfig>

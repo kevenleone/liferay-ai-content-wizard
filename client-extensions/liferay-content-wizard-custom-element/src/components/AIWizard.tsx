@@ -34,7 +34,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
 
   const { isLoading, data: settings = {} } = useSWR(
     '/ai/settings',
-    aiWizardContentOAuth2.settings
+    aiWizardContentOAuth2.getSettings
   );
 
   const form = useForm<Schema>({
@@ -52,14 +52,20 @@ export default function AIWizard({ modal }: AIWizardProps) {
   async function onSubmit({ files, input }: Schema) {
     appendMessage({ text: input, role: 'user' });
 
-    const response = await aiWizardContentOAuth2.generate({
-      files,
-      question: input,
-    });
+    try {
+      const data = await aiWizardContentOAuth2.generate({
+        files,
+        question: input,
+      });
 
-    if (!response.ok) {
-      const data = await response.json();
+      appendMessage({
+        text: data.output || JSON.stringify(data, null, 2),
+        role: 'assistant',
+      });
 
+      form.setValue('input', '');
+    } catch (error) {
+      const data = await (error as Response).json();
       return appendMessage({
         role: 'system',
         text: (
@@ -73,15 +79,6 @@ export default function AIWizard({ modal }: AIWizardProps) {
         ),
       });
     }
-
-    const data = await response.json();
-
-    appendMessage({
-      text: data.output || JSON.stringify(data, null, 2),
-      role: 'assistant',
-    });
-
-    form.setValue('input', '');
   }
 
   const configured = settings.configured || true;
