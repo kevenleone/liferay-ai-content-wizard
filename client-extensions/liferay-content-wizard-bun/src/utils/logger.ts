@@ -1,5 +1,10 @@
-import logger from 'pino';
+import logger, { type LoggerOptions } from 'pino';
 
-export default logger({
-  transport: { target: 'pino-pretty', options: { colorize: true } },
-});
+export function createLogger(options?: LoggerOptions) {
+  return logger({
+    ...options,
+    transport: { target: 'pino-pretty', options: { colorize: true } },
+  });
+}
+
+export default createLogger();

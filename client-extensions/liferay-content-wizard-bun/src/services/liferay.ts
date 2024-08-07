@@ -1,22 +1,27 @@
 import ky from 'ky';
 
-export default function getLiferayInstance() {
+import logger from '../utils/logger';
+
+export default function getLiferayInstance(
+  authorization: string = 'Basic dGVzdEBsaWZlcmF5LmNvbTox',
+  prefixUrl: string = 'http://localhost:8080'
+) {
   return ky.extend({
-    prefixUrl: 'http://localhost:8080',
+    prefixUrl,
     headers: {
-      Authorization: 'Basic dGVzdEBsaWZlcmF5LmNvbTox',
+      Authorization: authorization,
     },
     hooks: {
       beforeError: [
         async (error) => {
           const response = error.response;
 
-          console.log(error.message);
-          console.log({ error });
+          logger.error(error.message);
 
           if (response) {
             const data = await response.json();
-            console.log(
+
+            logger.error(
               `Error Formatted: ${JSON.stringify(data, null, 2)} (${
                 response.status
               })`

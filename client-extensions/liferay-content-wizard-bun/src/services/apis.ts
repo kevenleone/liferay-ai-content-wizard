@@ -1,12 +1,33 @@
+import type { APIResponse, WizardSetting } from '../utils/types';
 import type getLiferayInstance from './liferay';
-
-const SITE_ID = 10101;
 
 export default function liferayHeadless(
   liferay: ReturnType<typeof getLiferayInstance>
 ) {
   return {
     instance: liferay,
+
+    getContentWizardSettings(urlSearchParams = new URLSearchParams()) {
+      return liferay
+        .get(`o/c/contentwizardsettingses?${urlSearchParams.toString()}`)
+        .json<APIResponse<WizardSetting & { id: number }>>();
+    },
+
+    deleteContentWizardSetting(id: number) {
+      return liferay.delete(`o/c/contentwizardsettingses/${id}`);
+    },
+
+    patchContentWizardSettings(id: number, json: unknown) {
+      return liferay
+        .patch(`o/c/contentwizardsettingses/${id}`, { json })
+        .json<WizardSetting & { id: number }>();
+    },
+
+    postContentWizardSettings(json: unknown) {
+      return liferay
+        .post('o/c/contentwizardsettingses', { json })
+        .json<WizardSetting & { id: number }>();
+    },
 
     async postAccount(account: {
       description: string;
@@ -138,13 +159,6 @@ export default function liferayHeadless(
       );
     },
 
-    createKeywordBatch(siteId: string, json: unknown) {
-      return liferay.post(
-        `o/headless-admin-taxonomy/v1.0/sites/${siteId}/keywords/batch`,
-        { json }
-      );
-    },
-
     createChildWikiPage(
       parentWikiPageId: number,
       json: {
@@ -182,118 +196,8 @@ export default function liferayHeadless(
       );
     },
 
-    postProductImage(productId: number, body: unknown) {
-      return liferay.post(
-        `o/headless-commerce-admin-catalog/v1.0/products/${productId}/images`,
-        { json: body }
-      );
-    },
-
-    postSpecification(productId: number, body: unknown) {
-      return liferay.post(
-        `o/headless-commerce-admin-catalog/v1.0/products/${productId}/productSpecifications`,
-        { json: body }
-      );
-    },
-
     myUserAccount() {
       return liferay.get('o/headless-admin-user/v1.0/my-user-account');
-    },
-
-    getAccountGroups() {
-      return liferay
-        .get(
-          'o/headless-commerce-admin-account/v1.0/accountGroups?pageSize=1000'
-        )
-        .json<any>();
-    },
-
-    createDocumentFolder(name: string, parentDocumentFolderId: number) {
-      const url =
-        parentDocumentFolderId !== 0
-          ? `/o/headless-delivery/v1.0/document-folders/{parentDocumentFolderId}/document-folders`
-          : `o/headless-delivery/v1.0/sites/${SITE_ID}/document-folders`;
-
-      return liferay
-        .post(url, {
-          json: {
-            name,
-            parentDocumentFolderId,
-            viewableBy: 'Anyone',
-          },
-        })
-        .json<{ id: number }>();
-    },
-
-    createCatalog(catalog: any) {
-      return liferay
-        .post(`o/headless-commerce-admin-catalog/v1.0/catalogs`, {
-          json: catalog,
-        })
-        .json();
-    },
-
-    createAccountGroup(accountGroup: any) {
-      return liferay
-        .post('o/headless-commerce-admin-account/v1.0/accountGroups', {
-          json: accountGroup,
-        })
-        .json();
-    },
-
-    getRoles() {
-      return liferay
-        .get('o/headless-admin-user/v1.0/roles?types=1&pageSize=-1')
-        .then((response) => response.json<any>());
-    },
-
-    updateSiteDocuments(id: string, document: any) {
-      return liferay
-        .put(`o/headless-delivery/v1.0/documents/${id}`, {
-          body: document,
-        })
-        .json<any>();
-    },
-
-    createSiteDocuments(document: any) {
-      return liferay
-        .post(`o/headless-delivery/v1.0/sites/${SITE_ID}/documents`, {
-          json: document,
-        })
-        .json<any>();
-    },
-
-    createDocumentFolderDocument(documentFolderId: string, document: any) {
-      return liferay
-        .post(
-          `o/headless-delivery/v1.0/document-folders/${documentFolderId}/documents`,
-          {
-            json: document,
-          }
-        )
-        .json<any>();
-    },
-
-    getSiteDocuments(siteId: number) {
-      return liferay
-        .get(
-          `o/headless-delivery/v1.0/sites/${SITE_ID}/documents?flatten=true&page=-1`
-        )
-        .json<any>();
-    },
-
-    getSiteDocumentFolders() {
-      return liferay
-        .get(
-          `o/headless-delivery/v1.0/sites/${SITE_ID}/document-folders?fields=id,parentDocumentFolderId,name&flatten=true&page=-1`
-        )
-        .json<any>();
-    },
-
-    getDocumentFolderDocuments(folderId: number) {
-      return liferay.get(
-        `o/headless-delivery/v1.0/document-folders/${folderId}/documents`
-      );
     },
   };
 }
