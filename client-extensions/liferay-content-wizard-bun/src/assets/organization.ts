@@ -1,16 +1,10 @@
 import { z } from 'zod';
 
-import type { HookContext, PromptInput, PromptPayload } from '../types';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
 import { organizationSchema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
-export default class OrganizationAsset extends Asset<
-  z.infer<typeof organizationSchema>
-> {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, organizationSchema);
-  }
-
+export default class OrganizationAsset extends Asset {
   async action(organizations: z.infer<typeof organizationSchema>) {
     for (const organization of organizations) {
       const organizationResponse =

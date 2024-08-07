@@ -1,4 +1,4 @@
-import type { PromptPayload } from '../types';
+import type { PromptPayload } from '../utils/types';
 import { categorizationSchema } from '../schemas';
 
 export default function getPromptCategorization(

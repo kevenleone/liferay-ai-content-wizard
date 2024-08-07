@@ -1,20 +1,16 @@
 import { z } from 'zod';
 
-import type { HookContext, PromptInput, PromptPayload } from '../types';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
 import { accountSchema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
 export default class Account extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, accountSchema);
-  }
-
   async createAccounts(
     accounts: z.infer<typeof accountSchema>,
     { liferay }: HookContext
   ) {
     for (const account of accounts) {
-      console.log(`Creating Account: ${account.name}`);
+      this.logger.info(`Creating Account: ${account.name}`);
 
       await liferay.postAccount({
         description: account.description,

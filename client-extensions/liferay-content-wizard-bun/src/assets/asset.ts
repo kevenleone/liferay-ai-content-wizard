@@ -1,26 +1,17 @@
-import type { ZodSchema, z } from 'zod';
-import type { HookContext, PromptInput, PromptPayload } from '../types';
-import { categorizationSchema } from '../schemas';
-import logger from '../utils/logger';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
+import type { Logger } from 'pino';
 
 export default class Asset<T = any> {
   protected data = {
     promptResponse: null,
     output: '',
   };
-  protected hookContext: HookContext;
-  public categorization: z.infer<typeof categorizationSchema>;
-  public schema: ZodSchema;
 
   constructor(
-    hookContext: HookContext,
-    categorization: z.infer<typeof categorizationSchema>,
-    zodSchema: ZodSchema
-  ) {
-    this.categorization = categorization;
-    this.hookContext = hookContext;
-    this.schema = zodSchema;
-  }
+    protected hookContext: HookContext,
+    protected logger: Logger,
+    protected promptInput: PromptInput
+  ) {}
 
   public async action(_data: T) {
     throw new Error(
@@ -29,11 +20,11 @@ export default class Asset<T = any> {
   }
 
   public afterPromptCall() {
-    logger.info('Calling afterPromptCall...');
+    this.logger.info('Calling afterPromptCall...');
   }
 
   public beforePromptCall() {
-    logger.info('Calling beforePromptCall...');
+    this.logger.info('Calling beforePromptCall...');
   }
 
   public getPrompt(_input: PromptInput): PromptPayload {
@@ -43,7 +34,7 @@ export default class Asset<T = any> {
   }
 
   public async getStructuredContentCustomCall(input: PromptInput) {
-    logger.info('Calling getStructuredContentCustomCall...');
+    this.logger.info('Calling getStructuredContentCustomCall...');
 
     return this.hookContext.langChain.getStructuredContent(
       this.getPrompt(input)
@@ -51,18 +42,18 @@ export default class Asset<T = any> {
   }
 
   public async run() {
-    logger.info('Start processing');
+    this.logger.info('Start processing');
 
     await this.beforePromptCall();
 
     this.data.promptResponse = await this.getStructuredContentCustomCall(
-      this.categorization
+      this.promptInput
     );
 
     await this.afterPromptCall();
     await this.action(this.data.promptResponse as T);
 
-    const { assetType, amount, subject } = this.categorization;
+    const { assetType, amount, subject } = this.promptInput;
 
     let capitalizedAssetType =
       assetType.charAt(0).toUpperCase() +
@@ -76,7 +67,7 @@ export default class Asset<T = any> {
       this.data.output = `${capitalizedAssetType} generated with the following subject "${subject}"`;
     }
 
-    logger.info('Finish processing');
+    this.logger.info('Finish processing');
 
     return this.data;
   }

@@ -1,12 +1,8 @@
 import { warehouseSchema as schema } from '../schemas';
-import Asset from './Asset';
-import type { HookContext, PromptInput, PromptPayload } from '../types';
+import Asset from './asset';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
 
 export default class Warehouse extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, schema);
-  }
-
   getWarehousePrompt({ amount, subject }: PromptInput): PromptPayload {
     return {
       instruction:

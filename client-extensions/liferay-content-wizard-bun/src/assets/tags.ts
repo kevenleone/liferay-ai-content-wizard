@@ -5,17 +5,13 @@ import type {
   HookContext,
   PromptInput,
   PromptPayload,
-} from '../types';
+} from '../utils/types';
 
 import { tagSchema as schema } from '../schemas';
 import SearchBuilder from '../core/SearchBuilder';
-import Asset from './Asset';
+import Asset from './asset';
 
 export default class TagAsset extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, schema);
-  }
-
   async action(tags: z.infer<typeof schema>) {
     const keywordResponse = await this.hookContext.liferay.getKeywords(
       this.hookContext.themeDisplay.scopeGroupId,

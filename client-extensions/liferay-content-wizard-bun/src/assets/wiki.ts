@@ -1,14 +1,10 @@
 import { z } from 'zod';
 
-import type { HookContext, PromptInput, PromptPayload } from '../types';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
 import { wikiSchema as schema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
 export default class Wiki extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, schema);
-  }
-
   async action(wiki: z.infer<typeof schema>) {
     const wikiNodeResponse = await this.hookContext.liferay.createWikiNode(
       this.hookContext.themeDisplay.scopeGroupId,

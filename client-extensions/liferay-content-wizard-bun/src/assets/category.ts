@@ -1,14 +1,13 @@
 import { z } from 'zod';
 
 import type {
-  HookContext,
   PromptInput,
   PromptPayload,
   RetrieveFirstItem,
-} from '../types';
+} from '../utils/types';
 
 import { categorySchema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
 type VocabulariesSchema = z.infer<typeof categorySchema>;
 type VocabularyCategoriesSchema = RetrieveFirstItem<
@@ -16,10 +15,6 @@ type VocabularyCategoriesSchema = RetrieveFirstItem<
 >;
 
 export default class CategoryAsset extends Asset<VocabulariesSchema> {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, categorySchema);
-  }
-
   async createVocabulary(
     category: VocabularyCategoriesSchema,
     taxonomyVocabulary: any

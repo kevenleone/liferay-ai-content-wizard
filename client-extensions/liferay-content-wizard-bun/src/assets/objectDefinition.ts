@@ -5,18 +5,14 @@ import type {
   PromptInput,
   PromptPayload,
   RetrieveFirstItem,
-} from '../types';
+} from '../utils/types';
 import { objectDefinitionSchema as schema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
 type Schema = z.infer<typeof schema>;
 type FieldType = RetrieveFirstItem<Schema['fields']>['type'];
 
 export default class objectDefinition extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, schema);
-  }
-
   private getBusinessType(type: FieldType) {
     if (type === 'String') {
       return 'Text';

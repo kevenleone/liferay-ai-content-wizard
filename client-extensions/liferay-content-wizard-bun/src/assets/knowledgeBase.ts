@@ -1,14 +1,10 @@
 import { z } from 'zod';
 
-import type { HookContext, PromptInput, PromptPayload } from '../types';
+import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
 import { knowledgeBaseSchema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 
 export default class KnowledgeBase extends Asset {
-  constructor(hookContext: HookContext, promptInput: PromptInput) {
-    super(hookContext, promptInput, knowledgeBaseSchema);
-  }
-
   async action(knowledgeBases: z.infer<typeof knowledgeBaseSchema>) {
     for (const knowledgeBase of knowledgeBases) {
       const knowledgeBaseFolderResponse =

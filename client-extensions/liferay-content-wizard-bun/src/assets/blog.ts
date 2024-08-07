@@ -1,25 +1,17 @@
 import { z } from 'zod';
 
 import type {
-  HookContext,
   PromptInput,
   PromptPayload,
   RetrieveFirstItem,
-} from '../types';
+} from '../utils/types';
 import { blogSchema, categorizationSchema } from '../schemas';
-import Asset from './Asset';
+import Asset from './asset';
 import responseToBase64 from '../utils/ResponseToBase64';
 
 type BlogsSchema = z.infer<typeof blogSchema>;
 
 export default class BlogAsset extends Asset<BlogsSchema> {
-  constructor(
-    hookContext: HookContext,
-    categorization: z.infer<typeof categorizationSchema>
-  ) {
-    super(hookContext, categorization, blogSchema);
-  }
-
   async createBlog(blog: RetrieveFirstItem<z.infer<typeof blogSchema>>) {
     const formData = await this.hookContext.langChain.getGeneratedImage(
       blog.pictureDescription
@@ -56,7 +48,7 @@ export default class BlogAsset extends Asset<BlogsSchema> {
             ''
           )}</ul>`;
 
-    console.log(fields, this.data.output);
+    this.logger.info(fields, this.data.output);
   }
 
   async getStructuredContentCustomCall() {
@@ -70,12 +62,12 @@ export default class BlogAsset extends Asset<BlogsSchema> {
 
       const base64 = await responseToBase64(imageResponse);
 
-      const prompt = await this.getPrompt(this.categorization);
+      const prompt = await this.getPrompt(this.promptInput);
 
       return this.hookContext.langChain.getImageContext(
         `${prompt.instruction} ${prompt.prompt}`,
         files.map((file) => ({ type: 'base64', content: base64 })),
-        this.schema
+        blogSchema
       );
     }
 
@@ -94,7 +86,7 @@ export default class BlogAsset extends Asset<BlogsSchema> {
     )} that can be used as reference for taxonomyCategoryIds`;
 
     return super.getStructuredContentCustomCall({
-      ...this.categorization,
+      ...this.promptInput,
       instruction,
     } as PromptInput & { instruction?: string });
   }
