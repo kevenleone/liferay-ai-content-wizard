@@ -7,6 +7,12 @@ export default function liferayHeadless(
   return {
     instance: liferay,
 
+    getContentWizardSetting(id: string) {
+      return liferay
+        .get(`o/c/contentwizardsettingses/${id}`)
+        .json<WizardSetting & { id: number }>();
+    },
+
     getContentWizardSettings(urlSearchParams = new URLSearchParams()) {
       return liferay
         .get(`o/c/contentwizardsettingses?${urlSearchParams.toString()}`)

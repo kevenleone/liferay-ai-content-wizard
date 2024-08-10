@@ -4,7 +4,7 @@ import { liferay } from '../../liferay';
 import type { WizardSettingsPayload } from '../../../utils/types';
 import SearchBuilder from '../../../core/SearchBuilder';
 
-export const createSetting = new Elysia()
+export const saveSetting = new Elysia()
   .use(liferay)
   .post(
     '/settings',
@@ -13,12 +13,14 @@ export const createSetting = new Elysia()
 
       logger.info('Saving Settings ' + JSON.stringify(body, null, 2));
 
-      const response = await liferay.postContentWizardSettings(body);
+      const response = await (body.id
+        ? liferay.patchContentWizardSettings(body.id, body)
+        : liferay.postContentWizardSettings(body));
 
       if (body.active) {
         /**
          * @description retrieve all the settings created
-         * and deactivate the ones that are active, expect the one created now
+         * and deactivate the ones that are active, except the current one
          */
         const settingsPage = await liferay.getContentWizardSettings(
           new URLSearchParams({
@@ -45,5 +47,7 @@ export const createSetting = new Elysia()
         imageModel: response.imageModel.name,
         model: response.model.name,
       } as WizardSettingsPayload);
+
+      return response;
     }
   );
