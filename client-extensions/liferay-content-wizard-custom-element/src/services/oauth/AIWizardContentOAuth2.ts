@@ -28,6 +28,14 @@ export default class AIWizardContentOAuth2 extends OAuth2Client {
     }) as unknown as Promise<{ output: string }>;
   }
 
+  async getSettingsStatus(): Promise<any> {
+    return this.fetch('/settings/status');
+  }
+
+  async getSetting(id: string): Promise<any> {
+    return this.fetch(`/settings/${id}`);
+  }
+
   async getSettings(): Promise<any> {
     return this.fetch('/settings');
   }

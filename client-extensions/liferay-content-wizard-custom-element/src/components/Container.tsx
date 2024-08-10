@@ -6,7 +6,7 @@ export default function Container({
   className,
   children,
 }: {
-  className: string;
+  className?: string;
   children: ReactNode;
 }) {
   return (

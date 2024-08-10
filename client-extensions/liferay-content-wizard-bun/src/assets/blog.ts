@@ -5,7 +5,7 @@ import type {
   PromptPayload,
   RetrieveFirstItem,
 } from '../utils/types';
-import { blogSchema, categorizationSchema } from '../schemas';
+import { blogSchema } from '../schemas';
 import Asset from './asset';
 import responseToBase64 from '../utils/ResponseToBase64';
 
