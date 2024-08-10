@@ -1,8 +1,8 @@
 import Elysia from 'elysia';
 
-import liferayHeadless from '../services/apis';
 import getLiferayInstance from '../services/liferay';
-import { createLogger } from '../utils/logger';
+import liferayHeadless from '../services/apis';
+import logger from '../utils/logger';
 import type { WizardSettingsPayload } from '../utils/types';
 
 export const wizardCredentialsDefault = {
@@ -21,7 +21,9 @@ export const liferay = new Elysia()
     liferay: liferayHeadless(
       getLiferayInstance(headers.authorization, headers.origin)
     ),
-    logger: createLogger({ msgPrefix: crypto.randomUUID() + ' ' }),
+    logger: logger.child(logger.bindings, {
+      msgPrefix: crypto.randomUUID() + ' ',
+    }),
     themeDisplay: {
       languageId: headers['language-id'],
       scopeGroupId: headers['scope-group-id'],
