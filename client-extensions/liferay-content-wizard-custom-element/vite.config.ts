@@ -4,28 +4,28 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    outDir: 'build/vite',
-    rollupOptions: {
-      output: {
-        assetFileNames: 'assets/[name][extname]',
-        chunkFileNames: '[name]-[hash].js',
-        entryFileNames: 'main.js',
-      },
+    build: {
+        outDir: 'build/vite',
+        rollupOptions: {
+            output: {
+                assetFileNames: 'assets/[name][extname]',
+                chunkFileNames: '[name]-[hash].js',
+                entryFileNames: 'main.js',
+            },
+        },
     },
-  },
-  experimental: {
-    renderBuiltUrl(filename: string) {
-      return `/o/liferay-content-wizard-custom-element/${filename}`;
+    experimental: {
+        renderBuiltUrl(filename: string) {
+            return `/o/liferay-content-wizard-custom-element/${filename}`;
+        },
     },
-  },
-  plugins: [react(), splitVendorChunkPlugin()],
-  resolve: {
-    alias: {
-      '~': path.resolve(__dirname, './src/'),
+    plugins: [react(), splitVendorChunkPlugin()],
+    resolve: {
+        alias: {
+            '~': path.resolve(__dirname, './src/'),
+        },
     },
-  },
-  server: {
-    origin: 'http://localhost:5173',
-  },
+    server: {
+        origin: 'http://localhost:5173',
+    },
 });

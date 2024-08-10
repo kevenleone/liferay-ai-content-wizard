@@ -14,142 +14,143 @@ import ChatInput from './Chat/ChatInput';
 import useAIWizardContentOAuth2 from '../hooks/useAIWizardOAuth2';
 
 type AIWizardProps = {
-  modal: ReturnType<typeof useModal>;
+    modal: ReturnType<typeof useModal>;
 };
 
 const schema = z.object({
-  files: z.array(
-    z.object({ type: z.enum(['fileEntryId', 'folder']), value: z.string() })
-  ),
-  input: z.string(),
+    files: z.array(
+        z.object({ type: z.enum(['fileEntryId', 'folder']), value: z.string() })
+    ),
+    input: z.string(),
 });
 
 export type Schema = z.infer<typeof schema>;
 
 export default function AIWizard({ modal }: AIWizardProps) {
-  const [fullscreen, setFullscreen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
-  const ref = useRef<HTMLDivElement>(null);
+    const [fullscreen, setFullscreen] = useState(false);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
+    const ref = useRef<HTMLDivElement>(null);
 
-  const { isLoading, data: settings = {} } = useSWR('/ai/settings/status', () =>
-    aiWizardContentOAuth2.getSettingsStatus()
-  );
+    const { isLoading, data: settings = {} } = useSWR(
+        '/ai/settings/status',
+        () => aiWizardContentOAuth2.getSettingsStatus()
+    );
 
-  const form = useForm<Schema>({
-    defaultValues: { files: [], input: '' },
-    resolver: zodResolver(schema),
-  });
+    const form = useForm<Schema>({
+        defaultValues: { files: [], input: '' },
+        resolver: zodResolver(schema),
+    });
 
-  const appendMessage = (message: Message) =>
-    setMessages((prevMessages) => [...prevMessages, message]);
+    const appendMessage = (message: Message) =>
+        setMessages((prevMessages) => [...prevMessages, message]);
 
-  useEffect(() => {
-    ref.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+    useEffect(() => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
-  async function onSubmit({ files, input }: Schema) {
-    appendMessage({ text: input, role: 'user' });
+    async function onSubmit({ files, input }: Schema) {
+        appendMessage({ text: input, role: 'user' });
 
-    try {
-      const data = await aiWizardContentOAuth2.generate({
-        files,
-        question: input,
-      });
-
-      appendMessage({
-        text: data.output || JSON.stringify(data, null, 2),
-        role: 'assistant',
-      });
-
-      form.setValue('input', '');
-    } catch (error) {
-      const data = await (error as Response).json();
-
-      appendMessage({
-        role: 'system',
-        text: (
-          <ClayAlert displayType='danger'>
-            <b>Error:</b> it seems like you might have typed a symbol by
-            mistake. Please try again.
-            <details className='mt-2'>
-              <pre>{JSON.stringify(data, null, 2)}</pre>
-            </details>
-          </ClayAlert>
-        ),
-      });
-    }
-  }
-
-  const configured = settings.active;
-
-  return (
-    <Modal
-      className='ai-parent-modal'
-      disableAutoClose
-      size={fullscreen ? 'full-screen' : 'lg'}
-      observer={modal.observer}
-    >
-      <Modal.Header>
-        Liferay AI Content Wizard
-        <span
-          className='modal-options'
-          onClick={() => setFullscreen(!fullscreen)}
-        >
-          <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
-        </span>
-      </Modal.Header>
-
-      <Modal.Body>
-        <ChatBody
-          configured={configured}
-          fullscreen={fullscreen}
-          isLoading={isLoading}
-          isLoadingContent={form.formState.isSubmitting}
-          messages={messages}
-          onClose={modal.onClose}
-          onSelectAsset={(asset) => {
-            appendMessage({
-              role: 'user',
-              text: `I would like to create ${asset.title}.`,
+        try {
+            const data = await aiWizardContentOAuth2.generate({
+                files,
+                question: input,
             });
 
-            setTimeout(() => {
-              appendMessage({
+            appendMessage({
+                text: data.output || JSON.stringify(data, null, 2),
                 role: 'assistant',
+            });
+
+            form.setValue('input', '');
+        } catch (error) {
+            const data = await (error as Response).json();
+
+            appendMessage({
+                role: 'system',
                 text: (
-                  <>
-                    Tell me more about what you would like to create. Here is an
-                    example: <br />
-                    <br />
-                    <i>"{asset.hint}"</i>
-                  </>
+                    <ClayAlert displayType="danger">
+                        <b>Error:</b> it seems like you might have typed a
+                        symbol by mistake. Please try again.
+                        <details className="mt-2">
+                            <pre>{JSON.stringify(data, null, 2)}</pre>
+                        </details>
+                    </ClayAlert>
                 ),
-              });
-            }, 750);
-          }}
-        />
+            });
+        }
+    }
 
-        {/* Bottom Reference, to scroll messages */}
-        <div ref={ref} />
-      </Modal.Body>
+    const configured = settings.active;
 
-      {configured && (
-        <div className='modal-footer'>
-          <ChatInput form={form} onSubmit={onSubmit} placeholder='' />
+    return (
+        <Modal
+            className="ai-parent-modal"
+            disableAutoClose
+            size={fullscreen ? 'full-screen' : 'lg'}
+            observer={modal.observer}
+        >
+            <Modal.Header>
+                Liferay AI Content Wizard
+                <span
+                    className="modal-options"
+                    onClick={() => setFullscreen(!fullscreen)}
+                >
+                    <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
+                </span>
+            </Modal.Header>
 
-          <div className='d-flex mt-4 justify-content-end'>
-            <ClayButton
-              borderless
-              displayType='secondary'
-              onClick={() => setMessages([])}
-              size='xs'
-            >
-              <ClayIcon symbol='reset' /> Restart Chat
-            </ClayButton>
-          </div>
-        </div>
-      )}
-    </Modal>
-  );
+            <Modal.Body>
+                <ChatBody
+                    configured={configured}
+                    fullscreen={fullscreen}
+                    isLoading={isLoading}
+                    isLoadingContent={form.formState.isSubmitting}
+                    messages={messages}
+                    onClose={modal.onClose}
+                    onSelectAsset={(asset) => {
+                        appendMessage({
+                            role: 'user',
+                            text: `I would like to create ${asset.title}.`,
+                        });
+
+                        setTimeout(() => {
+                            appendMessage({
+                                role: 'assistant',
+                                text: (
+                                    <>
+                                        Tell me more about what you would like
+                                        to create. Here is an example: <br />
+                                        <br />
+                                        <i>"{asset.hint}"</i>
+                                    </>
+                                ),
+                            });
+                        }, 750);
+                    }}
+                />
+
+                {/* Bottom Reference, to scroll messages */}
+                <div ref={ref} />
+            </Modal.Body>
+
+            {configured && (
+                <div className="modal-footer">
+                    <ChatInput form={form} onSubmit={onSubmit} placeholder="" />
+
+                    <div className="d-flex mt-4 justify-content-end">
+                        <ClayButton
+                            borderless
+                            displayType="secondary"
+                            onClick={() => setMessages([])}
+                            size="xs"
+                        >
+                            <ClayIcon symbol="reset" /> Restart Chat
+                        </ClayButton>
+                    </div>
+                </div>
+            )}
+        </Modal>
+    );
 }

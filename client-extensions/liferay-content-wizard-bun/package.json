@@ -1,27 +1,27 @@
 {
-  "name": "liferay-content-wizard-bun",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest",
-    "pino-pretty": "^11.2.1",
-    "typescript": "^5.3.3"
-  },
-  "dependencies": {
-    "@elysiajs/cors": "^1.0.2",
-    "@elysiajs/cookie": "^0.8.0",
-    "@elysiajs/jwt": "^0.8.0",
-    "@langchain/google-genai": "^0.0.21",
-    "@langchain/google-vertexai": "^0.0.19",
-    "elysia": "^0.8.9",
-    "ky": "^1.4.0",
-    "langchain": "^0.2.8",
-    "pino": "^9.2.0",
-    "zod": "^3.23.8"
-  },
-  "scripts": {
-    "dev": "bun --watch src/http/server.ts",
-    "start": "NODE_ENV=production bun src/http/server.ts",
-    "test": "bun test"
-  }
+    "name": "liferay-content-wizard-bun",
+    "module": "index.ts",
+    "type": "module",
+    "devDependencies": {
+        "@types/bun": "latest",
+        "pino-pretty": "^11.2.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "@elysiajs/cors": "^1.0.2",
+        "@elysiajs/cookie": "^0.8.0",
+        "@elysiajs/jwt": "^0.8.0",
+        "@langchain/google-genai": "^0.0.21",
+        "@langchain/google-vertexai": "^0.0.19",
+        "elysia": "^0.8.9",
+        "ky": "^1.4.0",
+        "langchain": "^0.2.8",
+        "pino": "^9.2.0",
+        "zod": "^3.23.8"
+    },
+    "scripts": {
+        "dev": "bun --watch src/http/server.ts",
+        "start": "NODE_ENV=production bun src/http/server.ts",
+        "test": "bun test"
+    }
 }

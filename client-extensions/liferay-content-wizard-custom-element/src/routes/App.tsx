@@ -7,42 +7,42 @@ import DisplayIcon from '../components/DisplayIcon';
 import DisplayButton from '../components/DisplayButton';
 
 function App() {
-  const [container, setContainer] = useState<{
-    sidebar: HTMLElement | null;
-    topbar: HTMLElement | null;
-  }>({
-    sidebar: null,
-    topbar: null,
-  });
-
-  const modal = useModal({ defaultOpen: false });
-
-  useEffect(() => {
-    setContainer({
-      sidebar: document.querySelector('#productMenuSidebar'),
-      topbar: document.querySelector(
-        '.control-menu-nav-item.layout-reports-icon'
-      ),
+    const [container, setContainer] = useState<{
+        sidebar: HTMLElement | null;
+        topbar: HTMLElement | null;
+    }>({
+        sidebar: null,
+        topbar: null,
     });
-  }, []);
 
-  return (
-    <>
-      {modal.open && <AIWizard modal={modal} />}
+    const modal = useModal({ defaultOpen: false });
 
-      {container.topbar &&
-        createPortal(
-          <DisplayIcon onClick={() => modal.onOpenChange(true)} />,
-          container.topbar
-        )}
+    useEffect(() => {
+        setContainer({
+            sidebar: document.querySelector('#productMenuSidebar'),
+            topbar: document.querySelector(
+                '.control-menu-nav-item.layout-reports-icon'
+            ),
+        });
+    }, []);
 
-      {container.sidebar &&
-        createPortal(
-          <DisplayButton onClick={() => modal.onOpenChange(true)} />,
-          container.sidebar
-        )}
-    </>
-  );
+    return (
+        <>
+            {modal.open && <AIWizard modal={modal} />}
+
+            {container.topbar &&
+                createPortal(
+                    <DisplayIcon onClick={() => modal.onOpenChange(true)} />,
+                    container.topbar
+                )}
+
+            {container.sidebar &&
+                createPortal(
+                    <DisplayButton onClick={() => modal.onOpenChange(true)} />,
+                    container.sidebar
+                )}
+        </>
+    );
 }
 
 export default App;

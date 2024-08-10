@@ -14,34 +14,36 @@ const customElementId = 'liferay-content-wizard-custom-element';
 type Route = 'app' | 'settings';
 
 class ContentWizard extends HTMLElement {
-  private root?: Root;
+    private root?: Root;
 
-  connectedCallback() {
-    if (!this.root) {
-      this.root = ReactDOM.createRoot(this);
+    connectedCallback() {
+        if (!this.root) {
+            this.root = ReactDOM.createRoot(this);
 
-      const route = (this.getAttribute('route') as Route) || 'app';
+            const route = (this.getAttribute('route') as Route) || 'app';
 
-      this.root.render(
-        <SWRConfig
-          value={{
-            provider: SWRCacheProvider,
-            revalidateIfStale: true,
-            revalidateOnFocus: false,
-          }}
-        >
-          <AppContextProvider>
-            <ClayIconSpriteContext.Provider value={getIconSpriteMap()}>
-              {route === 'app' && <App />}
-              {route === 'settings' && <SettingRouter />}
-            </ClayIconSpriteContext.Provider>
-          </AppContextProvider>
-        </SWRConfig>
-      );
+            this.root.render(
+                <SWRConfig
+                    value={{
+                        provider: SWRCacheProvider,
+                        revalidateIfStale: true,
+                        revalidateOnFocus: false,
+                    }}
+                >
+                    <AppContextProvider>
+                        <ClayIconSpriteContext.Provider
+                            value={getIconSpriteMap()}
+                        >
+                            {route === 'app' && <App />}
+                            {route === 'settings' && <SettingRouter />}
+                        </ClayIconSpriteContext.Provider>
+                    </AppContextProvider>
+                </SWRConfig>
+            );
+        }
     }
-  }
 }
 
 if (!customElements.get(customElementId)) {
-  customElements.define(customElementId, ContentWizard);
+    customElements.define(customElementId, ContentWizard);
 }

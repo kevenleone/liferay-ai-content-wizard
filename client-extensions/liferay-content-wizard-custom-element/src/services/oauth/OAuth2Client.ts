@@ -6,12 +6,12 @@
 import { IOAuth2ClientAgentApplication, Liferay } from '../liferay';
 
 class OAuth2Client {
-  public oAuth2Client: IOAuth2ClientAgentApplication;
+    public oAuth2Client: IOAuth2ClientAgentApplication;
 
-  constructor(agentName: string) {
-    this.oAuth2Client =
-      Liferay.OAuth2Client.FromUserAgentApplication(agentName);
-  }
+    constructor(agentName: string) {
+        this.oAuth2Client =
+            Liferay.OAuth2Client.FromUserAgentApplication(agentName);
+    }
 }
 
 export default OAuth2Client;

@@ -1,1 +1,1232 @@
-{"program":{"fileNames":["./node_modules/typescript/lib/lib.d.ts","./node_modules/typescript/lib/lib.es5.d.ts","./node_modules/typescript/lib/lib.dom.d.ts","./node_modules/typescript/lib/lib.webworker.importscripts.d.ts","./node_modules/typescript/lib/lib.scripthost.d.ts","./node_modules/typescript/lib/lib.decorators.d.ts","./node_modules/typescript/lib/lib.decorators.legacy.d.ts","./node_modules/@types/estree/index.d.ts","./node_modules/rollup/dist/rollup.d.ts","./node_modules/vite/types/hmrpayload.d.ts","./node_modules/vite/types/customevent.d.ts","./node_modules/vite/types/hot.d.ts","./node_modules/vite/dist/node/types.d-agj9qkwt.d.ts","./node_modules/esbuild/lib/main.d.ts","./node_modules/source-map-js/source-map.d.ts","./node_modules/postcss/lib/previous-map.d.ts","./node_modules/postcss/lib/input.d.ts","./node_modules/postcss/lib/css-syntax-error.d.ts","./node_modules/postcss/lib/declaration.d.ts","./node_modules/postcss/lib/root.d.ts","./node_modules/postcss/lib/warning.d.ts","./node_modules/postcss/lib/lazy-result.d.ts","./node_modules/postcss/lib/no-work-result.d.ts","./node_modules/postcss/lib/processor.d.ts","./node_modules/postcss/lib/result.d.ts","./node_modules/postcss/lib/document.d.ts","./node_modules/postcss/lib/rule.d.ts","./node_modules/postcss/lib/node.d.ts","./node_modules/postcss/lib/comment.d.ts","./node_modules/postcss/lib/container.d.ts","./node_modules/postcss/lib/at-rule.d.ts","./node_modules/postcss/lib/list.d.ts","./node_modules/postcss/lib/postcss.d.ts","./node_modules/vite/dist/node/runtime.d.ts","./node_modules/vite/types/importglob.d.ts","./node_modules/vite/types/metadata.d.ts","./node_modules/vite/dist/node/index.d.ts","./node_modules/@swc/types/index.ts","./node_modules/@swc/core/spack.d.ts","./node_modules/@swc/core/index.d.ts","./node_modules/@vitejs/plugin-react-swc/index.d.ts","./vite.config.ts","./node_modules/@types/react/global.d.ts","./node_modules/csstype/index.d.ts","./node_modules/@types/prop-types/index.d.ts","./node_modules/@types/react/index.d.ts","./node_modules/@types/hoist-non-react-statics/index.d.ts","./node_modules/@types/react-dom/index.d.ts"],"fileInfos":["a7297ff837fcdf174a9524925966429eb8e5feecc2cc55cc06574e6b092c1eaa",{"version":"44e584d4f6444f58791784f1d530875970993129442a847597db702a073ca68c","affectsGlobalScope":true},{"version":"4af6b0c727b7a2896463d512fafd23634229adf69ac7c00e2ae15a09cb084fad","affectsGlobalScope":true},{"version":"80e18897e5884b6723488d4f5652167e7bb5024f946743134ecc4aa4ee731f89","affectsGlobalScope":true},{"version":"cd034f499c6cdca722b60c04b5b1b78e058487a7085a8e0d6fb50809947ee573","affectsGlobalScope":true},{"version":"33358442698bb565130f52ba79bfd3d4d484ac85fe33f3cb1759c54d18201393","affectsGlobalScope":true},{"version":"782dec38049b92d4e85c1585fbea5474a219c6984a35b004963b00beb1aab538","affectsGlobalScope":true},"ee7d8894904b465b072be0d2e4b45cf6b887cdba16a467645c4e200982ece7ea",{"version":"574de9322239fc2f136769dd4726fdeea6f379a44691759ffe3a941f9022e5b9","affectsGlobalScope":true},"282f98006ed7fa9bb2cd9bdbe2524595cfc4bcd58a0bb3232e4519f2138df811","6222e987b58abfe92597e1273ad7233626285bc2d78409d4a7b113d81a83496b","cbe726263ae9a7bf32352380f7e8ab66ee25b3457137e316929269c19e18a2be","8b96046bf5fb0a815cba6b0880d9f97b7f3a93cf187e8dcfe8e2792e97f38f87",{"version":"bacf2c84cf448b2cd02c717ad46c3d7fd530e0c91282888c923ad64810a4d511","affectsGlobalScope":true},"858d0d831826c6eb563df02f7db71c90e26deadd0938652096bea3cc14899700","8885cf05f3e2abf117590bbb951dcf6359e3e5ac462af1c901cfd24c6a6472e2","18c04c22baee54d13b505fa6e8bcd4223f8ba32beee80ec70e6cac972d1cc9a6","e61df3640a38d535fd4bc9f4a53aef17c296b58dc4b6394fd576b808dd2fe5e6","44fe135be91bc8edc495350f79cd7a2e5a8b7a7108b10b2599a321b9248657dc","1d51250438f2071d2803053d9aec7973ef22dfffd80685a9ec5fb3fa082f4347","7ec359bbc29b69d4063fe7dad0baaf35f1856f914db16b3f4f6e3e1bca4099fa","b9261ac3e9944d3d72c5ee4cf888ad35d9743a5563405c6963c4e43ee3708ca4","c84fd54e8400def0d1ef1569cafd02e9f39a622df9fa69b57ccc82128856b916","c7a38c1ef8d6ae4bf252be67bd9a8b012b2cdea65bd6225a3d1a726c4f0d52b6","e773630f8772a06e82d97046fc92da59ada8414c61689894fff0155dd08f102c","edf7cf322a3f3e6ebca77217a96ed4480f5a7d8d0084f8b82f1c281c92780f3a","e97321edbef59b6f68839bcdfd5ae1949fe80d554d2546e35484a8d044a04444","96aed8ec4d342ec6ac69f0dcdfb064fd17b10cb13825580451c2cebbd556e965","106e607866d6c3e9a497a696ac949c3e2ec46b6e7dda35aabe76100bf740833b","28ffc4e76ad54f4b34933d78ff3f95b763accf074e8630a6d926f3fd5bbd8908","304af95fcace2300674c969700b39bc0ee05be536880daa844c64dc8f90ef482","3d65182eff7bbb16de1a69e17651c51083f740af11a1a92359be6dab939e8bcf","670ddaf1f1b881abaa1cc28236430d86b691affbeaefd66b3ee1db31fdfb8dba","82e687ebd99518bc63ea04b0c3810fb6e50aa6942decd0ca6f7a56d9b9a212a6","7f698624bbbb060ece7c0e51b7236520ebada74b747d7523c7df376453ed6fea","8f07f2b6514744ac96e51d7cb8518c0f4de319471237ea10cf688b8d0e9d0225","c98746b56b1a6fa699944ce94df1060627a49ee90bddb3c50389ba34c1a1e89b","4b4eff666c2fae23d20b7921114475f4de8b87d947422ea75e8d0cf097f2c0e1","136ac2fb228b2c64ad2d039eb4de311212505a20a91b9ba632bd6cfdc3b4126f","727d47bd0ffe1ed848370a599dab12c1c399427b3b7f46e6a831d22880fd9f73","52d795bdd96017f36b13f87abb05e077dbf86c4a398144e698a4fc52035d7f6f","7be4d4756353ae477fc3294371b032c09bff96a3254c1081f43fa49c0f4581ca",{"version":"36a2e4c9a67439aca5f91bb304611d5ae6e20d420503e96c230cf8fcdc948d94","affectsGlobalScope":true},"8a8eb4ebffd85e589a1cc7c178e291626c359543403d58c9cd22b81fab5b1fb9","247a952efd811d780e5630f8cfd76f495196f5fa74f6f0fee39ac8ba4a3c9800",{"version":"8ca4709dbd22a34bcc1ebf93e1877645bdb02ebd3f3d9a211a299a8db2ee4ba1","affectsGlobalScope":true},"a7ca2a9e61286d74bc37fe64e5dcd7da04607f7f5432f7c651b47b573fc76cef","adb17fea4d847e1267ae1241fa1ac3917c7e332999ebdab388a24d82d4f58240"],"root":[42],"options":{"allowSyntheticDefaultImports":true,"composite":true,"module":99},"fileIdsList":[[38,39],[38],[46],[43,44,45],[37,40],[30],[28,30],[19,27,28,29,31],[17],[20,25,30,33],[16,33],[20,21,24,25,26,33],[20,21,22,24,25,33],[17,18,19,20,21,25,26,27,29,30,31,33],[15,17,18,19,20,21,22,24,25,26,27,28,29,30,31,32],[15,33],[20,22,23,25,26,33],[24,33],[25,26,30,33],[18,28],[8],[15],[9,10,11,12,13,14,33,34,35,36],[10,11,12,13],[10,11,12],[10],[11],[9],[37,41]],"referencedMap":[[40,1],[39,2],[47,3],[48,3],[46,4],[41,5],[31,6],[29,7],[30,8],[18,9],[19,7],[26,10],[17,11],[22,12],[23,13],[28,14],[33,15],[16,16],[24,17],[25,18],[20,19],[27,6],[21,20],[9,21],[15,22],[37,23],[34,24],[13,25],[11,26],[12,27],[36,28],[42,29]],"semanticDiagnosticsPerFile":[[9,[{"start":5456,"length":16,"messageText":"Cannot find name 'IterableIterator'.","category":1,"code":2304},{"start":14032,"length":16,"messageText":"Cannot find name 'IterableIterator'.","category":1,"code":2304}]],[12,[{"start":118,"length":20,"messageText":"A computed property name in a type literal must refer to an expression whose type is a literal type or a 'unique symbol' type.","category":1,"code":1170},{"start":119,"length":6,"messageText":"'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.","category":1,"code":2585}]],[13,[{"start":231,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":1024,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":1064,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":1128,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":1191,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":1276,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":3042,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":3738,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":3899,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":3926,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":3940,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":4107,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":4134,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":4148,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":6442,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":6469,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583}]],[22,[{"start":1473,"length":9,"messageText":"Property 'finally' does not exist on type 'Promise<Result_<RootNode>>'.","category":1,"code":2339},{"start":4863,"length":6,"messageText":"'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.","category":1,"code":2585}]],[23,[{"start":1067,"length":9,"messageText":"Property 'finally' does not exist on type 'Promise<Result_<Root_>>'.","category":1,"code":2339},{"start":1465,"length":6,"messageText":"'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.","category":1,"code":2585}]],[34,[{"start":962,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583}]],[36,[{"start":51,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":78,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583}]],[37,[{"start":551,"length":17,"code":2307,"category":1,"messageText":{"messageText":"Cannot find module 'rollup/parseAst' or its corresponding type declarations.","category":1,"code":2307,"next":[{"info":{"moduleReference":"rollup/parseAst"}}]}},{"start":592,"length":11,"messageText":"Cannot find module 'node:http' or its corresponding type declarations.","category":1,"code":2307},{"start":723,"length":11,"messageText":"Cannot find module 'node:http' or its corresponding type declarations.","category":1,"code":2307},{"start":770,"length":12,"messageText":"Cannot find module 'node:http2' or its corresponding type declarations.","category":1,"code":2307},{"start":804,"length":9,"messageText":"Cannot find module 'node:fs' or its corresponding type declarations.","category":1,"code":2307},{"start":839,"length":13,"messageText":"Cannot find module 'node:events' or its corresponding type declarations.","category":1,"code":2307},{"start":883,"length":13,"messageText":"Cannot find module 'node:events' or its corresponding type declarations.","category":1,"code":2307},{"start":973,"length":12,"messageText":"Cannot find module 'node:https' or its corresponding type declarations.","category":1,"code":2307},{"start":1008,"length":10,"messageText":"Cannot find module 'node:net' or its corresponding type declarations.","category":1,"code":2307},{"start":1041,"length":10,"messageText":"Cannot find module 'node:url' or its corresponding type declarations.","category":1,"code":2307},{"start":1073,"length":10,"messageText":"Cannot find module 'node:url' or its corresponding type declarations.","category":1,"code":2307},{"start":1109,"length":13,"messageText":"Cannot find module 'node:stream' or its corresponding type declarations.","category":1,"code":2307},{"start":1162,"length":13,"messageText":"Cannot find module 'node:stream' or its corresponding type declarations.","category":1,"code":2307},{"start":1348,"length":10,"messageText":"Cannot find module 'node:tls' or its corresponding type declarations.","category":1,"code":2307},{"start":1388,"length":11,"messageText":"Cannot find module 'node:zlib' or its corresponding type declarations.","category":1,"code":2307},{"start":11184,"length":6,"messageText":"Cannot find namespace 'NodeJS'.","category":1,"code":2503},{"start":13735,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":27167,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27211,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27252,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27290,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27331,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27373,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27385,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":27863,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28054,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28098,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28144,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28191,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28203,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28242,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28524,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":28674,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29245,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29289,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29301,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29339,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29382,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":29459,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":30569,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":31145,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":33593,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":35554,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":36045,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":36423,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":36924,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":37305,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":37801,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":38171,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":38590,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":38903,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":39337,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":39772,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":39795,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":39910,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":39933,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":40065,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":40074,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":41040,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":42228,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":42237,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":43229,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":43853,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":44098,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":49358,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":58498,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":78926,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580},{"start":98598,"length":3,"messageText":"Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":117213,"length":3,"messageText":"Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.","category":1,"code":2583},{"start":118596,"length":6,"messageText":"Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.","category":1,"code":2580}]],[42,[{"start":17,"length":6,"messageText":"Cannot find module 'path' or its corresponding type declarations.","category":1,"code":2307},{"start":653,"length":9,"messageText":"Cannot find name '__dirname'.","category":1,"code":2304}]],[45,[{"start":286,"length":8,"messageText":"Cannot find name 'Iterable'.","category":1,"code":2304}]],[46,[{"start":15157,"length":8,"messageText":"Cannot find name 'Iterable'.","category":1,"code":2304},{"start":16378,"length":9,"messageText":"Type alias 'ReactNode' circularly references itself.","category":1,"code":2456},{"start":16457,"length":8,"messageText":"Cannot find name 'Iterable'.","category":1,"code":2304}]]],"affectedFilesPendingEmit":[42],"emitSignatures":[42]},"version":"5.5.2"}
+{
+    "program": {
+        "fileNames": [
+            "./node_modules/typescript/lib/lib.d.ts",
+            "./node_modules/typescript/lib/lib.es5.d.ts",
+            "./node_modules/typescript/lib/lib.dom.d.ts",
+            "./node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+            "./node_modules/typescript/lib/lib.scripthost.d.ts",
+            "./node_modules/typescript/lib/lib.decorators.d.ts",
+            "./node_modules/typescript/lib/lib.decorators.legacy.d.ts",
+            "./node_modules/@types/estree/index.d.ts",
+            "./node_modules/rollup/dist/rollup.d.ts",
+            "./node_modules/vite/types/hmrpayload.d.ts",
+            "./node_modules/vite/types/customevent.d.ts",
+            "./node_modules/vite/types/hot.d.ts",
+            "./node_modules/vite/dist/node/types.d-agj9qkwt.d.ts",
+            "./node_modules/esbuild/lib/main.d.ts",
+            "./node_modules/source-map-js/source-map.d.ts",
+            "./node_modules/postcss/lib/previous-map.d.ts",
+            "./node_modules/postcss/lib/input.d.ts",
+            "./node_modules/postcss/lib/css-syntax-error.d.ts",
+            "./node_modules/postcss/lib/declaration.d.ts",
+            "./node_modules/postcss/lib/root.d.ts",
+            "./node_modules/postcss/lib/warning.d.ts",
+            "./node_modules/postcss/lib/lazy-result.d.ts",
+            "./node_modules/postcss/lib/no-work-result.d.ts",
+            "./node_modules/postcss/lib/processor.d.ts",
+            "./node_modules/postcss/lib/result.d.ts",
+            "./node_modules/postcss/lib/document.d.ts",
+            "./node_modules/postcss/lib/rule.d.ts",
+            "./node_modules/postcss/lib/node.d.ts",
+            "./node_modules/postcss/lib/comment.d.ts",
+            "./node_modules/postcss/lib/container.d.ts",
+            "./node_modules/postcss/lib/at-rule.d.ts",
+            "./node_modules/postcss/lib/list.d.ts",
+            "./node_modules/postcss/lib/postcss.d.ts",
+            "./node_modules/vite/dist/node/runtime.d.ts",
+            "./node_modules/vite/types/importglob.d.ts",
+            "./node_modules/vite/types/metadata.d.ts",
+            "./node_modules/vite/dist/node/index.d.ts",
+            "./node_modules/@swc/types/index.ts",
+            "./node_modules/@swc/core/spack.d.ts",
+            "./node_modules/@swc/core/index.d.ts",
+            "./node_modules/@vitejs/plugin-react-swc/index.d.ts",
+            "./vite.config.ts",
+            "./node_modules/@types/react/global.d.ts",
+            "./node_modules/csstype/index.d.ts",
+            "./node_modules/@types/prop-types/index.d.ts",
+            "./node_modules/@types/react/index.d.ts",
+            "./node_modules/@types/hoist-non-react-statics/index.d.ts",
+            "./node_modules/@types/react-dom/index.d.ts"
+        ],
+        "fileInfos": [
+            "a7297ff837fcdf174a9524925966429eb8e5feecc2cc55cc06574e6b092c1eaa",
+            {
+                "version": "44e584d4f6444f58791784f1d530875970993129442a847597db702a073ca68c",
+                "affectsGlobalScope": true
+            },
+            {
+                "version": "4af6b0c727b7a2896463d512fafd23634229adf69ac7c00e2ae15a09cb084fad",
+                "affectsGlobalScope": true
+            },
+            {
+                "version": "80e18897e5884b6723488d4f5652167e7bb5024f946743134ecc4aa4ee731f89",
+                "affectsGlobalScope": true
+            },
+            {
+                "version": "cd034f499c6cdca722b60c04b5b1b78e058487a7085a8e0d6fb50809947ee573",
+                "affectsGlobalScope": true
+            },
+            {
+                "version": "33358442698bb565130f52ba79bfd3d4d484ac85fe33f3cb1759c54d18201393",
+                "affectsGlobalScope": true
+            },
+            {
+                "version": "782dec38049b92d4e85c1585fbea5474a219c6984a35b004963b00beb1aab538",
+                "affectsGlobalScope": true
+            },
+            "ee7d8894904b465b072be0d2e4b45cf6b887cdba16a467645c4e200982ece7ea",
+            {
+                "version": "574de9322239fc2f136769dd4726fdeea6f379a44691759ffe3a941f9022e5b9",
+                "affectsGlobalScope": true
+            },
+            "282f98006ed7fa9bb2cd9bdbe2524595cfc4bcd58a0bb3232e4519f2138df811",
+            "6222e987b58abfe92597e1273ad7233626285bc2d78409d4a7b113d81a83496b",
+            "cbe726263ae9a7bf32352380f7e8ab66ee25b3457137e316929269c19e18a2be",
+            "8b96046bf5fb0a815cba6b0880d9f97b7f3a93cf187e8dcfe8e2792e97f38f87",
+            {
+                "version": "bacf2c84cf448b2cd02c717ad46c3d7fd530e0c91282888c923ad64810a4d511",
+                "affectsGlobalScope": true
+            },
+            "858d0d831826c6eb563df02f7db71c90e26deadd0938652096bea3cc14899700",
+            "8885cf05f3e2abf117590bbb951dcf6359e3e5ac462af1c901cfd24c6a6472e2",
+            "18c04c22baee54d13b505fa6e8bcd4223f8ba32beee80ec70e6cac972d1cc9a6",
+            "e61df3640a38d535fd4bc9f4a53aef17c296b58dc4b6394fd576b808dd2fe5e6",
+            "44fe135be91bc8edc495350f79cd7a2e5a8b7a7108b10b2599a321b9248657dc",
+            "1d51250438f2071d2803053d9aec7973ef22dfffd80685a9ec5fb3fa082f4347",
+            "7ec359bbc29b69d4063fe7dad0baaf35f1856f914db16b3f4f6e3e1bca4099fa",
+            "b9261ac3e9944d3d72c5ee4cf888ad35d9743a5563405c6963c4e43ee3708ca4",
+            "c84fd54e8400def0d1ef1569cafd02e9f39a622df9fa69b57ccc82128856b916",
+            "c7a38c1ef8d6ae4bf252be67bd9a8b012b2cdea65bd6225a3d1a726c4f0d52b6",
+            "e773630f8772a06e82d97046fc92da59ada8414c61689894fff0155dd08f102c",
+            "edf7cf322a3f3e6ebca77217a96ed4480f5a7d8d0084f8b82f1c281c92780f3a",
+            "e97321edbef59b6f68839bcdfd5ae1949fe80d554d2546e35484a8d044a04444",
+            "96aed8ec4d342ec6ac69f0dcdfb064fd17b10cb13825580451c2cebbd556e965",
+            "106e607866d6c3e9a497a696ac949c3e2ec46b6e7dda35aabe76100bf740833b",
+            "28ffc4e76ad54f4b34933d78ff3f95b763accf074e8630a6d926f3fd5bbd8908",
+            "304af95fcace2300674c969700b39bc0ee05be536880daa844c64dc8f90ef482",
+            "3d65182eff7bbb16de1a69e17651c51083f740af11a1a92359be6dab939e8bcf",
+            "670ddaf1f1b881abaa1cc28236430d86b691affbeaefd66b3ee1db31fdfb8dba",
+            "82e687ebd99518bc63ea04b0c3810fb6e50aa6942decd0ca6f7a56d9b9a212a6",
+            "7f698624bbbb060ece7c0e51b7236520ebada74b747d7523c7df376453ed6fea",
+            "8f07f2b6514744ac96e51d7cb8518c0f4de319471237ea10cf688b8d0e9d0225",
+            "c98746b56b1a6fa699944ce94df1060627a49ee90bddb3c50389ba34c1a1e89b",
+            "4b4eff666c2fae23d20b7921114475f4de8b87d947422ea75e8d0cf097f2c0e1",
+            "136ac2fb228b2c64ad2d039eb4de311212505a20a91b9ba632bd6cfdc3b4126f",
+            "727d47bd0ffe1ed848370a599dab12c1c399427b3b7f46e6a831d22880fd9f73",
+            "52d795bdd96017f36b13f87abb05e077dbf86c4a398144e698a4fc52035d7f6f",
+            "7be4d4756353ae477fc3294371b032c09bff96a3254c1081f43fa49c0f4581ca",
+            {
+                "version": "36a2e4c9a67439aca5f91bb304611d5ae6e20d420503e96c230cf8fcdc948d94",
+                "affectsGlobalScope": true
+            },
+            "8a8eb4ebffd85e589a1cc7c178e291626c359543403d58c9cd22b81fab5b1fb9",
+            "247a952efd811d780e5630f8cfd76f495196f5fa74f6f0fee39ac8ba4a3c9800",
+            {
+                "version": "8ca4709dbd22a34bcc1ebf93e1877645bdb02ebd3f3d9a211a299a8db2ee4ba1",
+                "affectsGlobalScope": true
+            },
+            "a7ca2a9e61286d74bc37fe64e5dcd7da04607f7f5432f7c651b47b573fc76cef",
+            "adb17fea4d847e1267ae1241fa1ac3917c7e332999ebdab388a24d82d4f58240"
+        ],
+        "root": [
+            42
+        ],
+        "options": {
+            "allowSyntheticDefaultImports": true,
+            "composite": true,
+            "module": 99
+        },
+        "fileIdsList": [
+            [
+                38,
+                39
+            ],
+            [
+                38
+            ],
+            [
+                46
+            ],
+            [
+                43,
+                44,
+                45
+            ],
+            [
+                37,
+                40
+            ],
+            [
+                30
+            ],
+            [
+                28,
+                30
+            ],
+            [
+                19,
+                27,
+                28,
+                29,
+                31
+            ],
+            [
+                17
+            ],
+            [
+                20,
+                25,
+                30,
+                33
+            ],
+            [
+                16,
+                33
+            ],
+            [
+                20,
+                21,
+                24,
+                25,
+                26,
+                33
+            ],
+            [
+                20,
+                21,
+                22,
+                24,
+                25,
+                33
+            ],
+            [
+                17,
+                18,
+                19,
+                20,
+                21,
+                25,
+                26,
+                27,
+                29,
+                30,
+                31,
+                33
+            ],
+            [
+                15,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                24,
+                25,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32
+            ],
+            [
+                15,
+                33
+            ],
+            [
+                20,
+                22,
+                23,
+                25,
+                26,
+                33
+            ],
+            [
+                24,
+                33
+            ],
+            [
+                25,
+                26,
+                30,
+                33
+            ],
+            [
+                18,
+                28
+            ],
+            [
+                8
+            ],
+            [
+                15
+            ],
+            [
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                33,
+                34,
+                35,
+                36
+            ],
+            [
+                10,
+                11,
+                12,
+                13
+            ],
+            [
+                10,
+                11,
+                12
+            ],
+            [
+                10
+            ],
+            [
+                11
+            ],
+            [
+                9
+            ],
+            [
+                37,
+                41
+            ]
+        ],
+        "referencedMap": [
+            [
+                40,
+                1
+            ],
+            [
+                39,
+                2
+            ],
+            [
+                47,
+                3
+            ],
+            [
+                48,
+                3
+            ],
+            [
+                46,
+                4
+            ],
+            [
+                41,
+                5
+            ],
+            [
+                31,
+                6
+            ],
+            [
+                29,
+                7
+            ],
+            [
+                30,
+                8
+            ],
+            [
+                18,
+                9
+            ],
+            [
+                19,
+                7
+            ],
+            [
+                26,
+                10
+            ],
+            [
+                17,
+                11
+            ],
+            [
+                22,
+                12
+            ],
+            [
+                23,
+                13
+            ],
+            [
+                28,
+                14
+            ],
+            [
+                33,
+                15
+            ],
+            [
+                16,
+                16
+            ],
+            [
+                24,
+                17
+            ],
+            [
+                25,
+                18
+            ],
+            [
+                20,
+                19
+            ],
+            [
+                27,
+                6
+            ],
+            [
+                21,
+                20
+            ],
+            [
+                9,
+                21
+            ],
+            [
+                15,
+                22
+            ],
+            [
+                37,
+                23
+            ],
+            [
+                34,
+                24
+            ],
+            [
+                13,
+                25
+            ],
+            [
+                11,
+                26
+            ],
+            [
+                12,
+                27
+            ],
+            [
+                36,
+                28
+            ],
+            [
+                42,
+                29
+            ]
+        ],
+        "semanticDiagnosticsPerFile": [
+            [
+                9,
+                [
+                    {
+                        "start": 5456,
+                        "length": 16,
+                        "messageText": "Cannot find name 'IterableIterator'.",
+                        "category": 1,
+                        "code": 2304
+                    },
+                    {
+                        "start": 14032,
+                        "length": 16,
+                        "messageText": "Cannot find name 'IterableIterator'.",
+                        "category": 1,
+                        "code": 2304
+                    }
+                ]
+            ],
+            [
+                12,
+                [
+                    {
+                        "start": 118,
+                        "length": 20,
+                        "messageText": "A computed property name in a type literal must refer to an expression whose type is a literal type or a 'unique symbol' type.",
+                        "category": 1,
+                        "code": 1170
+                    },
+                    {
+                        "start": 119,
+                        "length": 6,
+                        "messageText": "'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.",
+                        "category": 1,
+                        "code": 2585
+                    }
+                ]
+            ],
+            [
+                13,
+                [
+                    {
+                        "start": 231,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 1024,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 1064,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 1128,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 1191,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 1276,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 3042,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 3738,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 3899,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 3926,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 3940,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 4107,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 4134,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 4148,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 6442,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 6469,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    }
+                ]
+            ],
+            [
+                22,
+                [
+                    {
+                        "start": 1473,
+                        "length": 9,
+                        "messageText": "Property 'finally' does not exist on type 'Promise<Result_<RootNode>>'.",
+                        "category": 1,
+                        "code": 2339
+                    },
+                    {
+                        "start": 4863,
+                        "length": 6,
+                        "messageText": "'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.",
+                        "category": 1,
+                        "code": 2585
+                    }
+                ]
+            ],
+            [
+                23,
+                [
+                    {
+                        "start": 1067,
+                        "length": 9,
+                        "messageText": "Property 'finally' does not exist on type 'Promise<Result_<Root_>>'.",
+                        "category": 1,
+                        "code": 2339
+                    },
+                    {
+                        "start": 1465,
+                        "length": 6,
+                        "messageText": "'Symbol' only refers to a type, but is being used as a value here. Do you need to change your target library? Try changing the 'lib' compiler option to es2015 or later.",
+                        "category": 1,
+                        "code": 2585
+                    }
+                ]
+            ],
+            [
+                34,
+                [
+                    {
+                        "start": 962,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    }
+                ]
+            ],
+            [
+                36,
+                [
+                    {
+                        "start": 51,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 78,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    }
+                ]
+            ],
+            [
+                37,
+                [
+                    {
+                        "start": 551,
+                        "length": 17,
+                        "code": 2307,
+                        "category": 1,
+                        "messageText": {
+                            "messageText": "Cannot find module 'rollup/parseAst' or its corresponding type declarations.",
+                            "category": 1,
+                            "code": 2307,
+                            "next": [
+                                {
+                                    "info": {
+                                        "moduleReference": "rollup/parseAst"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "start": 592,
+                        "length": 11,
+                        "messageText": "Cannot find module 'node:http' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 723,
+                        "length": 11,
+                        "messageText": "Cannot find module 'node:http' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 770,
+                        "length": 12,
+                        "messageText": "Cannot find module 'node:http2' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 804,
+                        "length": 9,
+                        "messageText": "Cannot find module 'node:fs' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 839,
+                        "length": 13,
+                        "messageText": "Cannot find module 'node:events' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 883,
+                        "length": 13,
+                        "messageText": "Cannot find module 'node:events' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 973,
+                        "length": 12,
+                        "messageText": "Cannot find module 'node:https' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1008,
+                        "length": 10,
+                        "messageText": "Cannot find module 'node:net' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1041,
+                        "length": 10,
+                        "messageText": "Cannot find module 'node:url' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1073,
+                        "length": 10,
+                        "messageText": "Cannot find module 'node:url' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1109,
+                        "length": 13,
+                        "messageText": "Cannot find module 'node:stream' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1162,
+                        "length": 13,
+                        "messageText": "Cannot find module 'node:stream' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1348,
+                        "length": 10,
+                        "messageText": "Cannot find module 'node:tls' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 1388,
+                        "length": 11,
+                        "messageText": "Cannot find module 'node:zlib' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 11184,
+                        "length": 6,
+                        "messageText": "Cannot find namespace 'NodeJS'.",
+                        "category": 1,
+                        "code": 2503
+                    },
+                    {
+                        "start": 13735,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 27167,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27211,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27252,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27290,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27331,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27373,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27385,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 27863,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28054,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28098,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28144,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28191,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28203,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28242,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28524,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 28674,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29245,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29289,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29301,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29339,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29382,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 29459,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 30569,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 31145,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 33593,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 35554,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 36045,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 36423,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 36924,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 37305,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 37801,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 38171,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 38590,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 38903,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 39337,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 39772,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 39795,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 39910,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 39933,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 40065,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 40074,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 41040,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 42228,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 42237,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 43229,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 43853,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 44098,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 49358,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 58498,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 78926,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    },
+                    {
+                        "start": 98598,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Set'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 117213,
+                        "length": 3,
+                        "messageText": "Cannot find name 'Map'. Do you need to change your target library? Try changing the 'lib' compiler option to 'es2015' or later.",
+                        "category": 1,
+                        "code": 2583
+                    },
+                    {
+                        "start": 118596,
+                        "length": 6,
+                        "messageText": "Cannot find name 'Buffer'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node`.",
+                        "category": 1,
+                        "code": 2580
+                    }
+                ]
+            ],
+            [
+                42,
+                [
+                    {
+                        "start": 17,
+                        "length": 6,
+                        "messageText": "Cannot find module 'path' or its corresponding type declarations.",
+                        "category": 1,
+                        "code": 2307
+                    },
+                    {
+                        "start": 653,
+                        "length": 9,
+                        "messageText": "Cannot find name '__dirname'.",
+                        "category": 1,
+                        "code": 2304
+                    }
+                ]
+            ],
+            [
+                45,
+                [
+                    {
+                        "start": 286,
+                        "length": 8,
+                        "messageText": "Cannot find name 'Iterable'.",
+                        "category": 1,
+                        "code": 2304
+                    }
+                ]
+            ],
+            [
+                46,
+                [
+                    {
+                        "start": 15157,
+                        "length": 8,
+                        "messageText": "Cannot find name 'Iterable'.",
+                        "category": 1,
+                        "code": 2304
+                    },
+                    {
+                        "start": 16378,
+                        "length": 9,
+                        "messageText": "Type alias 'ReactNode' circularly references itself.",
+                        "category": 1,
+                        "code": 2456
+                    },
+                    {
+                        "start": 16457,
+                        "length": 8,
+                        "messageText": "Cannot find name 'Iterable'.",
+                        "category": 1,
+                        "code": 2304
+                    }
+                ]
+            ]
+        ],
+        "affectedFilesPendingEmit": [
+            42
+        ],
+        "emitSignatures": [
+            42
+        ]
+    },
+    "version": "5.5.2"
+}

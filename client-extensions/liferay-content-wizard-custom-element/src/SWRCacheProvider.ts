@@ -7,17 +7,17 @@ const STORAGE_KEY = '@liferay-ai-content-wizard/swr';
  */
 
 const SWRCacheProvider = (): Map<any, any> => {
-  const cacheMap = new Map(
-    JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-  );
+    const cacheMap = new Map(
+        JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+    );
 
-  window.addEventListener('beforeunload', () => {
-    const appCache = JSON.stringify(Array.from(cacheMap.entries()));
+    window.addEventListener('beforeunload', () => {
+        const appCache = JSON.stringify(Array.from(cacheMap.entries()));
 
-    localStorage.setItem(STORAGE_KEY, appCache);
-  });
+        localStorage.setItem(STORAGE_KEY, appCache);
+    });
 
-  return cacheMap;
+    return cacheMap;
 };
 
 export default SWRCacheProvider;

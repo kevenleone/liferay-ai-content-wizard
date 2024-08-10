@@ -11,16 +11,16 @@ import env from '../utils/env';
 import logger from '../utils/logger';
 
 new Elysia()
-  .onError(({ code, error }) => console.log(code, error))
-  .use(cors({ allowedHeaders: '*' }))
-  .use(aiGenerate)
-  .use(deleteSetting)
-  .use(getSetting)
-  .use(getSettings)
-  .use(getSettingsStatus)
-  .use(saveSetting)
-  .listen(env.PORT, () =>
-    logger.info(
-      `Liferay Content Wizard | Elysia is running on PORT ${env.PORT}`
-    )
-  );
+    .onError(({ code, error }) => console.log(code, error))
+    .use(cors({ allowedHeaders: '*' }))
+    .use(aiGenerate)
+    .use(deleteSetting)
+    .use(getSetting)
+    .use(getSettings)
+    .use(getSettingsStatus)
+    .use(saveSetting)
+    .listen(env.PORT, () =>
+        logger.info(
+            `Liferay Content Wizard | Elysia is running on PORT ${env.PORT}`
+        )
+    );

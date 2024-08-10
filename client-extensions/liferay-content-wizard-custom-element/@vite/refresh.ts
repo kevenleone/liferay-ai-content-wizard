@@ -21,9 +21,9 @@ window.$RefreshSig$ = () => (type) => type;
 window.__vite_plugin_react_preamble_installed__ = true;
 
 declare global {
-	interface Window {
-		$RefreshReg$: () => void;
-		$RefreshSig$: () => (type: string) => string;
-		__vite_plugin_react_preamble_installed__: boolean;
-	}
+    interface Window {
+        $RefreshReg$: () => void;
+        $RefreshSig$: () => (type: string) => string;
+        __vite_plugin_react_preamble_installed__: boolean;
+    }
 }
