@@ -1,20 +1,24 @@
-import { Button } from '@clayui/core';
 import { ClayButtonWithIcon } from '@clayui/button';
 import { useNavigate } from 'react-router-dom';
 import ClayAlert from '@clayui/alert';
-import ClayEmptyState from '@clayui/empty-state';
-import useSWR from 'swr';
 import ClayIcon from '@clayui/icon';
+import useSWR from 'swr';
 
 import Container from '../../components/Container';
+import NoSettingsEmptyState from '../../components/NoSettingsEmptyState';
 import Table from '../../components/Table';
 import useAIWizardContentOAuth2 from '../../hooks/useAIWizardOAuth2';
+
+export const maskApiKey = (apiKey: string) =>
+  apiKey
+    .substring(0, PAD_LIMIT)
+    .padEnd(apiKey.length - PAD_LIMIT, '*****************');
 
 const renderPickList = ({ name }: { key: string; name: string }) => name;
 
 const PAD_LIMIT = 15;
 
-const providerStatuses = {
+export const providerStatuses = {
   true: {
     'aria-label': 'Active provider',
     color: 'green',
@@ -26,6 +30,27 @@ const providerStatuses = {
     color: 'red',
   },
 };
+
+const columns = [
+  {
+    key: 'provider',
+    name: 'Provider',
+    render: (data, { active }) => (
+      <>
+        <ClayIcon {...(providerStatuses as any)[active]} />{' '}
+        {renderPickList(data)}
+      </>
+    ),
+  },
+  {
+    key: 'apiKey',
+    name: 'API Key',
+    render: (apiKey: string) => <b>{maskApiKey(apiKey)}</b>,
+  },
+  { key: 'model', name: 'Model', render: renderPickList },
+  { key: 'imageModel', name: 'Image Model', render: renderPickList },
+  { key: 'description', name: 'Description' },
+];
 
 export default function Settings() {
   const aiWizardOAuth2 = useAIWizardContentOAuth2();
@@ -41,6 +66,7 @@ export default function Settings() {
     }
 
     await aiWizardOAuth2.deleteSetting(id);
+
     await mutate((data: any) => data, { revalidate: true });
   };
 
@@ -55,7 +81,7 @@ export default function Settings() {
         {hasItems && (
           <ClayButtonWithIcon
             aria-label='Add Config'
-            onClick={() => navigate('form')}
+            onClick={() => navigate('create')}
             symbol='plus'
           />
         )}
@@ -64,55 +90,30 @@ export default function Settings() {
       <Table
         actions={[
           {
+            label: 'Details',
+            onClick: ({ id }: any) => navigate(`${id}`),
+          },
+          {
             label: 'Edit',
-            onClick: ({ id }: any) => navigate(`update/${id}`),
+            onClick: ({ id }: any) => navigate(`${id}/update`),
           },
           {
             label: 'Delete',
             onClick: onDelete,
           },
         ]}
+        columns={columns}
         emptyState={
-          <ClayEmptyState
-            title='Oops... looks like is your first time here'
-            description='No settings was found, click in the button below to start the configuration'
-          >
-            <Button displayType='primary' onClick={() => navigate('form')}>
-              Setup
-            </Button>
-          </ClayEmptyState>
+          <NoSettingsEmptyState
+            buttonProps={{ onClick: () => navigate('create') }}
+          />
         }
-        columns={[
-          {
-            key: 'provider',
-            name: 'Provider',
-            render: (data, { active }) => (
-              <>
-                <ClayIcon {...(providerStatuses as any)[active]} />{' '}
-                {renderPickList(data)}
-              </>
-            ),
-          },
-          {
-            key: 'apiKey',
-            name: 'API Key',
-            render: (apiKey: string) => (
-              <b>
-                {apiKey
-                  .substring(0, PAD_LIMIT)
-                  .padEnd(apiKey.length - PAD_LIMIT, '*****************')}
-              </b>
-            ),
-          },
-          { key: 'model', name: 'Model', render: renderPickList },
-          { key: 'imageModel', name: 'Image Model', render: renderPickList },
-        ]}
         rows={items}
       />
 
       {hasItems && (
         <ClayAlert>
-          You can have multiple settings, but only one can be active at time.
+          You can have multiple settings, but only one can be active at a time.
         </ClayAlert>
       )}
     </Container>
