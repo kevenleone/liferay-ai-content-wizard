@@ -1,5 +1,6 @@
+import { Liferay } from '../../services/liferay';
 import ModalContent from '../ModalContent';
-import WizardEmptyState from '../WizardEmptyState';
+import NoSettingsEmptyState from '../NoSettingsEmptyState';
 
 type ContentWizardProps = {
   configured: boolean;
@@ -7,6 +8,7 @@ type ContentWizardProps = {
   isLoading: boolean;
   isLoadingContent: boolean;
   messages: any[];
+  onClose: () => void;
   onSelectAsset: (asset: any) => void;
 };
 
@@ -16,6 +18,7 @@ export default function ChatBody({
   isLoading,
   isLoadingContent,
   messages,
+  onClose,
   onSelectAsset,
 }: ContentWizardProps) {
   if (isLoading) {
@@ -34,9 +37,16 @@ export default function ChatBody({
   }
 
   return (
-    <WizardEmptyState
-      description='You must setting up the AI Wizard Settings.'
-      title='Oops... Unable to continue'
+    <NoSettingsEmptyState
+      buttonProps={{
+        onClick: () => {
+          Liferay.Util.navigate(
+            `/group/liferay-ai-content-wizard/~/control_panel/manage?p_p_id=com_liferay_client_extension_web_internal_portlet_ClientExtensionEntryPortlet_${Liferay.ThemeDisplay.getCompanyId()}_LXC_liferay_content_wizard_settings_custom_element#/form`
+          );
+
+          onClose();
+        },
+      }}
     />
   );
 }

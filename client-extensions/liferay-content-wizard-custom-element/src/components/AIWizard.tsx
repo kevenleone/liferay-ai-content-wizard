@@ -18,10 +18,10 @@ type AIWizardProps = {
 };
 
 const schema = z.object({
-  input: z.string(),
   files: z.array(
-    z.object({ value: z.string(), type: z.enum(['fileEntryId', 'folder']) })
+    z.object({ type: z.enum(['fileEntryId', 'folder']), value: z.string() })
   ),
+  input: z.string(),
 });
 
 export type Schema = z.infer<typeof schema>;
@@ -32,14 +32,13 @@ export default function AIWizard({ modal }: AIWizardProps) {
   const aiWizardContentOAuth2 = useAIWizardContentOAuth2();
   const ref = useRef<HTMLDivElement>(null);
 
-  const { isLoading, data: settings = {} } = useSWR(
-    '/ai/settings',
-    aiWizardContentOAuth2.getSettings
+  const { isLoading, data: settings = {} } = useSWR('/ai/settings/status', () =>
+    aiWizardContentOAuth2.getSettingsStatus()
   );
 
   const form = useForm<Schema>({
-    resolver: zodResolver(schema),
     defaultValues: { files: [], input: '' },
+    resolver: zodResolver(schema),
   });
 
   const appendMessage = (message: Message) =>
@@ -66,7 +65,8 @@ export default function AIWizard({ modal }: AIWizardProps) {
       form.setValue('input', '');
     } catch (error) {
       const data = await (error as Response).json();
-      return appendMessage({
+
+      appendMessage({
         role: 'system',
         text: (
           <ClayAlert displayType='danger'>
@@ -81,7 +81,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
     }
   }
 
-  const configured = settings.configured || true;
+  const configured = settings.active;
 
   return (
     <Modal
@@ -91,7 +91,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
       observer={modal.observer}
     >
       <Modal.Header>
-        Liferay Assistant
+        Liferay AI Content Wizard
         <span
           className='modal-options'
           onClick={() => setFullscreen(!fullscreen)}
@@ -99,6 +99,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
           <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
         </span>
       </Modal.Header>
+
       <Modal.Body>
         <ChatBody
           configured={configured}
@@ -106,6 +107,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
           isLoading={isLoading}
           isLoadingContent={form.formState.isSubmitting}
           messages={messages}
+          onClose={modal.onClose}
           onSelectAsset={(asset) => {
             appendMessage({
               role: 'user',
@@ -139,9 +141,9 @@ export default function AIWizard({ modal }: AIWizardProps) {
           <div className='d-flex mt-4 justify-content-end'>
             <ClayButton
               borderless
-              size='xs'
               displayType='secondary'
               onClick={() => setMessages([])}
+              size='xs'
             >
               <ClayIcon symbol='reset' /> Restart Chat
             </ClayButton>
