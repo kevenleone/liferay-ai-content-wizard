@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import ClayIcon from '@clayui/icon';
 import Icon from '@clayui/icon';
 import LoadingIndicator from '@clayui/loading-indicator';
+import Markdown from 'markdown-to-jsx';
 
 import { Liferay } from '../services/liferay';
 import { assets } from '../utils/assets';
@@ -154,13 +155,7 @@ export default function ModalContent({
 
             {messages.map((message, index) => (
                 <Message key={index} role={message.role}>
-                    {React.isValidElement(message.text) ? (
-                        message.text
-                    ) : (
-                        <span
-                            dangerouslySetInnerHTML={{ __html: message.text }}
-                        />
-                    )}
+                    <Markdown>{message.text}</Markdown>
                 </Message>
             ))}
 

@@ -1,5 +1,44 @@
 import { z } from 'zod';
 
+export const single = {
+    account: z.object({
+        type: z
+            .enum(['business', 'supplier', 'person'])
+            .describe(
+                'The type of the account, business is for general public, suppliers are used for people that publishes products, person is a single user account, you can consider "business" value if the user not mention the account type'
+            ),
+        description: z.string().describe('Business description'),
+        name: z.string().describe('Name of the business'),
+    }),
+    blog: z.object({
+        alternativeHeadline: z
+            .string()
+            .describe('A headline that is a summary of the blog'),
+        articleBody: z.string().describe('The content of the blog article'),
+        headline: z.string().describe('The title of the blog article'),
+        keywords: z
+            .array(
+                z
+                    .string()
+                    .describe(
+                        'Identify the content of the blog and add meaningful keywords using the following format: hyphen-case'
+                    )
+            )
+            .describe('You cannot add more than 5 keywords.'),
+        pictureDescription: z
+            .string()
+            .describe(
+                'A description of an appropriate image for this blog in three sentences.'
+            ),
+        taxonomyCategoryIds: z
+            .array(z.number())
+            .default([])
+            .describe(
+                'This field is a relationship with TaxonomyCategory, you must filter taxonomyCategoryIds that are most related to the articleBody/keywords/headline and store the id, max: 3 taxonomyCategoryIds.'
+            ),
+    }),
+};
+
 export const accountSchema = z.array(
     z.object({
         type: z

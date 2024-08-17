@@ -9,8 +9,6 @@
     },
     "dependencies": {
         "@elysiajs/cors": "^1.0.2",
-        "@elysiajs/cookie": "^0.8.0",
-        "@elysiajs/jwt": "^0.8.0",
         "@langchain/google-genai": "^0.0.21",
         "@langchain/google-vertexai": "^0.0.19",
         "elysia": "^0.8.9",

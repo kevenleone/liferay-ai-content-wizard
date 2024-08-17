@@ -9,11 +9,13 @@ import { getSettings } from './routes/settings/get-settings';
 import { getSettingsStatus } from './routes/settings/get-settings-status';
 import env from '../utils/env';
 import logger from '../utils/logger';
+import { aiAgent } from './routes/ai/agent';
 
 new Elysia()
     .onError(({ code, error }) => console.log(code, error))
     .use(cors({ allowedHeaders: '*' }))
     .use(aiGenerate)
+    .use(aiAgent)
     .use(deleteSetting)
     .use(getSetting)
     .use(getSettings)

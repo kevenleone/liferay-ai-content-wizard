@@ -23,7 +23,7 @@ export default class AIWizardContentOAuth2 extends OAuth2Client {
     }
 
     async generate(data: unknown) {
-        return this.fetch('/ai/generate', {
+        return this.fetch('/ai/agent', {
             body: JSON.stringify(data),
             method: 'POST',
         }) as unknown as Promise<{ output: string }>;

@@ -22,7 +22,7 @@ export default function SettingsBody() {
         setting?: any;
     }>();
 
-    const { setting, mutate } = outletContext || {};
+    const { setting, mutate = () => {} } = outletContext || {};
 
     const form = useForm<z.infer<typeof zodSchema>>({
         defaultValues: setting
