@@ -93,6 +93,7 @@ export const categorizationSchema = z
                 'none',
                 'objectDefinition',
                 'organization',
+                'page',
                 'product',
                 'tag',
                 'user',
