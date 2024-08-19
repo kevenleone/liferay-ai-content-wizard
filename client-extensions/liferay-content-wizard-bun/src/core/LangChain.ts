@@ -12,10 +12,14 @@ import {
 } from 'langchain/output_parsers';
 import type { PromptPayload } from '../utils/types';
 import env from '../utils/env';
+import type { GoogleAIResponseMimeType } from '@langchain/google-vertexai/types';
+import { SYSTEM_INSTRUCTIONS } from '../utils/imageInstructions';
 
 type LangChainOptions = {
     apiKey?: string;
     modelName: string;
+    responseMimeType?: GoogleAIResponseMimeType;
+	temperature?: number;
 };
 
 const providers = ['google', 'openai'] as const;
@@ -31,11 +35,10 @@ export class LangChain {
 
     constructor(provider: Provider, options: LangChainOptions) {
         const baseOptions = {
-            ...options,
             maxOutputTokens: 4000,
-            modelName: options.modelName,
             temperature: 0.7,
             verbose: false,
+            ...options,
         };
 
         this.llm =
