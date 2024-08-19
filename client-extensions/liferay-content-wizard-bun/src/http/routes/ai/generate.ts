@@ -72,6 +72,8 @@ export const aiGenerate = new Elysia().use(liferay).post(
         )) as z.infer<typeof categorizationSchema>;
 
         if (categorization.assetType === 'page') {
+            // We need to pass here the image in base64
+
             return generateLayout("");
         }
 
