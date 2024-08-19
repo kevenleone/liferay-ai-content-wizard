@@ -8,6 +8,9 @@ import getCategorizationPrompt from '../../../assets/categorization';
 import type { categorizationSchema } from '../../../schemas';
 import type Asset from '../../../assets/asset';
 import SearchBuilder from '../../../core/SearchBuilder';
+import { createJSON } from '../../../utils/addPage';
+
+
 
 export const aiGenerate = new Elysia().use(liferay).post(
     '/ai/generate',
@@ -68,6 +71,10 @@ export const aiGenerate = new Elysia().use(liferay).post(
             getCategorizationPrompt(question)
         )) as z.infer<typeof categorizationSchema>;
 
+        if (categorization.assetType === 'page') {
+            return generateLayout("");
+        }
+
         if (categorization.assetType === 'none') {
             logger.error('Invalid asset type.');
 
@@ -105,3 +112,17 @@ export const aiGenerate = new Elysia().use(liferay).post(
         }),
     }
 );
+
+async function generateLayout(image: string) {
+	const langChain = new LangChain('google', {
+		modelName: 'gemini-1.5-pro-001',
+		temperature: 0,
+		responseMimeType: 'application/json'
+	});
+
+	const content = await langChain.getImageDescription(image);
+
+	await createJSON(content);
+
+	return {output: 'Page generated!'};
+}
