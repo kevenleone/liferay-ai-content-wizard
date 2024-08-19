@@ -3,7 +3,7 @@ import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { ChatVertexAI } from '@langchain/google-vertexai';
 import { DallEAPIWrapper } from '@langchain/openai';
-import { ZodSchema } from 'zod';
+import { z, ZodSchema } from 'zod';
 import ky from 'ky';
 
 import {
@@ -137,4 +137,41 @@ export class LangChain {
 
         return formData;
     }
+
+    async getImageDescription(image: string) {
+		const multiModalPrompt = ChatPromptTemplate.fromMessages([
+			['system', '{instructions}'],
+			[
+				'human',
+				[
+					{
+						text: 'Can you describe the layout of the page specifiying all the web components used and the position of them'
+					},
+					{
+						type: 'image_url',
+						image_url: '{base64Image}'
+					}
+				]
+			]
+		]);
+		const outputParser = StructuredOutputParser.fromZodSchema(
+			z.object({
+				content: z
+					.string()
+					.describe(
+						'Can you describe the layout of the page specifiying all the web components used and the position of them'
+					)
+			})
+		);
+
+		const chain = multiModalPrompt.pipe(this.llm);
+
+		const response = await chain.invoke({
+			instructions: SYSTEM_INSTRUCTIONS,
+			base64Image: image,
+			format_instructions: outputParser.getFormatInstructions()
+		});
+
+		return response.content;
+	}
 }
