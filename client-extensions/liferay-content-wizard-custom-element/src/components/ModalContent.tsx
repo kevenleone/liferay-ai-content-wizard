@@ -13,6 +13,7 @@ import { useAppContext } from '../context/AppContext';
 
 const ASSETS_BASE_LIMIT = 4;
 const ASSETS_BASE_LIMIT_FULLSCREEN = 5;
+const SHOW_MORE = false; //Hiding More Button Temporarily For LPD-33226
 
 type ModalContentProps = {
     isLoadingContent: boolean;
@@ -141,7 +142,7 @@ export default function ModalContent({
                                 />
                             ))}
 
-                        {assetCount < assets.length && (
+                        {assetCount < assets.length && SHOW_MORE && (
                             <More
                                 fullscreen={fullscreen}
                                 isLoadingContent={isLoadingContent}
