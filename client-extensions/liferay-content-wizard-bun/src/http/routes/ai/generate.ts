@@ -10,8 +10,6 @@ import type Asset from '../../../assets/asset';
 import SearchBuilder from '../../../core/SearchBuilder';
 import { createJSON } from '../../../utils/addPage';
 
-
-
 export const aiGenerate = new Elysia().use(liferay).post(
     '/ai/generate',
     async ({
@@ -74,7 +72,7 @@ export const aiGenerate = new Elysia().use(liferay).post(
         if (categorization.assetType === 'page') {
             // We need to pass here the image in base64
 
-            return generateLayout("");
+            return generateLayout('');
         }
 
         if (categorization.assetType === 'none') {
@@ -116,15 +114,15 @@ export const aiGenerate = new Elysia().use(liferay).post(
 );
 
 async function generateLayout(image: string) {
-	const langChain = new LangChain('google', {
-		modelName: 'gemini-1.5-pro-001',
-		temperature: 0,
-		responseMimeType: 'application/json'
-	});
+    const langChain = new LangChain('google', {
+        modelName: 'gemini-1.5-pro-001',
+        temperature: 0,
+        responseMimeType: 'application/json',
+    });
 
-	const content = await langChain.getImageDescription(image);
+    const content = await langChain.getImageDescription(image);
 
-	await createJSON(content);
+    await createJSON(content);
 
-	return {output: 'Page generated!'};
+    return { output: 'Page generated!' };
 }
