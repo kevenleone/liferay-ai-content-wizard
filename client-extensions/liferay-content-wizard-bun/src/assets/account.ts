@@ -1,18 +1,15 @@
 import { z } from 'zod';
 
-import type { HookContext, PromptInput, PromptPayload } from '../utils/types';
-import { accountSchema } from '../schemas';
+import type { PromptInput, PromptPayload } from '../utils/types';
+import { accountSchema as schema } from '../schemas';
 import Asset from './asset';
 
 export default class Account extends Asset {
-    async createAccounts(
-        accounts: z.infer<typeof accountSchema>,
-        { liferay }: HookContext
-    ) {
+    async action(accounts: z.infer<typeof schema>) {
         for (const account of accounts) {
             this.logger.info(`Creating Account: ${account.name}`);
 
-            await liferay.postAccount({
+            await this.hookContext.liferay.postAccount({
                 description: account.description,
                 externalReferenceCode: `${account.name
                     .toUpperCase()
@@ -23,12 +20,12 @@ export default class Account extends Asset {
         }
     }
 
-    getAccountPrompt(props: PromptInput): PromptPayload {
+    getPrompt(props: PromptInput): PromptPayload {
         return {
             instruction:
-                'You are an account manager responsible for listing the active acccounts for your company',
-            prompt: `Create an array of ${props.amount} business accounts, that provides the subject: ${props.subject}`,
-            schema: accountSchema,
+                'You are a system administrator responsible for creating tags for your company',
+            prompt: `Create a list of ${props.amount} accounts, about: ${props.subject}`,
+            schema,
         };
     }
 }

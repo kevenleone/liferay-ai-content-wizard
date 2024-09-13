@@ -1,4 +1,4 @@
-export { default as accounts } from './account';
+export { default as account } from './account';
 export { default as blog } from './blog';
 export { default as categories } from './category';
 export { default as category } from './category';

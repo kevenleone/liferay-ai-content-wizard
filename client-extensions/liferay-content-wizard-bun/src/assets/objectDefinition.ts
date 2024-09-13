@@ -90,8 +90,6 @@ export default class objectDefinition extends Asset {
     <ul class="mt-2">
     ${fields.join('')}
     </ul>`;
-
-        console.log(this.data.output);
     }
 
     getPrompt({

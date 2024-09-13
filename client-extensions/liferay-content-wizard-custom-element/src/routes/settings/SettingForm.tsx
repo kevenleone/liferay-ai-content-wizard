@@ -22,7 +22,7 @@ export default function SettingsBody() {
         setting?: any;
     }>();
 
-    const { setting, mutate } = outletContext || {};
+    const { setting, mutate = () => {} } = outletContext || {};
 
     const form = useForm<z.infer<typeof zodSchema>>({
         defaultValues: setting
@@ -61,7 +61,7 @@ export default function SettingsBody() {
         try {
             const response = await aiWizardOAuth2.saveSettings(data);
 
-            mutate!(response);
+            mutate(response);
 
             Liferay.Util.openToast({
                 message: 'Yayy! Settings saved',

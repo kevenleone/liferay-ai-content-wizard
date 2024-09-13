@@ -20,15 +20,16 @@ export default class TagAsset extends Asset {
 
         const keywordPage = await keywordResponse.json<APIResponse>();
         const keywords = keywordPage.items.map(({ name }) => name);
+
         const filteredTags = tags.filter(
-            ({ name }) => !keywords.includes(name)
+            ({ name }) => !keywords.includes(name.toLowerCase())
         );
 
         await Promise.all(
             filteredTags.map((tag) =>
                 this.hookContext.liferay.createKeyword(
                     this.hookContext.themeDisplay.scopeGroupId,
-                    tag.name
+                    tag.name.toLowerCase()
                 )
             )
         );

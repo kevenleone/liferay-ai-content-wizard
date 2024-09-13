@@ -88,17 +88,19 @@ export default function AIWizard({ modal }: AIWizardProps) {
         <Modal
             className="ai-parent-modal"
             disableAutoClose
-            size={fullscreen ? 'full-screen' : 'lg'}
             observer={modal.observer}
+            size={fullscreen ? 'full-screen' : 'lg'}
         >
             <Modal.Header>
-                Liferay AI Content Wizard
-                <span
-                    className="modal-options"
-                    onClick={() => setFullscreen(!fullscreen)}
-                >
-                    <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
-                </span>
+                <div className="justify-content-between d-flex align-items-center">
+                    Liferay AI Content Wizard
+                    <span
+                        className="modal-options"
+                        onClick={() => setFullscreen(!fullscreen)}
+                    >
+                        <ClayIcon symbol={fullscreen ? 'compress' : 'expand'} />
+                    </span>
+                </div>
             </Modal.Header>
 
             <Modal.Body>
