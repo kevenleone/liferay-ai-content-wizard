@@ -21,6 +21,7 @@ const schema = z.object({
     files: z.array(
         z.object({ type: z.enum(['fileEntryId', 'folder']), value: z.string() })
     ),
+    image: z.string(),
     input: z.string(),
 });
 
@@ -56,6 +57,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
             const data = await aiWizardContentOAuth2.generate({
                 files,
                 question: input,
+                image: (document.getElementById("wizard-content-image") as HTMLInputElement)?.value
             });
 
             appendMessage({
