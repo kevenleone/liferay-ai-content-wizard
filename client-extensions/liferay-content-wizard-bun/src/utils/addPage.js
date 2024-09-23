@@ -35,10 +35,9 @@ export async function createJSON(jsonAI) {
 }
 
 async function createSitePage(json) {
-    console.log(json);
 
     return fetch(
-        `http://localhost:8080/o/headless-delivery/v1.0/sites/guest/site-pages/`,
+        `http://localhost:8080/o/headless-delivery/v1.0/sites/20117/site-pages/`,
         {
             headers: {
                 Authorization: `Basic ${btoa('test@liferay.com:test')}`,

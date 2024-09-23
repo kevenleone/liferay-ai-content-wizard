@@ -72,7 +72,7 @@ export const aiGenerate = new Elysia().use(liferay).post(
         if (categorization.assetType === 'page') {
             // We need to pass here the image in base64
 
-            return generateLayout('');
+            return generateLayout(wizardCredentials.apiKey, '');
         }
 
         if (categorization.assetType === 'none') {
@@ -114,14 +114,15 @@ export const aiGenerate = new Elysia().use(liferay).post(
     }
 );
 
-async function generateLayout(image: string) {
-    const langChain = new LangChain('google', {
-        modelName: 'gemini-1.5-pro-001',
-        temperature: 0,
-        responseMimeType: 'application/json',
+async function generateLayout(apiKey: string, base64Image: string) {
+    const langChain = new LangChain('openai', {
+        modelName: 'gpt-4o',
+        apiKey: apiKey,
+        response_format: { type: "json_object" },
+        temperature: 0
     });
-
-    const content = await langChain.getImageDescription(image);
+    
+    const content = await langChain.getImageDescription(base64Image);
 
     await createJSON(content);
 
