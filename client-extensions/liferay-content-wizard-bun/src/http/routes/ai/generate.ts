@@ -13,7 +13,7 @@ import { createJSON } from '../../../utils/addPage';
 export const aiGenerate = new Elysia().use(liferay).post(
     '/ai/generate',
     async ({
-        body: { files, question },
+        body: { files, question, image },
         liferay,
         logger,
         store,
@@ -107,6 +107,7 @@ export const aiGenerate = new Elysia().use(liferay).post(
     },
     {
         body: t.Object({
+            image: t.String(),
             files: t.Any(),
             question: t.String(),
         }),
