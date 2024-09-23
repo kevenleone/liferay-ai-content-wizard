@@ -20,6 +20,7 @@ type LangChainOptions = {
     modelName: string;
     responseMimeType?: GoogleAIResponseMimeType;
 	temperature?: number;
+    response_format?: {type: string};
 };
 
 const providers = ['google', 'openai'] as const;
@@ -140,12 +141,12 @@ export class LangChain {
 
     async getImageDescription(image: string) {
 		const multiModalPrompt = ChatPromptTemplate.fromMessages([
-			['system', '{instructions}'],
+			['system', SYSTEM_INSTRUCTIONS],
 			[
 				'human',
 				[
 					{
-						text: 'Can you describe the layout of the page specifiying all the web components used and the position of them'
+						text: 'Can you describe the layout of the page specifiying all the web components used and ordering them by row'
 					},
 					{
 						type: 'image_url',
@@ -159,7 +160,7 @@ export class LangChain {
 				content: z
 					.string()
 					.describe(
-						'Can you describe the layout of the page specifiying all the web components used and the position of them'
+						'Can you describe the layout of the page specifiying all the web components used and ordering them by row'
 					)
 			})
 		);
