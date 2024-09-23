@@ -21,8 +21,10 @@ export default function ChatInput(props: Props) {
     const [selectedTree, setSelectedTree] = useState<any>();
     const { handleSubmit, formState, setValue, register, watch } = props.form;
     const formRef = useRef<HTMLFormElement>(null);
+    const [image, setImage] = useState('');
     const modal = useModal();
     const files = watch('files');
+    const inputRef = useRef<HTMLInputElement>(null);
     const text = watch('input');
     const { data: response } = useSiteDocuments();
 
@@ -84,6 +86,31 @@ export default function ChatInput(props: Props) {
                                 'Ask the Assistant to create a Liferay Asset'
                             }
                         />
+                        {image ?  <img
+                            width={150}
+                            src={image}
+                            /> : null
+                        }
+                        <ClayInput
+                            {...register('image')}
+                            value={image}
+                            id="wizard-content-image"
+                            type="hidden"
+                        />
+                        <ClayInput
+                            ref={inputRef}
+                            onChange={(event) => {
+                                if (event.target.files?.[0]) {
+                                const reader = new FileReader();
+                                reader.readAsDataURL(event.target.files[0]);
+                                reader.onload = () => {
+                                    setImage(reader.result as string)
+                                };
+                                }
+                            }}
+                            className='d-none'
+                            type="file"
+                        />
                     </ClayForm>
 
                     {files.length > 0 && (
@@ -136,7 +163,9 @@ export default function ChatInput(props: Props) {
                                         />
                                         Choose from Docs & Media
                                     </DropDown.Item>
-                                    <DropDown.Item>
+                                    <DropDown.Item onClick={() => {
+                                        inputRef.current?.click();
+                                    }}>
                                         <ClayIcon
                                             className="mr-2"
                                             symbol="display"
