@@ -173,6 +173,6 @@ export class LangChain {
 			format_instructions: outputParser.getFormatInstructions()
 		});
 
-		return response.content;
+		return response.content as string;
 	}
 }
