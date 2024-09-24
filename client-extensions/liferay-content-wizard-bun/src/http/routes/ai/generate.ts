@@ -125,15 +125,16 @@ async function generateLayout(apiKey: string, base64Image: string, themeDisplay:
     const content = await langChain.getImageDescription(base64Image);
 
     const start = content.indexOf('[');
-    const end = content.lastIndexOf(']');
     let json = content;
 
     if(start !== -1){
         json = content.slice(start);
     }
+
+    const end = json.lastIndexOf(']');
     
     if(end !== -1){
-        json = content.slice(0,end+1)
+        json = json.slice(0,end+1);
     }
 
     await createJSON(json, themeDisplay.scopeGroupId);
