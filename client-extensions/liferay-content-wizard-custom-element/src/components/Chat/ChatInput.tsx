@@ -13,7 +13,7 @@ import useSiteDocuments from '../../hooks/useSiteDocuments';
 
 type Props = {
     form: UseFormReturn<Schema>;
-    onSubmit: (data: Schema) => void;
+    onSubmit: (data: Schema, onSuccess: () => void) => void;
     placeholder: string;
 };
 
@@ -26,7 +26,8 @@ export default function ChatInput(props: Props) {
     const files = watch('files');
     const inputRef = useRef<HTMLInputElement>(null);
     const text = watch('input');
-    const { data: response } = useSiteDocuments();
+    const { data: response } = useSiteDocuments()
+
 
     useEffect(() => {
         const modalContainer = document.querySelector('.ai-parent-modal div');
@@ -71,7 +72,7 @@ export default function ChatInput(props: Props) {
                     <ClayForm
                         ref={formRef}
                         className="d-flex w-100"
-                        onSubmit={handleSubmit(props.onSubmit)}
+                        onSubmit={() => handleSubmit((data) => props.onSubmit(data, () => setImage('')))}
                     >
                         <ClayInput
                             {...register('input')}
@@ -183,7 +184,7 @@ export default function ChatInput(props: Props) {
                                 }
                                 displayType="primary"
                                 aria-label="Submit button"
-                                onClick={handleSubmit(props.onSubmit)}
+                                onClick={(event) => handleSubmit((data) => props.onSubmit(data, () => setImage('')))(event)}
                             >
                                 <ClayIcon
                                     aria-label="Submit Prompt"

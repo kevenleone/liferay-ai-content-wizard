@@ -50,7 +50,7 @@ export default function AIWizard({ modal }: AIWizardProps) {
         ref.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    async function onSubmit({ files, input }: Schema) {
+    async function onSubmit({ files, input}: Schema, onSuccess: () => void) {
         appendMessage({ text: input, role: 'user' });
 
         try {
@@ -64,6 +64,8 @@ export default function AIWizard({ modal }: AIWizardProps) {
                 text: data.output || JSON.stringify(data, null, 2),
                 role: 'assistant',
             });
+
+            onSuccess?.()
 
             form.setValue('input', '');
         } catch (error) {
