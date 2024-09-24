@@ -4,7 +4,7 @@ import {
     getRowDefinition,
 } from './definitionUtils';
 
-export async function createJSON(jsonAI) {
+export async function createJSON(jsonAI, groupId) {
     const pageElements = [];
 
     for (const component of JSON.parse(jsonAI)) {
@@ -31,13 +31,13 @@ export async function createJSON(jsonAI) {
 
     const json = JSON.stringify(getPageBody(pageElements));
 
-    await createSitePage(json);
+    await createSitePage(json, groupId);
 }
 
-async function createSitePage(json) {
+async function createSitePage(json, groupId) {
 
     return fetch(
-        `http://localhost:8080/o/headless-delivery/v1.0/sites/20117/site-pages/`,
+        `http://localhost:8080/o/headless-delivery/v1.0/sites/${groupId}/site-pages/`,
         {
             headers: {
                 Authorization: `Basic ${btoa('test@liferay.com:test')}`,
