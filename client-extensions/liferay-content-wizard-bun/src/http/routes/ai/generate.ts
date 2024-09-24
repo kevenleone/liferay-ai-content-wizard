@@ -125,6 +125,17 @@ async function generateLayout(apiKey: string, base64Image: string) {
     const content = await langChain.getImageDescription(base64Image);
 
     await createJSON(content);
+    const start = content.indexOf('[');
+    const end = content.lastIndexOf(']');
+    let json = content;
+
+    if(start !== -1){
+        json = content.slice(start);
+    }
+    
+    if(end !== -1){
+        json = content.slice(0,end+1)
+    }
 
     return { output: 'Page generated!' };
 }
