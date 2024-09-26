@@ -37,6 +37,12 @@ export default function liferayHeadless(
                 .json<WizardSetting & { id: number }>();
         },
 
+        postPage(siteId: string, json: unknown) {
+            return liferay.post(`o/headless-delivery/v1.0/sites/${siteId}/site-pages/`, {
+                json
+            });
+        },
+
         async postAccount(account: {
             description: string;
             externalReferenceCode: string;

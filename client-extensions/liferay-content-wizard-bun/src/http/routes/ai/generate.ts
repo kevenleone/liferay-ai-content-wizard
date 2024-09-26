@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 import { Elysia, t } from 'elysia';
+import type { Logger } from 'pino';
 
 import { LangChain, type Provider } from '../../../core/LangChain';
 import { liferay } from '../../liferay';
@@ -72,7 +73,12 @@ export const aiGenerate = new Elysia().use(liferay).post(
         if (categorization.assetType === 'page') {
             // We need to pass here the image in base64
 
-            return generateLayout(wizardCredentials.apiKey, image, themeDisplay);
+            await liferay.postPage(
+                themeDisplay.scopeGroupId as string, 
+                await generateLayout(wizardCredentials.apiKey, image, logger)
+            );
+
+            return { output: 'Page generated!' };
         }
 
         if (categorization.assetType === 'none') {
@@ -114,7 +120,7 @@ export const aiGenerate = new Elysia().use(liferay).post(
     }
 );
 
-async function generateLayout(apiKey: string, base64Image: string, themeDisplay: any) {
+async function generateLayout(apiKey: string, base64Image: string, logger: Logger) {
     const langChain = new LangChain('openai', {
         modelName: 'gpt-4o',
         apiKey: apiKey,
@@ -137,7 +143,5 @@ async function generateLayout(apiKey: string, base64Image: string, themeDisplay:
         json = json.slice(0,end+1);
     }
 
-    await createJSON(json, themeDisplay.scopeGroupId);
-
-    return { output: 'Page generated!' };
+    return createJSON(json);
 }

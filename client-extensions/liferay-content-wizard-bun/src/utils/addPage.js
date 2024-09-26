@@ -4,7 +4,7 @@ import {
     getRowDefinition,
 } from './definitionUtils';
 
-export async function createJSON(jsonAI, groupId) {
+export function createJSON(jsonAI) {
     const pageElements = [];
 
     for (const component of JSON.parse(jsonAI)) {
@@ -29,26 +29,7 @@ export async function createJSON(jsonAI, groupId) {
         }
     }
 
-    const json = JSON.stringify(getPageBody(pageElements));
-
-    await createSitePage(json, groupId);
-}
-
-async function createSitePage(json, groupId) {
-
-    return fetch(
-        `http://localhost:8080/o/headless-delivery/v1.0/sites/${groupId}/site-pages/`,
-        {
-            headers: {
-                Authorization: `Basic ${btoa('test@liferay.com:test')}`,
-                'Content-Type': 'application/json',
-            },
-            method: 'POST',
-            body: json,
-        }
-    )
-        .then((response) => response.json())
-        .then(console.log);
+    return getPageBody(pageElements);
 }
 
 function getPageBody(pageElements) {
@@ -60,7 +41,7 @@ function getPageBody(pageElements) {
                 type: 'Root',
             },
         },
-        title: 'Page created with AI',
+        title: 'Generated Page',
     };
 }
 

@@ -230,6 +230,10 @@ export function getRowDefinition(pageElements) {
 
 	return {
 		definition: {
+            fragmentStyle: {
+				marginBottom: '3',
+                overflow: 'visible'
+			},
 			gutters: true,
 			numberOfColumns: columns.length
 		},
