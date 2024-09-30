@@ -1,5 +1,9 @@
+assemble:
+    - include:
+          - "src/**"
+          - package.json
 liferay-content-wizard-oauth-application-user-agent:
-    .serviceAddress: localhost:3333
+    .serviceAddress: localhost:3001
     .serviceScheme: http
     name: Liferay Content Wizard OAuth Application User Agent
     scopes:

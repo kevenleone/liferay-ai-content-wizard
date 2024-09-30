@@ -19,6 +19,7 @@ new Elysia()
     .use(getSettings)
     .use(getSettingsStatus)
     .use(saveSetting)
+    .get('/ready', () => 'Server running')
     .listen(env.PORT, () =>
         logger.info(
             `Liferay Content Wizard | Elysia is running on PORT ${env.PORT}`
