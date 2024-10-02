@@ -11,6 +11,7 @@ import {
     StructuredOutputParser,
 } from 'langchain/output_parsers';
 import type { PromptPayload } from '../utils/types';
+import env from '../utils/env';
 import type { GoogleAIResponseMimeType } from '@langchain/google-vertexai/types';
 import { SYSTEM_INSTRUCTIONS } from '../utils/imageInstructions';
 
@@ -18,8 +19,8 @@ type LangChainOptions = {
     apiKey?: string;
     modelName: string;
     responseMimeType?: GoogleAIResponseMimeType;
-    temperature?: number;
-    response_format?: { type: string };
+	temperature?: number;
+    response_format?: {type: string};
 };
 
 const providers = ['google', 'openai'] as const;
@@ -33,7 +34,7 @@ export class LangChain {
         return providers.includes(provider);
     }
 
-    constructor(private provider: Provider, private options: LangChainOptions) {
+    constructor(provider: Provider, options: LangChainOptions) {
         const baseOptions = {
             maxOutputTokens: 4000,
             temperature: 0.7,
@@ -116,16 +117,12 @@ export class LangChain {
         });
     }
 
-    imageGenerationEnabled() {
-        return this.provider === 'openai';
-    }
-
     async getGeneratedImage(prompt: String) {
         const tool = new DallEAPIWrapper({
             n: 1,
             model: 'dall-e-3',
             size: '1024x1024',
-            apiKey: this.options.apiKey,
+            apiKey: env.OPENAI_KEY,
         });
 
         const imageURL = await tool.invoke(prompt);
@@ -143,39 +140,39 @@ export class LangChain {
     }
 
     async getImageDescription(image: string) {
-        const multiModalPrompt = ChatPromptTemplate.fromMessages([
-            ['system', SYSTEM_INSTRUCTIONS],
-            [
-                'human',
-                [
-                    {
-                        text: 'Can you describe the layout of the page specifiying all the web components used and ordering them by row',
-                    },
-                    {
-                        type: 'image_url',
-                        image_url: '{base64Image}',
-                    },
-                ],
-            ],
-        ]);
-        const outputParser = StructuredOutputParser.fromZodSchema(
-            z.object({
-                content: z
-                    .string()
-                    .describe(
-                        'Can you describe the layout of the page specifiying all the web components used and ordering them by row'
-                    ),
-            })
-        );
+		const multiModalPrompt = ChatPromptTemplate.fromMessages([
+			['system', SYSTEM_INSTRUCTIONS],
+			[
+				'human',
+				[
+					{
+						text: 'Can you describe the layout of the page specifiying all the web components used and ordering them by row'
+					},
+					{
+						type: 'image_url',
+						image_url: '{base64Image}'
+					}
+				]
+			]
+		]);
+		const outputParser = StructuredOutputParser.fromZodSchema(
+			z.object({
+				content: z
+					.string()
+					.describe(
+						'Can you describe the layout of the page specifiying all the web components used and ordering them by row'
+					)
+			})
+		);
 
-        const chain = multiModalPrompt.pipe(this.llm);
+		const chain = multiModalPrompt.pipe(this.llm);
 
-        const response = await chain.invoke({
-            instructions: SYSTEM_INSTRUCTIONS,
-            base64Image: image,
-            format_instructions: outputParser.getFormatInstructions(),
-        });
+		const response = await chain.invoke({
+			instructions: SYSTEM_INSTRUCTIONS,
+			base64Image: image,
+			format_instructions: outputParser.getFormatInstructions()
+		});
 
-        return response.content as string;
-    }
+		return response.content as string;
+	}
 }

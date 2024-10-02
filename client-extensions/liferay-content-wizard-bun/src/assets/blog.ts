@@ -13,26 +13,25 @@ type BlogsSchema = z.infer<typeof blogSchema>;
 
 export default class BlogAsset extends Asset<BlogsSchema> {
     async createBlog(blog: RetrieveFirstItem<z.infer<typeof blogSchema>>) {
-        if (this.hookContext.langChain.imageGenerationEnabled()) {
-            const formData = await this.hookContext.langChain.getGeneratedImage(
-                blog.pictureDescription
-            );
-
-            const blogImage = await this.hookContext.liferay.postBlogImage(
-                this.hookContext.themeDisplay.scopeGroupId,
-                formData
-            );
-
-            const blogImageJson = await (blogImage.json() as any);
-
-            (blog as any).image = { imageId: blogImageJson.id };
-        }
+        const formData = await this.hookContext.langChain.getGeneratedImage(
+            blog.pictureDescription
+        );
 
         delete (blog as any).pictureDescription;
 
+        const blogImage = await this.hookContext.liferay.postBlogImage(
+            this.hookContext.themeDisplay.scopeGroupId,
+            formData
+        );
+
+        const blogImageJson = await (blogImage.json() as any);
+
         await this.hookContext.liferay.postBlog(
             this.hookContext.themeDisplay.scopeGroupId,
-            blog
+            {
+                ...blog,
+                image: { imageId: blogImageJson.id },
+            }
         );
     }
 
