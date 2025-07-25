@@ -1,7 +1,7 @@
 ## Getting Started with Liferay AI Content Wizard
 
 Complete documentation for Liferay Workspace can be found
-[here](https://learn.liferay.com/dxp/7.x/en/developing-applications/tooling/liferay-workspace.html).
+[here](https://learn.liferay.com/w/dxp/development/tooling/liferay-workspace).
 
 ## Running Liferay DXP locally
 
